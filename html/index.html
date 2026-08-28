@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>HTML 오픈북 비법노트</title><style>body{margin:0;font-family:Arial,sans-serif;background:#fffaf7;color:#302925;line-height:1.65}header{position:sticky;top:0;background:#fffaf7f5;border-bottom:1px solid #eadbd4;padding:14px;z-index:5}.wrap{max-width:1100px;margin:auto}.top{display:flex;gap:10px;align-items:center;justify-content:space-between}input{padding:10px;border:1px solid #e2cfc5;border-radius:10px;width:340px}button{padding:9px 12px;border:0;border-radius:9px;background:#d97757;color:#fff;cursor:pointer}.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:18px 0}.quick a,section{background:#fff;border:1px solid #eadbd4;border-radius:14px}.quick a{padding:12px;text-decoration:none;color:#302925}main{padding:18px}section{padding:18px;margin:14px 0}h2{color:#a24e34}pre{background:#f8eee9;border:1px solid #eadbd4;border-radius:10px;padding:14px;overflow:auto}table{width:100%;border-collapse:collapse}th,td{border:1px solid #eadbd4;padding:8px;text-align:left}th{background:#fff1ea}.hidden{display:none}.note{background:#fff4d8;border-left:4px solid #e0a427;padding:10px;border-radius:8px}</style></head><body><header><div class="wrap top"><div><b>🌷 HTML 오픈북 시험 비법노트</b><div style="font-size:13px;color:#766">키워드 검색 → 태그 찾기 → 코드 수정</div></div><div><input id="q" placeholder="제목, 이미지, 링크, 표, rowspan, radio, form"><button onclick="searchNote()">검색</button></div></div></header><main class="wrap"><div class="quick"><a href="#basic">제목·문단<br><b>h / p / span</b></a><a href="#img">이미지<br><b>img / src</b></a><a href="#link">링크<br><b>a / href</b></a><a href="#table">표<br><b>table / tr / td</b></a><a href="#form">입력<br><b>form / input</b></a></div><section id="basic"><h2>1. 기본 태그</h2><table><tr><th>기능</th><th>태그</th></tr><tr><td>제목</td><td>h1 ~ h6</td></tr><tr><td>문단</td><td>p</td></tr><tr><td>문장</td><td>span</td></tr><tr><td>줄바꿈</td><td>br</td></tr><tr><td>구분선</td><td>hr</td></tr></table><pre>&lt;h1&gt;제목&lt;/h1&gt;
+&lt;p&gt;본문&lt;/p&gt;
+&lt;span&gt;문장&lt;/span&gt;
+&lt;br&gt;
+&lt;hr&gt;</pre></section><section><h2>2. 강조 태그</h2><p><b>b</b> 시각적 굵게 · <b>strong</b> 의미 강조 · <b>mark</b> 배경 강조 · <b>sup</b> 위첨자 · <b>sub</b> 아래첨자</p><pre>&lt;strong&gt;중요 내용&lt;/strong&gt;
+&lt;mark&gt;강조&lt;/mark&gt;
+2&lt;sup&gt;2&lt;/sup&gt;
+H&lt;sub&gt;2&lt;/sub&gt;O</pre></section><section><h2>3. 리스트</h2><p>ul, ol 안에는 li가 필요.</p><pre>&lt;ul type="square"&gt;
+  &lt;li&gt;html&lt;/li&gt;
+  &lt;li&gt;css&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol type="i"&gt;
+  &lt;li&gt;등원하기&lt;/li&gt;
+  &lt;li&gt;수업듣기&lt;/li&gt;
+&lt;/ol&gt;</pre></section><section id="img"><h2>4. 이미지</h2><p>필수 속성: <b>src</b></p><pre>&lt;img src="이미지주소" width="300px"&gt;
+&lt;img src="../img/고먐미.jpg" width="300px"&gt;</pre><p>./ 현재 위치 · ../ 상위 폴더 · / 최상위</p></section><section id="link"><h2>5. a 태그</h2><p>필수 속성: <b>href</b></p><pre>&lt;a href="https://www.naver.com"&gt;네이버로 이동&lt;/a&gt;</pre><p>이미지에 링크를 걸려면 a 안에 img를 넣기.</p></section><section id="table"><h2>6. 테이블</h2><table><tr><th>태그/속성</th><th>역할</th></tr><tr><td>table</td><td>표 선언</td></tr><tr><td>caption</td><td>표 제목</td></tr><tr><td>tr</td><td>행</td></tr><tr><td>th</td><td>제목 셀</td></tr><tr><td>td</td><td>데이터 셀</td></tr><tr><td>colspan</td><td>좌우 병합</td></tr><tr><td>rowspan</td><td>위아래 병합</td></tr></table><pre>&lt;table border="1"&gt;
+ &lt;tr&gt;&lt;th colspan="2"&gt;메뉴&lt;/th&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;아메리카노&lt;/td&gt;&lt;td rowspan="2"&gt;3500&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td&gt;카페라떼&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</pre><div class="note">병합 후 겹치는 td/th는 제거하거나 주석 처리.</div></section><section id="form"><h2>7. Form</h2><p>method=get: URL에 내용이 보일 수 있음 · post: URL 노출 없이 전송 · action: 전송 위치</p><pre>&lt;form method="get" action="#"&gt;
+ ID &lt;input type="text" name="id" placeholder="아이디 입력"&gt;
+ PW &lt;input type="password" name="pw" maxlength="10"&gt;
+ &lt;input type="submit" value="전송하기"&gt;
+ &lt;input type="reset"&gt;
+&lt;/form&gt;</pre><h3>선택</h3><pre>축구 &lt;input type="checkbox" name="hobby" value="soccer"&gt;
+남 &lt;input type="radio" name="gender" value="man"&gt;
+여 &lt;input type="radio" name="gender" value="woman"&gt;</pre><div class="note">radio는 같은 질문끼리 name을 같게 해야 하나만 선택됨.</div><h3>select / textarea</h3><pre>&lt;select&gt;
+ &lt;option&gt;A형&lt;/option&gt;
+ &lt;option&gt;B형&lt;/option&gt;
+&lt;/select&gt;
+&lt;textarea cols="30" rows="5"&gt;&lt;/textarea&gt;</pre></section><section><h2>🚨 시험 직전 실수 체크</h2><table><tr><th>증상</th><th>확인</th></tr><tr><td>이미지 안 보임</td><td>src와 상대경로</td></tr><tr><td>링크 안 됨</td><td>href</td></tr><tr><td>표 칸 이상함</td><td>tr 안 th/td 수, colspan/rowspan</td></tr><tr><td>radio 여러 개 선택됨</td><td>name이 같은지</td></tr><tr><td>제출/초기화 안 됨</td><td>form 안에 있는지</td></tr></table></section></main><script>function searchNote(){let q=document.getElementById('q').value.trim().toLowerCase(),first=null;document.querySelectorAll('section').forEach(s=>{let ok=!q||s.innerText.toLowerCase().includes(q);s.classList.toggle('hidden',!ok);if(ok&&q&&!first)first=s});if(first)first.scrollIntoView({behavior:'smooth'})}document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')searchNote()})</script></body></html>
