@@ -3,19 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>HTML + CSS + JavaScript 초보자 실습 비법노트 - 밝은 테마</title>
+<title>HTML + CSS + JavaScript</title>
 <style>
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f7f9fc}
 iframe{display:block;width:100%;height:100%;border:0;background:#f7f9fc}
 </style>
 </head>
 <body>
-<iframe id="note" src="../frontend/" title="HTML CSS JavaScript 비법노트"></iframe>
+<iframe id="note" src="../frontend/" title="HTML + CSS + JavaScript"></iframe>
 <script>
 const frame=document.getElementById('note');
 frame.addEventListener('load',()=>{
  const d=frame.contentDocument;
  if(!d)return;
+ d.title='HTML + CSS + JavaScript';
+ const heading=d.querySelector('h1');
+ if(heading) heading.textContent='🧰 HTML + CSS + JavaScript';
  const style=d.createElement('style');
  style.textContent=`
  :root{--bg:#f7f9fc!important;--panel:#fff!important;--panel2:#eef4fb!important;--text:#1f2937!important;--muted:#64748b!important;--border:#d8e1ec!important}
