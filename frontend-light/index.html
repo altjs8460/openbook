@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>HTML + CSS + JavaScript 초보자 실습 비법노트 - 밝은 테마</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f7f9fc}
+iframe{display:block;width:100%;height:100%;border:0;background:#f7f9fc}
+</style>
+</head>
+<body>
+<iframe id="note" src="../frontend/" title="HTML CSS JavaScript 비법노트"></iframe>
+<script>
+const frame=document.getElementById('note');
+frame.addEventListener('load',()=>{
+ const d=frame.contentDocument;
+ if(!d)return;
+ const style=d.createElement('style');
+ style.textContent=`
+ :root{--bg:#f7f9fc!important;--panel:#fff!important;--panel2:#eef4fb!important;--text:#1f2937!important;--muted:#64748b!important;--border:#d8e1ec!important}
+ body{background:#f7f9fc!important;color:#1f2937!important}
+ header{background:rgba(255,255,255,.97)!important;box-shadow:0 2px 12px rgba(15,23,42,.06)!important}
+ .search-wrap input{background:#fff!important;color:#1f2937!important}
+ nav,section,.section-title,.tabs button,.quick a{background:#fff!important;color:#1f2937!important}
+ nav a{color:#475569!important} nav a:hover{background:#eef4fb!important;color:#0f172a!important}
+ .hero{background:linear-gradient(135deg,#ffe4e9,#dff3ff,#fff4bf)!important;color:#1e293b!important;border:1px solid #e2e8f0!important}
+ .tabs button{border-color:#d8e1ec!important}.tabs button.active{background:#dbeafe!important}
+ .quick a{border-color:#d8e1ec!important}.quick strong{color:#0369a1!important}
+ .badge.html{background:#ffe4e9!important;color:#9f1239!important}.badge.css{background:#e0f2fe!important;color:#075985!important}.badge.js{background:#fff4cc!important;color:#854d0e!important}.badge.mix{background:#dcfce7!important;color:#166534!important}
+ .callout{background:#eef7ff!important;color:#1f2937!important}.warn{background:#fff7e6!important;color:#4b3210!important}.danger{background:#fff0f0!important;color:#5f1d1d!important}.success{background:#edfdf3!important;color:#14532d!important}
+ pre{background:#f4f7fb!important;color:#1e293b!important;border-color:#d8e1ec!important}.copy{background:#e2e8f0!important;color:#334155!important}
+ th{background:#edf3f9!important;color:#1e293b!important}.card,.recipe{background:#f8fafc!important}
+ `;
+ d.head.appendChild(style);
+});
+</script>
+</body>
+</html>
