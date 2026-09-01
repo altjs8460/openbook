@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Oracle SQL Developer + SQL</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f6f9fc}
+iframe{display:block;width:100%;height:100%;border:0;background:#f6f9fc}
+</style>
+</head>
+<body>
+<iframe id="note" src="../database/" title="Oracle SQL Developer + SQL"></iframe>
+<script>
+const frame=document.getElementById('note');
+frame.addEventListener('load',()=>{
+ const d=frame.contentDocument;
+ if(!d)return;
+ d.title='Oracle SQL Developer + SQL';
+ const h=d.querySelector('h1');
+ if(h) h.textContent='🗄️ Oracle SQL Developer + SQL';
+ const sub=d.querySelector('.sub');
+ if(sub) sub.textContent='검색 → 문법 선택 → 코드 복사 → 테이블·컬럼·조건만 수정';
+ const st=d.createElement('style');
+ st.textContent=`
+ :root{--bg:#f6f9fc!important;--p:#fff!important;--p2:#eef6ff!important;--t:#1f2937!important;--m:#64748b!important;--a:#16a34a!important;--b:#2563eb!important;--bd:#d8e2ec!important}
+ body{background:#f6f9fc!important;color:#1f2937!important}
+ header{background:rgba(255,255,255,.97)!important;box-shadow:0 2px 12px rgba(15,23,42,.05)!important}
+ .s input{background:#fff!important;color:#1f2937!important}
+ nav,section,.st,.quick a{background:#fff!important;color:#1f2937!important}
+ nav a{color:#475569!important} nav a:hover{background:#eef6ff!important;color:#0f172a!important}
+ .hero{background:linear-gradient(135deg,#dcfce7,#dbeafe,#fef3c7)!important;color:#1f2937!important;border:1px solid #d8e2ec!important}
+ .quick a{border-color:#d8e2ec!important}.quick strong{color:#047857!important}
+ .badge{background:#dcfce7!important;color:#166534!important}
+ .call,.exam{background:#eef6ff!important;color:#1f2937!important}.danger{background:#fff0f0!important;color:#7f1d1d!important}
+ pre{background:#f3f6fa!important;color:#1e293b!important;border-color:#d8e2ec!important}.copy{background:#e2e8f0!important;color:#334155!important}
+ th{background:#edf3f9!important;color:#1e293b!important}.recipe{background:#f8fafc!important;border-color:#94a3b8!important}
+ `;
+ d.head.appendChild(st);
+ const main=d.querySelector('main');
+ const hero=d.querySelector('.hero');
+ if(main && hero && !d.getElementById('sqldev')){
+   const sec=d.createElement('section');
+   sec.id='sqldev';
+   sec.innerHTML=`<div class="st" onclick="tog(this)"><h2>🖥️ Oracle SQL Developer 기본</h2><span class="badge">Worksheet / Ctrl+Enter / F9</span></div><div class="body"><table><tr><th>할 일</th><th>수업 기준</th></tr><tr><td>SQL 작성</td><td>SQL Worksheet에 작성</td></tr><tr><td>문장 끝</td><td><code>;</code> 사용</td></tr><tr><td>실행</td><td><code>Ctrl + Enter</code> 또는 <code>F9</code></td></tr><tr><td>한 줄 주석</td><td><code>-- 주석</code></td></tr></table><pre><code>-- 전체 조회\nSELECT *\n  FROM EMPLOYEES;</code></pre><div class="call">먼저 <code>SELECT * FROM EMPLOYEES;</code>로 컬럼을 확인하고 필요한 WHERE 조건을 붙이면 실습에서 찾기 쉽습니다.</div></div>`;
+   hero.after(sec);
+   const nav=d.querySelector('nav');
+   if(nav){const a=d.createElement('a');a.href='#sqldev';a.textContent='🖥️ SQL Developer 기본';nav.insertBefore(a,nav.children[1]||null)}
+ }
+});
+</script>
+</body>
+</html>
