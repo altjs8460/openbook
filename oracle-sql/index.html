@@ -1,53 +1,47 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Oracle SQL Developer + SQL</title>
-<style>
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f6f9fc}
-iframe{display:block;width:100%;height:100%;border:0;background:#f6f9fc}
-</style>
-</head>
-<body>
-<iframe id="note" src="../database/" title="Oracle SQL Developer + SQL"></iframe>
-<script>
-const frame=document.getElementById('note');
-frame.addEventListener('load',()=>{
- const d=frame.contentDocument;
- if(!d)return;
- d.title='Oracle SQL Developer + SQL';
- const h=d.querySelector('h1');
- if(h) h.textContent='🗄️ Oracle SQL Developer + SQL';
- const sub=d.querySelector('.sub');
- if(sub) sub.textContent='검색 → 문법 선택 → 코드 복사 → 테이블·컬럼·조건만 수정';
- const st=d.createElement('style');
- st.textContent=`
- :root{--bg:#f6f9fc!important;--p:#fff!important;--p2:#eef6ff!important;--t:#1f2937!important;--m:#64748b!important;--a:#16a34a!important;--b:#2563eb!important;--bd:#d8e2ec!important}
- body{background:#f6f9fc!important;color:#1f2937!important}
- header{background:rgba(255,255,255,.97)!important;box-shadow:0 2px 12px rgba(15,23,42,.05)!important}
- .s input{background:#fff!important;color:#1f2937!important}
- nav,section,.st,.quick a{background:#fff!important;color:#1f2937!important}
- nav a{color:#475569!important} nav a:hover{background:#eef6ff!important;color:#0f172a!important}
- .hero{background:linear-gradient(135deg,#dcfce7,#dbeafe,#fef3c7)!important;color:#1f2937!important;border:1px solid #d8e2ec!important}
- .quick a{border-color:#d8e2ec!important}.quick strong{color:#047857!important}
- .badge{background:#dcfce7!important;color:#166534!important}
- .call,.exam{background:#eef6ff!important;color:#1f2937!important}.danger{background:#fff0f0!important;color:#7f1d1d!important}
- pre{background:#f3f6fa!important;color:#1e293b!important;border-color:#d8e2ec!important}.copy{background:#e2e8f0!important;color:#334155!important}
- th{background:#edf3f9!important;color:#1e293b!important}.recipe{background:#f8fafc!important;border-color:#94a3b8!important}
- `;
- d.head.appendChild(st);
- const main=d.querySelector('main');
- const hero=d.querySelector('.hero');
- if(main && hero && !d.getElementById('sqldev')){
-   const sec=d.createElement('section');
-   sec.id='sqldev';
-   sec.innerHTML=`<div class="st" onclick="tog(this)"><h2>🖥️ Oracle SQL Developer 기본</h2><span class="badge">Worksheet / Ctrl+Enter / F9</span></div><div class="body"><table><tr><th>할 일</th><th>수업 기준</th></tr><tr><td>SQL 작성</td><td>SQL Worksheet에 작성</td></tr><tr><td>문장 끝</td><td><code>;</code> 사용</td></tr><tr><td>실행</td><td><code>Ctrl + Enter</code> 또는 <code>F9</code></td></tr><tr><td>한 줄 주석</td><td><code>-- 주석</code></td></tr></table><pre><code>-- 전체 조회\nSELECT *\n  FROM EMPLOYEES;</code></pre><div class="call">먼저 <code>SELECT * FROM EMPLOYEES;</code>로 컬럼을 확인하고 필요한 WHERE 조건을 붙이면 실습에서 찾기 쉽습니다.</div></div>`;
-   hero.after(sec);
-   const nav=d.querySelector('nav');
-   if(nav){const a=d.createElement('a');a.href='#sqldev';a.textContent='🖥️ SQL Developer 기본';nav.insertBefore(a,nav.children[1]||null)}
- }
-});
-</script>
-</body>
-</html>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Oracle SQL Developer + SQL</title><style>:root{--b:#f6f9fc;--p:#fff;--t:#1f2937;--m:#64748b;--bd:#d8e2ec;--c:#f3f6fa}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,'Noto Sans KR',sans-serif;background:var(--b);color:var(--t);line-height:1.65}header{position:sticky;top:0;z-index:20;background:#fffffff2;border-bottom:1px solid var(--bd);padding:14px 18px}.head{max-width:1500px;margin:auto;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}h1{margin:0;font-size:1.25rem}.sub{color:var(--m);font-size:.9rem}.search{display:flex;gap:8px}.search input{width:min(520px,58vw);padding:10px;border:1px solid var(--bd);border-radius:10px}.search button{border:0;border-radius:10px;background:#dbeafe;color:#1e40af;font-weight:800;padding:10px 13px}.layout{max-width:1500px;margin:auto;display:grid;grid-template-columns:300px 1fr;gap:18px;padding:18px}nav{position:sticky;top:90px;height:calc(100vh - 110px);overflow:auto;background:#fff;border:1px solid var(--bd);border-radius:16px;padding:14px}nav a{display:block;text-decoration:none;color:#475569;padding:7px 8px;border-radius:8px}nav a:hover{background:#eef6ff}.hero{background:linear-gradient(135deg,#dcfce7,#dbeafe,#fef3c7);border:1px solid var(--bd);padding:22px;border-radius:18px;margin-bottom:14px}.hero h2,.hero p{margin:0}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.tabs button{background:#fff;border:1px solid var(--bd);padding:9px 12px;border-radius:999px;font-weight:700}.tabs .active{background:#dbeafe;color:#1d4ed8}.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:14px 0 18px}.quick a{background:#fff;border:1px solid var(--bd);padding:12px;border-radius:12px;text-decoration:none;color:#334155}.quick strong{color:#047857}section{background:#fff;border:1px solid var(--bd);border-radius:15px;margin-bottom:16px;overflow:hidden}.st{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:16px 18px;cursor:pointer}.st h2{font-size:1.08rem;margin:0}.body{padding:0 18px 18px}.collapsed .body{display:none}.badge{font-size:.74rem;padding:3px 8px;border-radius:999px;background:#dcfce7;color:#166534}.call,.warn,.danger{padding:12px 14px;border-radius:10px;margin:12px 0;border-left:4px solid #60a5fa;background:#eef6ff}.warn{background:#fff7e6;border-left-color:#f59e0b}.danger{background:#fff0f0;border-left-color:#ef4444}pre{position:relative;background:var(--c);border:1px solid var(--bd);border-radius:10px;padding:14px;overflow:auto}code{font-family:Consolas,monospace}.copy{position:absolute;right:8px;top:8px;border:0;border-radius:7px;background:#e2e8f0;color:#334155;padding:5px 8px}table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.91rem}th,td{border:1px solid var(--bd);padding:9px;vertical-align:top}th{background:#edf3f9;text-align:left}.recipe{background:#f8fafc;border:1px dashed #94a3b8;border-radius:12px;padding:12px;margin:10px 0}.hidden,.subject-hidden{display:none!important}footer{text-align:center;color:var(--m);padding:24px}@media(max-width:900px){.layout{grid-template-columns:1fr}nav{position:relative;top:0;height:auto}.head{grid-template-columns:1fr}.search input{width:100%}}</style></head><body><header><div class="head"><div><h1>🗄️ Oracle SQL Developer + SQL</h1><div class="sub">검색 → 문법 선택 → 코드 복사 → 테이블·컬럼·조건만 수정</div></div><div class="search"><input id="q" placeholder="예: JOIN, DDL, COMMIT, 서브쿼리, IN, NULL"><button onclick="findIt()">검색</button></div></div></header><div class="layout"><nav><h2>⚡ 빠른 이동</h2><a href="#dev">SQL Developer</a><a href="#select">SELECT / WHERE</a><a href="#func">함수</a><a href="#join">JOIN</a><a href="#ddl">DDL / 제약조건</a><a href="#dml">DML</a><a href="#dcl">DCL</a><a href="#tcl">TCL</a><a href="#sub">서브쿼리</a><a href="#choose">문법 선택표</a><a href="#err">오류 체크</a></nav><main><div class="hero"><h2>🎯 문제를 보면 3개부터</h2><p>무엇을 출력? → SELECT · 어느 테이블? → FROM · 어떤 조건? → WHERE</p></div><div class="tabs"><button class="active" onclick="filter('all',this)">전체</button><button onclick="filter('basic',this)">기본</button><button onclick="filter('join',this)">JOIN</button><button onclick="filter('cmd',this)">DDL·DML·DCL·TCL</button><button onclick="filter('sub',this)">서브쿼리</button></div><div class="quick"><a href="#select"><strong>조건 검색</strong><br>SELECT / WHERE</a><a href="#join"><strong>테이블 연결</strong><br>JOIN / ON / (+)</a><a href="#dml"><strong>데이터 변경</strong><br>INSERT / UPDATE / DELETE</a><a href="#sub"><strong>서브쿼리</strong><br>SELECT 안의 SELECT</a></div><section id="dev" data-s="basic"><div class="st" onclick="tog(this)"><h2>1. SQL Developer 기본</h2><span class="badge">Worksheet / Ctrl+Enter / F9</span></div><div class="body"><table><tr><th>할 일</th><th>수업 기준</th></tr><tr><td>작성</td><td>SQL Worksheet</td></tr><tr><td>실행</td><td>Ctrl + Enter 또는 F9</td></tr><tr><td>문장 끝</td><td>;</td></tr><tr><td>주석</td><td>-- 주석</td></tr></table><pre><button class="copy">복사</button><code>SELECT * FROM EMPLOYEES;</code></pre></div></section><section id="select" data-s="basic"><div class="st" onclick="tog(this)"><h2>2. SELECT / WHERE 핵심</h2><span class="badge">DISTINCT / NULL / IN / BETWEEN / LIKE</span></div><div class="body"><table><tr><th>목적</th><th>문법</th></tr><tr><td>전체</td><td>SELECT *</td></tr><tr><td>중복 제거</td><td>DISTINCT</td></tr><tr><td>조건</td><td>WHERE</td></tr><tr><td>여러 값</td><td>IN / NOT IN</td></tr><tr><td>범위</td><td>BETWEEN A AND B</td></tr><tr><td>문자 패턴</td><td>LIKE '%문자%'</td></tr><tr><td>NULL</td><td>IS NULL / IS NOT NULL</td></tr></table><pre><button class="copy">복사</button><code>SELECT FIRST_NAME, SALARY
+FROM EMPLOYEES
+WHERE SALARY BETWEEN 10000 AND 19999;</code></pre><div class="danger">NULL 비교는 = NULL이 아니라 IS NULL 사용.</div></div></section><section id="func" data-s="basic"><div class="st" onclick="tog(this)"><h2>3. 주요 함수</h2><span class="badge">문자 / 숫자 / 날짜 / NULL / 그룹</span></div><div class="body"><table><tr><th>구분</th><th>함수</th></tr><tr><td>문자</td><td>UPPER, LOWER, LENGTH, SUBSTR, REPLACE, CONCAT, TRIM</td></tr><tr><td>숫자</td><td>MOD, ROUND, TRUNC</td></tr><tr><td>날짜</td><td>SYSDATE, ADD_MONTHS</td></tr><tr><td>형변환</td><td>TO_CHAR, TO_NUMBER, TO_DATE</td></tr><tr><td>NULL</td><td>NVL, NVL2</td></tr><tr><td>분기</td><td>DECODE</td></tr><tr><td>그룹</td><td>SUM, COUNT, MAX, MIN, AVG</td></tr></table></div></section><section id="join" data-s="join"><div class="st" onclick="tog(this)"><h2>4. JOIN</h2><span class="badge">Oracle / ANSI / OUTER / SELF</span></div><div class="body"><div class="call"><b>JOIN:</b> 공통 컬럼을 기준으로 서로 다른 테이블을 가로로 연결.</div><h3>Oracle JOIN</h3><pre><button class="copy">복사</button><code>SELECT E.EMPLOYEE_ID, E.LAST_NAME, D.DEPARTMENT_NAME
+FROM EMPLOYEES E, DEPARTMENTS D
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID;</code></pre><h3>ANSI JOIN</h3><pre><button class="copy">복사</button><code>SELECT E.LAST_NAME, D.DEPARTMENT_NAME
+FROM EMPLOYEES E
+JOIN DEPARTMENTS D
+ON E.DEPARTMENT_ID = D.DEPARTMENT_ID;</code></pre><table><tr><th>종류</th><th>핵심</th></tr><tr><td>LEFT OUTER</td><td>왼쪽 전부, Oracle에서는 오른쪽에 (+)</td></tr><tr><td>RIGHT OUTER</td><td>오른쪽 전부, Oracle에서는 왼쪽에 (+)</td></tr><tr><td>FULL OUTER</td><td>양쪽 전부, ANSI 문법</td></tr><tr><td>SELF JOIN</td><td>같은 테이블을 자기 자신과 JOIN</td></tr></table><pre><button class="copy">복사</button><code>SELECT E.LAST_NAME AS 직원, M.LAST_NAME AS 매니저
+FROM EMPLOYEES E, EMPLOYEES M
+WHERE E.MANAGER_ID = M.EMPLOYEE_ID;</code></pre></div></section><section id="ddl" data-s="cmd"><div class="st" onclick="tog(this)"><h2>5. DDL + 제약조건</h2><span class="badge">CREATE / ALTER / DROP</span></div><div class="body"><table><tr><th>명령</th><th>기능</th></tr><tr><td>CREATE</td><td>생성</td></tr><tr><td>ALTER</td><td>구조 수정</td></tr><tr><td>RENAME</td><td>이름 변경</td></tr><tr><td>TRUNCATE</td><td>구조는 남기고 데이터 전체 삭제</td></tr><tr><td>DROP</td><td>테이블 자체 삭제</td></tr></table><table><tr><th>제약조건</th><th>뜻</th></tr><tr><td>NOT NULL</td><td>필수 입력</td></tr><tr><td>PRIMARY KEY</td><td>NULL/중복 불가</td></tr><tr><td>FOREIGN KEY</td><td>다른 테이블 값 참조</td></tr><tr><td>UNIQUE</td><td>중복 불가, NULL 허용</td></tr><tr><td>CHECK</td><td>조건 만족 값만 허용</td></tr></table><pre><button class="copy">복사</button><code>CREATE TABLE 부서(
+ 부서ID NUMBER(4) PRIMARY KEY,
+ 부서이름 VARCHAR2(30) NOT NULL
+);</code></pre></div></section><section id="dml" data-s="cmd"><div class="st" onclick="tog(this)"><h2>6. DML</h2><span class="badge">INSERT / UPDATE / DELETE</span></div><div class="body"><pre><button class="copy">복사</button><code>INSERT INTO 부서 (부서ID, 부서이름)
+VALUES (1, '연구개발팀');</code></pre><pre><button class="copy">복사</button><code>UPDATE 직원
+SET 급여 = 5000
+WHERE 직원ID = 1;</code></pre><pre><button class="copy">복사</button><code>DELETE FROM 직원
+WHERE 직원ID = 1;</code></pre><div class="danger"><b>UPDATE / DELETE는 WHERE 누락 주의.</b> 조건이 없으면 전체 행이 변경될 수 있음.</div></div></section><section id="dcl" data-s="cmd"><div class="st" onclick="tog(this)"><h2>7. DCL</h2><span class="badge">GRANT / REVOKE</span></div><div class="body"><pre><button class="copy">복사</button><code>GRANT SELECT, UPDATE
+ON HR.EMPLOYEES
+TO DCLTEST;</code></pre><div class="call">GRANT는 권한 부여, REVOKE는 권한 회수.</div></div></section><section id="tcl" data-s="cmd"><div class="st" onclick="tog(this)"><h2>8. TCL</h2><span class="badge">COMMIT / ROLLBACK</span></div><div class="body"><table><tr><th>명령</th><th>뜻</th></tr><tr><td>COMMIT</td><td>변경 확정</td></tr><tr><td>ROLLBACK</td><td>COMMIT 전 변경 취소</td></tr></table><div class="danger">COMMIT한 뒤에는 ROLLBACK으로 되돌릴 수 없음.</div></div></section><section id="sub" data-s="sub"><div class="st" onclick="tog(this)"><h2>9. 서브쿼리</h2><span class="badge">단일행 / 다중행 / DUAL</span></div><div class="body"><div class="call"><b>서브쿼리:</b> SELECT문 안에 또 다른 SELECT문이 괄호로 들어있는 것. <b>괄호 안쪽 SELECT가 먼저 실행</b>되고 바깥 SELECT가 그 결과를 사용.</div><h3>수업 실습 테이블</h3><pre><button class="copy">복사</button><code>CREATE TABLE 반_성적표(
+ 학생ID NUMBER(6) PRIMARY KEY,
+ 이름 VARCHAR2(20) NOT NULL,
+ 반 VARCHAR2(10),
+ 점수 NUMBER(6)
+);</code></pre><h3>INSERT ALL + DUAL</h3><pre><button class="copy">복사</button><code>INSERT ALL
+ INTO 반_성적표 VALUES (1,'유진','1반',NULL)
+ INTO 반_성적표 VALUES (2,'찬희','1반',95)
+ INTO 반_성적표 VALUES (3,'윤현','1반',72)
+ INTO 반_성적표 VALUES (4,'영표','2반',90)
+ INTO 반_성적표 VALUES (5,'예순','2반',66)
+ INTO 반_성적표 VALUES (6,'해도','2반',90)
+ INTO 반_성적표 VALUES (7,'예순','3반',78)
+ INTO 반_성적표 VALUES (8,'승환','3반',88)
+ INTO 반_성적표 VALUES (9,'나영','3반',84)
+ INTO 반_성적표 VALUES (10,'민성','3반',60)
+SELECT * FROM DUAL;</code></pre><div class="warn"><b>DUAL:</b> INSERT ALL 문법 끝에 서브쿼리가 필요해서 형식을 맞추기 위해 Oracle 기본 가짜 테이블 DUAL을 사용.</div><h3>찬희보다 점수가 낮은 학생</h3><pre><button class="copy">복사</button><code>SELECT 이름, 점수
+FROM 반_성적표
+WHERE 점수 &lt; (
+ SELECT 점수
+ FROM 반_성적표
+ WHERE 이름 = '찬희'
+);</code></pre><div class="call"><b>읽는 순서:</b> 안쪽에서 찬희 점수 95를 먼저 조회 → 바깥에서 95보다 낮은 학생 조회.</div><table><tr><th>구분</th><th>괄호 안 결과</th><th>수업 기준</th></tr><tr><td>단일행 서브쿼리</td><td>1개</td><td>=, &gt;, &lt;, &gt;=, &lt;= 같은 비교 연산자</td></tr><tr><td>다중행 서브쿼리</td><td>여러 개</td><td>IN</td></tr></table><pre><button class="copy">복사</button><code>SELECT 이름, 반, 점수
+FROM 반_성적표
+WHERE 반 IN (
+ SELECT 반
+ FROM 반_성적표
+ WHERE 점수 &gt;= 90
+);</code></pre><div class="danger">서브쿼리 결과가 여러 개인데 = 같은 단일 비교 연산자를 쓰지 않도록 먼저 결과 개수 확인.</div></div></section><section id="choose" data-s="basic"><div class="st" onclick="tog(this)"><h2>10. 문제 문장 → 문법</h2><span class="badge">실습 선택표</span></div><div class="body"><table><tr><th>문제 표현</th><th>사용</th></tr><tr><td>중복 없이</td><td>DISTINCT</td></tr><tr><td>여러 값 중 하나</td><td>IN</td></tr><tr><td>범위</td><td>BETWEEN</td></tr><tr><td>문자 포함</td><td>LIKE</td></tr><tr><td>다른 테이블 컬럼 같이</td><td>JOIN</td></tr><tr><td>테이블 생성/구조 수정</td><td>CREATE / ALTER</td></tr><tr><td>행 추가/수정/삭제</td><td>INSERT / UPDATE / DELETE</td></tr><tr><td>권한</td><td>GRANT / REVOKE</td></tr><tr><td>변경 확정/취소</td><td>COMMIT / ROLLBACK</td></tr><tr><td>다른 SELECT 결과를 조건으로</td><td>서브쿼리 — 1개면 비교 연산자, 여러 개면 IN</td></tr></table></div></section><section id="err" data-s="basic"><div class="st" onclick="tog(this)"><h2>11. 오류 체크</h2><span class="badge">실습 직전</span></div><div class="body"><table><tr><th>증상</th><th>확인</th></tr><tr><td>NULL 검색 안 됨</td><td>IS NULL 사용</td></tr><tr><td>JOIN 컬럼 모호</td><td>E.컬럼처럼 테이블 별칭</td></tr><tr><td>UPDATE/DELETE 전체 반영</td><td>WHERE 누락</td></tr><tr><td>ROLLBACK 안 됨</td><td>이미 COMMIT했는지</td></tr><tr><td>서브쿼리 오류</td><td>결과 1개/여러 개 확인</td></tr></table></div></section><footer>JOIN · DDL · DML · DCL · TCL · 서브쿼리 수업 진도 반영</footer></main></div><script>function tog(e){e.parentElement.classList.toggle('collapsed')}function findIt(){let q=document.getElementById('q').value.trim().toLowerCase(),f=null;document.querySelectorAll('section').forEach(s=>{s.classList.remove('hidden');if(!q)return;let ok=s.innerText.toLowerCase().includes(q);if(!ok)s.classList.add('hidden');else{s.classList.remove('collapsed');if(!f)f=s}});if(f)f.scrollIntoView({behavior:'smooth'})}function filter(x,b){document.querySelectorAll('.tabs button').forEach(v=>v.classList.remove('active'));b.classList.add('active');document.querySelectorAll('section').forEach(s=>{if(x==='all'||s.dataset.s===x)s.classList.remove('subject-hidden');else s.classList.add('subject-hidden')});document.getElementById('q').value=''}document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')findIt()});document.querySelectorAll('.copy').forEach(b=>b.onclick=async e=>{let c=e.target.nextElementSibling.innerText;try{await navigator.clipboard.writeText(c)}catch{}let o=e.target.innerText;e.target.innerText='복사됨!';setTimeout(()=>e.target.innerText=o,900)});</script></body></html>
