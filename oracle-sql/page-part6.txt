@@ -1,0 +1,38 @@
+ 결과 누락</td><td>Oracle <code>(+)</code>가 없어도 되는 쪽에 붙었는지 확인</td></tr><tr><td>UPDATE/DELETE 전체 반영</td><td><code>WHERE</code> 누락 여부 확인</td></tr><tr><td>ROLLBACK이 안 됨</td><td>이미 <code>COMMIT</code>했는지 확인</td></tr><tr><td>서브쿼리 비교 오류</td><td>안쪽 결과 1개 → 비교 연산자 / 여러 개 → <code>IN</code> 확인</td></tr></table>
+</div></section>
+
+<section id="recipes" data-subject="practice"><div class="section-title" onclick="toggleSection(this)"><h2>🏆 복붙 레시피</h2><span class="badge">바로 수정</span></div><div class="section-body">
+<div class="recipe"><b>부서 + 급여</b><pre><button class="copy">복사</button><code>SELECT EMPLOYEE_ID, FIRST_NAME, SALARY
+  FROM EMPLOYEES
+ WHERE DEPARTMENT_ID = 90
+   AND SALARY &gt;= 5000;</code></pre></div>
+<div class="recipe"><b>여러 부서</b><pre><button class="copy">복사</button><code>SELECT *
+  FROM EMPLOYEES
+ WHERE DEPARTMENT_ID IN (30, 50, 90);</code></pre></div>
+<div class="recipe"><b>문자 포함</b><pre><button class="copy">복사</button><code>SELECT FIRST_NAME
+  FROM EMPLOYEES
+ WHERE FIRST_NAME LIKE '%s%'
+    OR FIRST_NAME LIKE '%S%';</code></pre></div>
+
+<div class="recipe"><b>JOIN으로 직원 + 부서명</b><pre><button class="copy">복사</button><code>SELECT E.EMPLOYEE_ID,
+       E.LAST_NAME,
+       D.DEPARTMENT_NAME
+  FROM EMPLOYEES E, DEPARTMENTS D
+ WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID;</code></pre></div>
+<div class="recipe"><b>찬희보다 점수가 낮은 학생 — 서브쿼리</b><pre><button class="copy">복사</button><code>SELECT 이름, 점수
+FROM 반_성적표
+WHERE 점수 &lt; (
+    SELECT 점수
+    FROM 반_성적표
+    WHERE 이름 = '찬희'
+);</code></pre></div>
+</div></section>
+
+<footer>업로드한 데이터베이스 강의자료 + JOIN/DDL/DML/DCL/TCL 실습파일 + 현재 서브쿼리 진도 반영</footer></main></div>
+<script>
+function toggleSection(e){e.parentElement.classList.toggle('collapsed')}
+function doSearch(){const q=document.getElementById('search').value.trim().toLowerCase();document.querySelectorAll('section').forEach(s=>s.classList.remove('hidden'));if(!q)return;let f=null;document.querySelectorAll('section:not(.subject-hidden)').forEach(s=>{let ok=s.innerText.toLowerCase().includes(q);if(!ok)s.classList.add('hidden');else{s.classList.remove('collapsed');if(!f)f=s}});if(f)f.scrollIntoView({behavior:'smooth',block:'start'})}
+function filterSubject(x,b){document.querySelectorAll('.tabs button').forEach(v=>v.classList.remove('active'));b.classList.add('active');document.querySelectorAll('section').forEach(s=>{s.classList.remove('hidden');if(x==='all'||s.dataset.subject===x)s.classList.remove('subject-hidden');else s.classList.add('subject-hidden')});document.getElementById('search').value=''}
+document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()});
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async e=>{let c=e.target.nextElementSibling.innerText;try{await navigator.clipboard.writeText(c)}catch(err){}let o=e.target.innerText;e.target.innerText='복사됨!';setTimeout(()=>e.target.innerText=o,900)}));
+</script></body></html>
