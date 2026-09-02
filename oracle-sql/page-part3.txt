@@ -1,0 +1,169 @@
+><td>NULL이면 대체값</td><td><code>NVL(COMMISSION_PCT, 0)</code></td></tr>
+<tr><td>NVL2</td><td>NULL 여부에 따라 결과 선택</td><td><code>NVL2(컬럼, NULL아님값, NULL값)</code></td></tr></table>
+</div></section><section id="s18" data-subject="func">
+<div class="section-title" onclick="toggleSection(this)"><h2>18. DECODE</h2><span class="badge">값에 따라 결과 변경</span></div>
+<div class="section-body">
+<pre><button class="copy">복사</button><code>SELECT FIRST_NAME, DEPARTMENT_ID, SALARY,
+       DECODE(DEPARTMENT_ID,
+              100, SALARY*2,
+               90, SALARY*1.9,
+               80, SALARY*1.8,
+               SALARY) AS 성과급
+  FROM EMPLOYEES;</code></pre>
+</div></section><section id="groupfunc" data-subject="func">
+<div class="section-title" onclick="toggleSection(this)"><h2>19. 그룹 함수</h2><span class="badge">SUM / COUNT / MAX / MIN / AVG</span></div>
+<div class="section-body">
+<table><tr><th>함수</th><th>기능</th></tr>
+<tr><td>SUM</td><td>합계</td></tr><tr><td>COUNT</td><td>개수</td></tr><tr><td>MAX</td><td>최댓값</td></tr><tr><td>MIN</td><td>최솟값</td></tr><tr><td>AVG</td><td>평균</td></tr></table>
+<pre><button class="copy">복사</button><code>SELECT SUM(SALARY), COUNT(SALARY),
+       MAX(SALARY), MIN(SALARY),
+       ROUND(AVG(SALARY))
+  FROM EMPLOYEES;</code></pre>
+</div></section>
+
+
+<section id="join" data-subject="join">
+<div class="section-title" onclick="toggleSection(this)"><h2>20. JOIN — 여러 테이블 연결</h2><span class="badge">Oracle / ANSI / OUTER / SELF</span></div>
+<div class="section-body">
+<div class="callout"><b>JOIN:</b> 서로 다른 테이블 2개 이상을 공통된 컬럼 값을 기준으로 가로로 이어 붙여 조회합니다.</div>
+<table>
+<tr><th>종류</th><th>언제 사용?</th><th>수업 핵심</th></tr>
+<tr><td>INNER JOIN</td><td>양쪽에 연결되는 데이터만</td><td>기본 JOIN</td></tr>
+<tr><td>LEFT OUTER JOIN</td><td>왼쪽 테이블은 전부</td><td>Oracle 문법에서는 없어도 되는 오른쪽에 <code>(+)</code></td></tr>
+<tr><td>RIGHT OUTER JOIN</td><td>오른쪽 테이블은 전부</td><td>없어도 되는 왼쪽에 <code>(+)</code></td></tr>
+<tr><td>FULL OUTER JOIN</td><td>양쪽 모두 전부</td><td>ANSI 문법 사용</td></tr>
+<tr><td>SELF JOIN</td><td>같은 테이블을 자기 자신과 연결</td><td>직원 ↔ 매니저 등</td></tr>
+</table>
+
+<h3>Oracle JOIN 문법</h3>
+<pre><button class="copy">복사</button><code>SELECT E.EMPLOYEE_ID,
+       E.LAST_NAME,
+       D.DEPARTMENT_NAME
+  FROM EMPLOYEES E, DEPARTMENTS D
+ WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID;</code></pre>
+
+<h3>ANSI JOIN 문법</h3>
+<pre><button class="copy">복사</button><code>SELECT E.LAST_NAME,
+       D.DEPARTMENT_NAME
+  FROM EMPLOYEES E
+  JOIN DEPARTMENTS D
+    ON E.DEPARTMENT_ID = D.DEPARTMENT_ID;</code></pre>
+
+<h3>LEFT / RIGHT OUTER JOIN — Oracle (+)</h3>
+<pre><button class="copy">복사</button><code>-- 직원은 모두 출력
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, D.DEPARTMENT_NAME
+  FROM EMPLOYEES E, DEPARTMENTS D
+ WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID(+);
+
+-- 부서는 모두 출력
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, D.DEPARTMENT_NAME
+  FROM EMPLOYEES E, DEPARTMENTS D
+ WHERE E.DEPARTMENT_ID(+) = D.DEPARTMENT_ID;</code></pre>
+
+<h3>FULL OUTER JOIN — ANSI</h3>
+<pre><button class="copy">복사</button><code>SELECT E.LAST_NAME,
+       D.DEPARTMENT_NAME
+  FROM EMPLOYEES E
+  FULL OUTER JOIN DEPARTMENTS D
+    ON E.DEPARTMENT_ID = D.DEPARTMENT_ID;</code></pre>
+
+<h3>SELF JOIN</h3>
+<pre><button class="copy">복사</button><code>SELECT E.LAST_NAME AS 직원,
+       M.LAST_NAME AS 매니저
+  FROM EMPLOYEES E, EMPLOYEES M
+ WHERE E.MANAGER_ID = M.EMPLOYEE_ID;</code></pre>
+<div class="danger"><b>JOIN 실수:</b> 두 테이블에 같은 이름의 컬럼이 있으면 <code>E.DEPARTMENT_ID</code>처럼 테이블 별칭을 붙이는 습관이 중요합니다.</div>
+</div></section>
+
+<section id="groupjoin" data-subject="join">
+<div class="section-title" onclick="toggleSection(this)"><h2>21. JOIN + GROUP BY + HAVING</h2><span class="badge">AVG / GROUP BY / HAVING</span></div>
+<div class="section-body">
+<div class="callout"><b>문제:</b> 평균 급여가 8000 이상인 부서의 부서 이름과 평균 급여를 조회.</div>
+<pre><button class="copy">복사</button><code>SELECT D.DEPARTMENT_NAME,
+       ROUND(AVG(E.SALARY), 1) AS 평균급여
+  FROM EMPLOYEES E, DEPARTMENTS D
+ WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID
+ GROUP BY D.DEPARTMENT_NAME
+HAVING AVG(E.SALARY) &gt;= 8000;</code></pre>
+<table>
+<tr><th>절</th><th>역할</th></tr>
+<tr><td>WHERE</td><td>JOIN 연결 조건 / 행 조건</td></tr>
+<tr><td>GROUP BY</td><td>부서 이름 기준 그룹화</td></tr>
+<tr><td>AVG()</td><td>그룹별 평균 계산</td></tr>
+<tr><td>HAVING</td><td>그룹 함수 결과에 조건</td></tr>
+</table>
+</div></section>
+
+<section id="ddl" data-subject="command">
+<div class="section-title" onclick="toggleSection(this)"><h2>22. DDL — 테이블 구조 만들기/수정/삭제</h2><span class="badge">CREATE / ALTER / RENAME / TRUNCATE / DROP</span></div>
+<div class="section-body">
+<table>
+<tr><th>명령어</th><th>기능</th></tr>
+<tr><td>CREATE</td><td>새 테이블 등 생성</td></tr>
+<tr><td>ALTER</td><td>기존 테이블 구조 수정</td></tr>
+<tr><td>RENAME</td><td>테이블/컬럼 이름 변경</td></tr>
+<tr><td>TRUNCATE</td><td>테이블 구조는 남기고 데이터 전체 삭제</td></tr>
+<tr><td>DROP</td><td>테이블 자체 삭제</td></tr>
+</table>
+<h3>Oracle 자료형</h3>
+<table>
+<tr><th>자료형</th><th>용도</th></tr>
+<tr><td>VARCHAR2(크기)</td><td>길이가 변하는 문자</td></tr>
+<tr><td>CHAR(크기)</td><td>길이가 일정한 문자</td></tr>
+<tr><td>NUMBER</td><td>숫자</td></tr>
+<tr><td>DATE</td><td>날짜/시간</td></tr>
+<tr><td>CLOB</td><td>매우 긴 문자</td></tr>
+<tr><td>BLOB</td><td>이미지/영상/파일 등</td></tr>
+</table>
+<pre><button class="copy">복사</button><code>CREATE TABLE 부서(
+    부서ID   NUMBER(4)     NOT NULL,
+    부서이름 VARCHAR2(30)  NOT NULL,
+    매니저ID NUMBER(6),
+    위치ID   NUMBER(4)
+);</code></pre>
+<div class="callout"><b>문자열 값</b>은 작은따옴표 <code>' '</code>, 테이블/컬럼 이름을 특별하게 표현할 때는 큰따옴표 <code>" "</code>를 사용합니다.</div>
+</div></section>
+
+<section id="constraint" data-subject="command">
+<div class="section-title" onclick="toggleSection(this)"><h2>23. 제약조건 + ALTER TABLE</h2><span class="badge">NOT NULL / PK / FK / UNIQUE / CHECK</span></div>
+<div class="section-body">
+<table>
+<tr><th>제약조건</th><th>뜻</th></tr>
+<tr><td>NOT NULL</td><td>반드시 값 입력</td></tr>
+<tr><td>PRIMARY KEY</td><td>행을 구분하는 대표 값, NULL/중복 불가</td></tr>
+<tr><td>FOREIGN KEY</td><td>다른 테이블의 존재하는 값을 참조</td></tr>
+<tr><td>UNIQUE</td><td>중복 불가, NULL 허용</td></tr>
+<tr><td>CHECK</td><td>지정한 조건을 만족하는 값만 허용</td></tr>
+</table>
+<pre><button class="copy">복사</button><code>ALTER TABLE 직원
+ADD CONSTRAINT 직원_직원ID_PK
+PRIMARY KEY (직원ID);
+
+ALTER TABLE 직원
+ADD CONSTRAINT 직원_이메일_UK
+UNIQUE (이메일);
+
+ALTER TABLE 직원
+ADD CONSTRAINT 직원_급여_CK
+CHECK (급여 &gt; 0);</code></pre>
+<div class="callout"><b>ALTER TABLE</b>은 이미 만든 테이블의 컬럼 추가/수정/이름 변경/삭제와 제약조건 추가 등에 사용합니다.</div>
+</div></section>
+
+<section id="dml" data-subject="command">
+<div class="section-title" onclick="toggleSection(this)"><h2>24. DML — 데이터 추가/수정/삭제</h2><span class="badge">INSERT / UPDATE / DELETE</span></div>
+<div class="section-body">
+<table>
+<tr><th>명령어</th><th>기능</th></tr>
+<tr><td>INSERT</td><td>새로운 행 추가</td></tr>
+<tr><td>UPDATE</td><td>기존 데이터 수정</td></tr>
+<tr><td>DELETE</td><td>행 삭제</td></tr>
+</table>
+<h3>INSERT</h3>
+<pre><button class="copy">복사</button><code>INSERT INTO 부서 (부서ID, 부서이름)
+VALUES (1, '연구개발팀');</code></pre>
+
+<h3>여러 행 INSERT ALL</h3>
+<pre><button class="copy">복사</button><code>INSERT ALL
+    INTO 부서 (부서ID, 부서이름) VALUES (6, '첨단1강의실')
+    INTO 부서 (부서ID, 부서이름) VALUES (7, '첨단2강의실')
+    INTO 부서 (부서ID, 부서이름) VALUES (
