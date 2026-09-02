@@ -1,0 +1,212 @@
+8, '첨단3강의실')
+SELECT * FROM DUAL;</code></pre>
+
+<h3>UPDATE</h3>
+<pre><button class="copy">복사</button><code>UPDATE 직원
+   SET 급여 = 5000,
+       매니저ID = 1
+ WHERE 직원ID = 1;</code></pre>
+
+<h3>DELETE</h3>
+<pre><button class="copy">복사</button><code>DELETE FROM 직원
+ WHERE 직원ID = 1;</code></pre>
+<div class="danger"><b>UPDATE / DELETE에서 WHERE 누락 주의!</b> 조건이 없으면 여러 행 또는 전체 행이 수정/삭제될 수 있습니다.</div>
+</div></section>
+
+<section id="dcl" data-subject="command">
+<div class="section-title" onclick="toggleSection(this)"><h2>25. DCL — 권한 주기/회수</h2><span class="badge">GRANT / REVOKE</span></div>
+<div class="section-body">
+<div class="callout"><b>DCL:</b> 누구에게 무엇을 허락할지 정하는 명령어.</div>
+<table>
+<tr><th>명령어</th><th>뜻</th></tr>
+<tr><td>GRANT</td><td>권한을 준다</td></tr>
+<tr><td>REVOKE</td><td>권한을 회수한다</td></tr>
+</table>
+<pre><button class="copy">복사</button><code>-- 로그인 권한
+GRANT CREATE SESSION TO DCLTEST;
+
+-- HR 소유 EMPLOYEES의 SELECT, UPDATE 권한
+GRANT SELECT, UPDATE
+ON HR.EMPLOYEES
+TO DCLTEST;
+
+-- 다른 계정 소유 테이블 조회
+SELECT *
+  FROM HR.EMPLOYEES;</code></pre>
+<div class="warn"><b>수업 도구 구분:</b> 계정 생성/로그인 권한은 SYSTEM + Run SQL Command Line, 이후 테이블 권한 실습은 SQL Developer에서 진행했습니다.</div>
+</div></section>
+
+<section id="tcl" data-subject="command">
+<div class="section-title" onclick="toggleSection(this)"><h2>26. TCL — 트랜잭션 제어</h2><span class="badge">COMMIT / ROLLBACK / LOCK / SESSION</span></div>
+<div class="section-body">
+<table>
+<tr><th>용어</th><th>뜻</th></tr>
+<tr><td>COMMIT</td><td>변경 내용을 확정하고 저장</td></tr>
+<tr><td>ROLLBACK</td><td>COMMIT 전 변경 내용을 취소</td></tr>
+<tr><td>SESSION</td><td>DB에 접속된 하나의 연결 상태</td></tr>
+<tr><td>LOCK</td><td>같은 데이터를 동시에 변경하지 못하게 막음</td></tr>
+</table>
+<pre><button class="copy">복사</button><code>UPDATE 부서
+   SET 부서이름 = 'AI연구개발팀'
+ WHERE 부서ID = 1;
+
+COMMIT;</code></pre>
+<pre><button class="copy">복사</button><code>UPDATE 부서
+   SET 부서이름 = 'AI기획팀';
+
+ROLLBACK;</code></pre>
+<div class="danger"><b>핵심:</b> COMMIT하기 전에는 ROLLBACK으로 취소할 수 있지만, COMMIT한 내용은 ROLLBACK으로 되돌릴 수 없습니다.</div>
+<h3>트랜잭션 4가지 특성</h3>
+<table><tr><th>특성</th><th>뜻</th></tr>
+<tr><td>원자성</td><td>모든 작업이 성공하거나 모두 취소</td></tr>
+<tr><td>일관성</td><td>작업 전후 데이터가 올바른 상태 유지</td></tr>
+<tr><td>고립성</td><td>작업 중 데이터는 다른 작업의 영향을 받지 않음</td></tr>
+<tr><td>지속성</td><td>COMMIT한 데이터는 계속 저장</td></tr>
+</table>
+</div></section>
+
+
+
+<section id="subquery" data-subject="subquery">
+<div class="section-title" onclick="toggleSection(this)"><h2>27. 서브쿼리 — 기초부터 실습문제 풀이까지</h2><span class="badge">단일행 / 다중행 / 자기 부서 비교</span></div>
+<div class="section-body">
+
+<div class="callout"><b>서브쿼리란?</b> SELECT문 안에 또 다른 SELECT문이 괄호로 들어있는 것입니다. <b>괄호 안쪽 SELECT가 먼저 실행</b>되고, 그 결과를 바깥쪽 SELECT가 사용합니다.</div>
+
+<h3>1. 수업 실습용 테이블</h3>
+<pre><button class="copy">복사</button><code>CREATE TABLE 반_성적표(
+    학생ID NUMBER(6) PRIMARY KEY,
+    이름 VARCHAR2(20) NOT NULL,
+    반 VARCHAR2(10),
+    점수 NUMBER(6)
+);
+
+INSERT ALL
+    INTO 반_성적표 VALUES (1, '유진', '1반', NULL)
+    INTO 반_성적표 VALUES (2, '찬희', '1반', 95)
+    INTO 반_성적표 VALUES (3, '윤현', '1반', 72)
+    INTO 반_성적표 VALUES (4, '영표', '2반', 90)
+    INTO 반_성적표 VALUES (5, '예순', '2반', 66)
+    INTO 반_성적표 VALUES (6, '해도', '2반', 90)
+    INTO 반_성적표 VALUES (7, '예순', '3반', 78)
+    INTO 반_성적표 VALUES (8, '승환', '3반', 88)
+    INTO 반_성적표 VALUES (9, '나영', '3반', 84)
+    INTO 반_성적표 VALUES (10, '민성', '3반', 60)
+SELECT * FROM DUAL;</code></pre>
+
+<div class="warn"><b>DUAL:</b> 수업 설명에서는 <code>INSERT ALL</code>의 맨 끝에 서브쿼리가 하나 있어야 하는 규칙 때문에, 실제 데이터를 가져오려는 목적이 아니라 형식을 맞추기 위해 Oracle이 제공하는 DUAL 테이블을 사용했습니다.</div>
+
+<h3>2. 서브쿼리를 왜 쓰는가?</h3>
+<div class="callout">문제: <b>“찬희보다 점수가 낮은 학생”</b>을 찾고 싶은데 찬희의 점수를 모른다면, 먼저 찬희의 점수를 SELECT하고 그 SELECT문을 조건 안에 넣습니다.</div>
+
+<h4>① 찬희의 점수부터 찾기</h4>
+<pre><button class="copy">복사</button><code>SELECT 점수
+FROM 반_성적표
+WHERE 이름 = '찬희';
+-- 결과: 95</code></pre>
+
+<h4>② 점수를 알고 있다고 생각하고 조건 작성</h4>
+<pre><button class="copy">복사</button><code>SELECT 이름, 점수
+FROM 반_성적표
+WHERE 점수 &lt; 95;</code></pre>
+
+<h4>③ 95 자리에 SELECT문 넣기</h4>
+<pre><button class="copy">복사</button><code>SELECT 이름, 점수
+FROM 반_성적표
+WHERE 점수 &lt; (
+    SELECT 점수
+    FROM 반_성적표
+    WHERE 이름 = '찬희'
+);</code></pre>
+
+<table>
+<tr><th>실행 순서</th><th>생각</th></tr>
+<tr><td>1</td><td>괄호 안 SELECT로 찬희의 점수 95를 구함</td></tr>
+<tr><td>2</td><td>바깥 조건이 사실상 <code>점수 &lt; 95</code>가 됨</td></tr>
+<tr><td>3</td><td>찬희보다 점수가 낮은 학생을 출력</td></tr>
+</table>
+
+<h3>3. 기본 구조</h3>
+<pre><button class="copy">복사</button><code>SELECT 출력할_컬럼
+FROM 테이블
+WHERE 비교할_컬럼 연산자 (
+    SELECT 기준값을_구할_컬럼
+    FROM 테이블
+    WHERE 기준값을_찾는_조건
+);</code></pre>
+<div class="callout"><b>작성 순서:</b> 안쪽 SELECT를 먼저 완성해서 실행 → 결과 확인 → 바깥 SELECT 작성 → 기준값 자리에 안쪽 SELECT를 넣습니다.</div>
+
+<h3>4. 단일행 서브쿼리</h3>
+<div class="callout"><b>단일행 서브쿼리</b>는 괄호 안 결과가 딱 1개일 때입니다. 수업에서는 이때 일반 비교 연산자를 사용한다고 정리했습니다.</div>
+<table>
+<tr><th>결과</th><th>사용</th><th>예</th></tr>
+<tr><td>1개</td><td><code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></td><td><code>점수 &lt; (SELECT ...)</code></td></tr>
+</table>
+
+<h3>5. 다중행 서브쿼리</h3>
+<div class="callout"><b>다중행 서브쿼리</b>는 괄호 안 결과가 여러 개일 때입니다. 수업에서는 단일 비교 연산자 대신 <code>IN</code>을 사용한다고 배웠습니다.</div>
+<pre><button class="copy">복사</button><code>SELECT 이름, 반, 점수
+FROM 반_성적표
+WHERE 점수 IN (
+    SELECT MAX(점수)
+    FROM 반_성적표
+    WHERE 점수 IS NOT NULL
+    GROUP BY 반
+);</code></pre>
+
+<table>
+<tr><th>구분</th><th>서브쿼리 결과</th><th>수업 기준</th></tr>
+<tr><td>단일행</td><td>1개</td><td>비교 연산자</td></tr>
+<tr><td>다중행</td><td>여러 개</td><td><code>IN</code></td></tr>
+</table>
+
+<h3>6. WHERE와 HAVING 구분</h3>
+<pre><button class="copy">복사</button><code>SELECT 반, MAX(점수)
+FROM 반_성적표
+WHERE 점수 IS NOT NULL
+GROUP BY 반;</code></pre>
+<table>
+<tr><th>절</th><th>역할</th></tr>
+<tr><td>WHERE</td><td>GROUP BY 전에 개별 행을 조건으로 거름</td></tr>
+<tr><td>HAVING</td><td>GROUP BY 후 집계 결과에 조건을 적용</td></tr>
+</table>
+<div class="danger"><b>중요:</b> 서브쿼리나 AVG/MAX가 있다고 무조건 GROUP BY를 사용하는 것이 아닙니다. 여러 그룹별 집계 결과가 필요할 때 GROUP BY를 사용합니다.</div>
+
+<h3>7. 같은 반 / 자기 부서 비교 패턴</h3>
+<div class="callout">실습문제에서 <b>“각 반”, “각 부서”, “자신이 속한 부서”</b>가 나오면 안쪽 SELECT가 바깥쪽 현재 행의 반이나 부서를 참고하는 형태가 등장합니다.</div>
+
+<pre><button class="copy">복사</button><code>SELECT 이름, 반, 점수
+FROM 반_성적표 A
+WHERE 점수 IS NOT NULL
+GROUP BY 이름, 반, 점수
+HAVING 점수 = (
+    SELECT MAX(점수)
+    FROM 반_성적표 B
+    WHERE B.반 = A.반
+);</code></pre>
+
+<table>
+<tr><th>코드</th><th>의미</th></tr>
+<tr><td><code>A</code></td><td>바깥쪽에서 현재 확인 중인 학생</td></tr>
+<tr><td><code>B</code></td><td>같은 반의 최고 점수를 찾기 위해 다시 읽는 반_성적표</td></tr>
+<tr><td><code>B.반 = A.반</code></td><td>현재 학생과 같은 반만 안쪽에서 조회</td></tr>
+</table>
+
+<div class="warn">이처럼 안쪽 SELECT가 바깥쪽 SELECT의 컬럼을 참고하는 형태를 일반적으로 <b>상관 서브쿼리</b>라고 부릅니다. 이 용어는 수업 코드의 동작을 이해하기 위한 보충 설명입니다.</div>
+
+<h3>8. 실습 — 각 부서에서 가장 높은 급여를 받는 직원</h3>
+<pre><button class="copy">복사</button><code>SELECT E.LAST_NAME,
+       D.DEPARTMENT_NAME,
+       E.SALARY
+FROM EMPLOYEES E, DEPARTMENTS D
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID
+AND E.SALARY = (
+    SELECT MAX(E2.SALARY)
+    FROM EMPLOYEES E2
+    WHERE E2.DEPARTMENT_ID = E.DEPARTMENT_ID
+);</code></pre>
+
+<table>
+<tr><th>부분</th><th>뜻</th></tr>
+<tr><td><code>E</code></td><td>현재 확인하고 있는 직원</td></tr>
+<tr><td><code>E2</cod
