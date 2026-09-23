@@ -19,7 +19,7 @@ pre{background:#f4f7fb;color:#172033;border-color:#c4d2e2;font-size:.9rem}.copy{
 @media print{body{font-size:12pt}.hero{background:#eef5ff!important}}
 </style></head><body>
 <header><div class="head"><div class="title"><h1>🤖 머신러닝 시험 오픈북</h1><small>힌트 8개 완전 정리 · 검색 → 비교 → 코드 확인</small></div><div class="search"><input id="q" placeholder="예: 교차검증, 원핫, Ridge, 과대적합"><button onclick="findIt()">검색</button></div></div></header>
-<div class="layout"><nav><b>🔥 응용·순서 문제</b><a href="#sequence">라이브러리부터 평가까지</a><a href="#applications">응용문제 12개</a><b>⚡ 시험 힌트</b><a href="#learning">1. 지도/비지도/강화</a><a href="#fit">2. 과대·과소·일반화</a><a href="#classify">3. 분류 모델</a><a href="#cv">4. 교차 검증</a><a href="#category">5. 범주형 처리</a><a href="#reg">6. 회귀 모델</a><a href="#metric">7. MSE / RMSE</a><a href="#process">8. 머신러닝 7과정</a><b>📌 실습 핵심</b><a href="#split">데이터 분리</a><a href="#scale">스케일링</a><a href="#code">전체 코드 흐름</a><a href="#trap">함정 암기표</a><a href="#quiz">셀프 체크</a></nav><main>
+<div class="layout"><nav><b>🔥 응용·순서 문제</b><a href="#sequence">라이브러리부터 평가까지</a><a href="#applications">응용문제 12개</a><b>⚡ 시험 힌트</b><a href="#learning">1. 지도/비지도/강화</a><a href="#fit">2. 과대·과소·일반화</a><a href="#classify">3. 분류 모델</a><a href="#cv">4. 교차 검증</a><a href="#category">5. 범주형 처리</a><a href="#reg">6. 회귀 모델</a><a href="#metric">7. MSE / RMSE</a><a href="#process">8. 머신러닝 7과정</a><b>📌 실습 핵심</b><a href="#split">데이터 분리</a><a href="#scale">스케일링</a><a href="#code">전체 코드 흐름</a><a href="#trap">자주 틀리는 개념</a><a href="#quiz">셀프 체크</a></nav><main>
 <div class="hero"><h2>오늘 시험은 이 8개부터</h2><p><b>분류냐 회귀냐</b>를 먼저 판단하고, X/y 분리 → train/test 분리 → 모델 생성 → fit → predict/score 흐름을 기억하세요.</p><div class="chips"><span class="chip">분류 = 범주</span><span class="chip">회귀 = 연속값</span><span class="chip">MSE·RMSE ↓</span><span class="chip">R² ↑</span><span class="chip">일반화가 목표</span></div></div>
 <div class="quick"><a href="#sequence"><strong>🔥 코드 순서</strong>import → load → X/y → split → model → fit → predict → score</a><a href="#applications"><strong>응용문제</strong>상황 판단 · 순서 배열 · 빈칸</a><a href="#cv"><strong>5-fold</strong>5조각으로 순환 검증</a><a href="#process"><strong>7과정</strong>문수전탐모학평</a></div>
 
@@ -408,8 +408,43 @@ print('train:', model.score(X_train, y_train))
 print('test :', model.score(X_test, y_test))
 print('CV   :', cross_val_score(model, X_train, y_train, cv=5).mean())</code></pre></div></section>
 
-<section id="trap"><div class="sh" onclick="tog(this)"><h2>30초 함정 암기표</h2><span class="badge">마지막 확인</span></div><div class="sb">
-<table><tr><th>분류/회귀</th><td>범주 = 분류, 연속 숫자 = 회귀</td></tr><tr><th>LogisticRegression</th><td>이름과 달리 분류</td></tr><tr><th>점수 방향</th><td>정확도·R² ↑ / MSE·RMSE ↓</td></tr><tr><th>과대/과소</th><td>train만 높음 = 과대 / 둘 다 낮음 = 과소</td></tr><tr><th>교차 검증</th><td>검증 fold 순환, 수업은 cv=5</td></tr><tr><th>범주형 X</th><td>원-핫: 한 칸 1, 나머지 0</td></tr><tr><th>L1/L2</th><td>Lasso 일부 0 / Ridge 전체 축소</td></tr><tr><th>전처리 fit</th><td>train만 fit, test는 transform</td></tr><tr><th>7과정</th><td>문수전탐모학평</td></tr></table></div></section>
+<section id="trap"><div class="sh" onclick="tog(this)"><h2>⚠️ 자주 틀리는 개념 쉽게 이해하기</h2><span class="badge">뜻 + 예시 + 판단법</span></div><div class="sb">
+<div class="call"><b>이 섹션의 목적:</b> 이름이 비슷하거나 방향을 반대로 외우기 쉬운 내용을 실제 문제 예시로 구분하는 곳입니다. 단어만 외우지 말고 “무엇을 예측하는가?”와 “이 값이 점수인가 오차인가?”를 먼저 보세요.</div>
+
+<h3>1. 분류와 회귀를 어떻게 구분하나?</h3>
+<div class="grid"><div class="card"><h4>분류</h4><p>결과가 <b>종류·이름·범주</b> 중 하나이다.</p><p>예: 합격/불합격, 뇌졸중 O/X, BMI 등급, 손글씨 0~9</p><p><span class="key">판단 질문:</span> 답이 몇 가지 종류 중 하나인가?</p></div><div class="card"><h4>회귀</h4><p>결과가 끊기지 않는 <b>연속적인 숫자</b>이다.</p><p>예: 주택가격 3억 2천만 원, 성적 87.5점, 내일 기온 23.4도</p><p><span class="key">판단 질문:</span> 정확한 수치 자체를 예측하는가?</p></div></div>
+<div class="must call"><b>시험 예시:</b> “집이 비싼 집/싼 집인지 예측”은 분류, “집값이 정확히 얼마인지 예측”은 회귀입니다. 같은 소재라도 정답 형태에 따라 달라집니다.</div>
+
+<h3>2. LogisticRegression은 왜 회귀가 아니라 분류인가?</h3>
+<p>이름에는 Regression이 있지만, 선형식의 결과를 <b>sigmoid 함수</b>에 넣어 0~1 사이의 확률로 바꾼 뒤 클래스를 선택합니다.</p>
+<div class="formula">예측 확률 0.82 → 기준 0.5 이상 → 합격(1)으로 분류<br>예측 확률 0.23 → 기준 0.5 미만 → 불합격(0)으로 분류</div>
+<p><span class="key">정답 문장:</span> LogisticRegression은 sigmoid 함수를 이용해 클래스의 확률을 계산하는 <b>분류 모델</b>이다.</p>
+
+<h3>3. 어떤 평가지표가 클수록 좋고, 어떤 것이 작을수록 좋은가?</h3>
+<table><tr><th>지표</th><th>무엇을 나타내나?</th><th>좋은 방향</th><th>이유</th></tr><tr><td>정확도</td><td>전체 중 맞힌 비율</td><td class="good">클수록 좋음</td><td>많이 맞힐수록 좋은 모델</td></tr><tr><td>R²</td><td>회귀 모델의 설명력</td><td class="good">1에 가까울수록 좋음</td><td>실제 데이터 변화를 잘 설명</td></tr><tr><td>MSE</td><td>오차 제곱의 평균</td><td class="bad">작을수록 좋음</td><td>예측과 실제의 차이가 작아야 함</td></tr><tr><td>RMSE</td><td>MSE의 제곱근</td><td class="bad">작을수록 좋음</td><td>이것도 오차이므로 0이 가장 좋음</td></tr></table>
+<div class="must call"><b>외우는 법:</b> 정확도·R²는 <b>성적표</b>라 높을수록 좋고, MSE·RMSE는 <b>틀린 정도</b>라 낮을수록 좋습니다.</div>
+
+<h3>4. 과대적합과 과소적합은 점수로 어떻게 찾나?</h3>
+<table><tr><th>훈련 점수</th><th>평가 점수</th><th>판단</th><th>이유</th></tr><tr><td>0.99</td><td>0.70</td><td class="bad">과대적합</td><td>공부한 문제는 외웠지만 새 문제를 못 풂</td></tr><tr><td>0.62</td><td>0.60</td><td class="bad">과소적합</td><td>훈련 데이터의 규칙조차 충분히 못 배움</td></tr><tr><td>0.91</td><td>0.89</td><td class="good">일반화 양호</td><td>훈련과 새로운 데이터 모두 잘 맞힘</td></tr></table>
+<p><span class="key">핵심:</span> 점수 하나만 보지 말고 반드시 train과 test의 <b>차이</b>를 함께 봅니다.</p>
+
+<h3>5. 원-핫 인코딩은 왜 필요한가?</h3>
+<p>모델의 입력 X에 “남자”, “여자”, “사무직” 같은 문자열이 있으면 계산할 수 없으므로 숫자로 바꿉니다. 단순히 사무직=1, 서비스직=2로 바꾸면 2가 1보다 크다는 가짜 순서가 생깁니다.</p>
+<div class="formula">성별=남자 → [남자 1, 여자 0]<br>성별=여자 → [남자 0, 여자 1]</div>
+<p><span class="key">정답 문장:</span> 순서가 없는 범주형 입력은 범주 수만큼 열을 만드는 원-핫 인코딩으로 숫자화한다.</p>
+
+<h3>6. Lasso(L1)와 Ridge(L2)는 무엇이 다른가?</h3>
+<div class="grid"><div class="card"><h4>Lasso / L1</h4><p>중요하지 않은 특성의 가중치를 <b>정확히 0</b>으로 만들 수 있습니다.</p><p>→ 필요 없는 특성을 제거하는 <b>특성 선택</b> 효과</p></div><div class="card"><h4>Ridge / L2</h4><p>모든 특성의 가중치를 <b>0에 가깝게 골고루</b> 줄입니다.</p><p>→ 특성은 유지하면서 모델을 안정화</p></div></div>
+<p><span class="key">공통점:</span> 둘 다 가중치를 제한해 과대적합을 줄입니다. alpha가 너무 크면 모델이 지나치게 단순해져 과소적합될 수 있습니다.</p>
+
+<h3>7. scaler는 왜 train에만 fit하나?</h3>
+<div class="formula">올바른 순서: split → scaler.fit(X_train) → transform(X_train) → transform(X_test)</div>
+<p>test는 처음 보는 데이터 역할입니다. test까지 이용해 최솟값·최댓값을 미리 학습하면 시험 답을 살짝 본 것과 같은 <b>데이터 누수</b>가 됩니다.</p>
+
+<h3>8. fit / predict / score에는 무엇을 넣나?</h3>
+<table><tr><th>함수</th><th>넣는 데이터</th><th>뜻</th></tr><tr><td><code>fit</code></td><td><code>X_train, y_train</code></td><td>문제와 정답을 함께 보고 규칙 학습</td></tr><tr><td><code>predict</code></td><td><code>X_test</code></td><td>평가 문제만 보고 정답 예측</td></tr><tr><td><code>score</code></td><td><code>X_test, y_test</code></td><td>예측과 실제 정답을 비교해 점수 계산</td></tr></table>
+<div class="danger call"><b>자주 하는 실수:</b> <code>predict(X_test, y_test)</code>는 틀립니다. 예측할 때는 실제 정답을 모델에 알려주면 안 되므로 X_test만 넣습니다.</div>
+</div></section>
 
 <section id="quiz"><div class="sh" onclick="tog(this)"><h2>셀프 체크 10문제</h2><span class="badge">클릭</span></div><div class="sb">
 <details><summary>1. 라벨 없이 고객을 비슷하게 묶는 학습?</summary><p>비지도학습의 군집화.</p></details>
