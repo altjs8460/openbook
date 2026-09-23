@@ -149,20 +149,162 @@ svm.score(X_test_s, y_test)</code></pre>
 <div class="danger call"><b>순서 함정:</b> 모델 생성 전에 데이터를 불러오고 X/y를 준비해야 한다. <code>predict</code>는 반드시 <code>fit</code> 뒤. test 데이터에는 모델도, scaler도 <code>fit</code>하지 않는다.</div>
 </div></section>
 
-<section id="applications"><div class="sh" onclick="tog(this)"><h2>🧩 응용문제 12개</h2><span class="badge">상황·순서·빈칸</span></div><div class="sb">
-<details><summary>1. 고객의 소득·나이로 대출 승인 여부(승인/거절)를 예측한다. 학습 종류와 문제 유형은?</summary><p><b>지도학습의 분류</b>. 정답 라벨이 있고 결과가 두 범주이기 때문.</p></details>
-<details><summary>2. 아파트 정보로 실제 매매가격을 예측한다. 어떤 유형과 평가 지표?</summary><p><b>지도학습의 회귀</b>. 연속 숫자 예측이므로 MSE/RMSE(작을수록 좋음), R²(클수록 좋음)를 사용.</p></details>
-<details><summary>3. model.predict(X_test)와 model.fit(X_train, y_train) 중 무엇이 먼저?</summary><p><code>fit</code>이 먼저. 모델이 규칙을 학습한 후 <code>predict</code>로 예측한다.</p></details>
-<details><summary>4. train_test_split의 올바른 반환 순서를 쓰시오.</summary><p><code>X_train, X_test, y_train, y_test</code></p></details>
-<details><summary>5. 직업 컬럼이 문자열이다. DecisionTree 학습 전에 무엇을 해야 하나?</summary><p><code>pd.get_dummies()</code> 등의 <b>원-핫 인코딩</b>으로 입력 X를 숫자화한다.</p></details>
-<details><summary>6. scaler.fit(X_test)를 실행했다. 잘못된 이유는?</summary><p>평가 데이터에서 변환 기준을 학습해 <b>데이터 누수</b>가 발생한다. scaler는 X_train에만 fit.</p></details>
-<details><summary>7. 훈련 정확도 1.0, 평가 정확도 0.70이다. 상태와 해결법은?</summary><p><b>과대적합</b>. 트리 깊이 제한, 규제, 데이터 추가, 교차 검증 등을 사용.</p></details>
-<details><summary>8. KNN에서 K를 지나치게 작게 설정하면?</summary><p>결정경계가 복잡해져 노이즈까지 외우므로 과대적합 가능성이 커진다.</p></details>
-<details><summary>9. 빈칸: model.____(X_train, y_train) / model.____(X_test)</summary><p><code>fit</code> / <code>predict</code></p></details>
-<details><summary>10. 빈칸: mean_squared_error(____, ____)</summary><p><code>y_test, y_pred</code> — 실제값을 먼저, 예측값을 다음에 넣는다.</p></details>
-<details><summary>11. cv=5의 의미를 설명하시오.</summary><p>훈련 데이터를 5개 fold로 나누어 4개 학습·1개 검증을 검증 위치를 바꾸며 총 5번 수행.</p></details>
-<details><summary>12. 다음을 순서대로 배열: 평가 / 모델 생성 / 데이터 로드 / 예측 / X-y 분리 / 학습 / train-test 분리</summary><p><b>데이터 로드 → X-y 분리 → train-test 분리 → 모델 생성 → 학습 → 예측 → 평가</b></p></details>
+<section id="applications"><div class="sh" onclick="tog(this)"><h2>🧩 응용문제 12개 + 바로 쓰는 정답</h2><span class="badge">답 전부 펼침</span></div><div class="sb">
+<div class="must call"><b>사용법:</b> 문제와 가장 비슷한 유형을 찾은 뒤, 파란색 <b>정답</b> 문장을 그대로 참고해서 작성하세요. 모든 답은 처음부터 펼쳐져 있습니다.</div>
+<details open><summary>1. 고객의 소득·나이로 대출 승인 여부(승인/거절)를 예측한다. 학습 종류와 문제 유형은?</summary><p><span class="key">정답:</span> <b>지도학습의 분류</b>이다. 정답인 승인 여부가 주어지고, 예측 결과가 승인·거절이라는 범주이기 때문이다.</p></details>
+<details open><summary>2. 아파트 정보로 실제 매매가격을 예측한다. 어떤 유형과 평가 지표?</summary><p><span class="key">정답:</span> 정답이 있는 <b>지도학습의 회귀</b> 문제이다. 연속적인 숫자인 가격을 예측하므로 MSE와 RMSE는 작을수록 좋고, R²는 1에 가까울수록 좋다.</p></details>
+<details open><summary>3. model.predict(X_test)와 model.fit(X_train, y_train) 중 무엇이 먼저?</summary><p><span class="key">정답:</span> <code>model.fit(X_train, y_train)</code>이 먼저이다. 훈련 데이터로 규칙을 학습한 후 <code>model.predict(X_test)</code>로 새로운 값을 예측한다.</p></details>
+<details open><summary>4. train_test_split의 올바른 반환 순서를 쓰시오.</summary><p><span class="key">정답:</span> <code>X_train, X_test, y_train, y_test</code> 순서이다.</p></details>
+<details open><summary>5. 직업 컬럼이 문자열이다. DecisionTree 학습 전에 무엇을 해야 하나?</summary><p><span class="key">정답:</span> 머신러닝 입력 데이터는 수치여야 하므로 <code>pd.get_dummies()</code>를 이용한 <b>원-핫 인코딩</b>으로 문자열 특성을 숫자화한다.</p></details>
+<details open><summary>6. scaler.fit(X_test)를 실행했다. 잘못된 이유는?</summary><p><span class="key">정답:</span> 평가 데이터의 정보로 변환 기준을 학습해 <b>데이터 누수</b>가 발생한다. scaler는 <code>X_train</code>에만 <code>fit</code>하고, X_train과 X_test에는 같은 scaler로 <code>transform</code>만 수행한다.</p></details>
+<details open><summary>7. 훈련 정확도 1.0, 평가 정확도 0.70이다. 상태와 해결법은?</summary><p><span class="key">정답:</span> 훈련 성능에 비해 평가 성능이 낮으므로 <b>과대적합</b>이다. 트리 깊이 제한, 규제 적용, 데이터 추가, 교차 검증 등으로 모델 복잡도를 조절한다.</p></details>
+<details open><summary>8. KNN에서 K를 지나치게 작게 설정하면?</summary><p><span class="key">정답:</span> 소수의 가까운 데이터와 노이즈에 민감해 결정경계가 복잡해지므로 <b>과대적합</b> 가능성이 커진다.</p></details>
+<details open><summary>9. 빈칸: model.____(X_train, y_train) / model.____(X_test)</summary><p><span class="key">정답:</span> <code>model.fit(X_train, y_train)</code> / <code>model.predict(X_test)</code></p></details>
+<details open><summary>10. 빈칸: mean_squared_error(____, ____)</summary><p><span class="key">정답:</span> <code>mean_squared_error(y_test, y_pred)</code>이다. 실제값을 먼저, 예측값을 다음에 넣는다.</p></details>
+<details open><summary>11. cv=5의 의미를 설명하시오.</summary><p><span class="key">정답:</span> 훈련 데이터를 5개 fold로 나눈 뒤 4개로 학습하고 1개로 검증하는 과정을, 검증 fold를 바꾸어 총 5번 수행한다. 결과의 평균으로 일반화 성능을 확인한다.</p></details>
+<details open><summary>12. 다음을 순서대로 배열: 평가 / 모델 생성 / 데이터 로드 / 예측 / X-y 분리 / 학습 / train-test 분리</summary><p><span class="key">정답:</span> <b>데이터 로드 → X-y 분리 → train-test 분리 → 모델 생성 → 학습 → 예측 → 평가</b></p></details>
 <div class="must call"><b>서술형 답안 공식:</b> “정답 데이터가 있으므로 지도학습이고, 예측값이 [범주/연속값]이므로 [분류/회귀]이다. 데이터를 X와 y로 나누고 train/test로 분리한 뒤, 모델을 생성하여 train으로 학습하고 test로 평가한다.”</div>
+<h3>💻 응용 실습형 문제 - 완성 정답 코드</h3>
+
+<h4>응용 1. 키·몸무게로 BMI 등급 예측하기 (KNN)</h4>
+<pre><button class="copy">복사</button><code># 정답 코드
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+
+data = pd.read_csv('bmi_500.csv')
+X = data[['Height', 'Weight']]
+y = data['Label']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=7
+)
+
+knn_model = KNeighborsClassifier(n_neighbors=13)
+knn_model.fit(X_train, y_train)
+
+print('훈련 점수:', knn_model.score(X_train, y_train))
+print('평가 점수:', knn_model.score(X_test, y_test))
+print('새 데이터 예측:', knn_model.predict([[170, 70]]))</code></pre>
+<div class="call"><b>답안 설명:</b> BMI 등급은 여러 범주 중 하나를 예측하므로 지도학습의 분류 문제이다. KNN은 가까운 13개 이웃의 정답을 참고해 새로운 사람의 BMI 등급을 예측한다.</div>
+
+<h4>응용 2. 문자열 특성이 있는 뇌졸중 여부 예측하기 (DecisionTree)</h4>
+<pre><button class="copy">복사</button><code># 정답 코드
+import pandas as pd
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.tree import DecisionTreeClassifier
+
+data = pd.read_csv('stroke.csv')
+X = data.drop('stroke', axis=1)
+y = data['stroke']
+
+# 문자열 범주형 특성을 수치형으로 변환
+X = pd.get_dummies(X)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=7
+)
+
+dt_model = DecisionTreeClassifier(
+    max_depth=5, min_samples_split=5, min_samples_leaf=10
+)
+dt_model.fit(X_train, y_train)
+
+print('훈련 점수:', dt_model.score(X_train, y_train))
+print('평가 점수:', dt_model.score(X_test, y_test))
+print('교차검증 평균:', cross_val_score(
+    dt_model, X_train, y_train, cv=5
+).mean())</code></pre>
+<div class="call"><b>답안 설명:</b> 문자열 입력 특성은 원-핫 인코딩으로 숫자화한다. 트리 깊이와 분할 조건을 제한해 과대적합을 줄이고, 5-fold 교차 검증으로 일반화 성능을 확인한다.</div>
+
+<h4>응용 3. 손글씨 숫자 분류하기 (LinearSVC + 스케일링)</h4>
+<pre><button class="copy">복사</button><code># 정답 코드
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.svm import LinearSVC
+
+digit_data = pd.read_csv('digit_train.csv')
+X = digit_data.drop('label', axis=1)
+y = digit_data['label']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=7
+)
+
+scaler = MinMaxScaler()
+scaler.fit(X_train)                   # train에만 fit
+X_train_scaled = scaler.transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+svm = LinearSVC()
+svm.fit(X_train_scaled, y_train)
+print('평가 점수:', svm.score(X_test_scaled, y_test))</code></pre>
+<div class="call"><b>답안 설명:</b> 픽셀 특성의 범위를 0~1로 맞추면 SVM이 더 안정적으로 학습한다. 데이터 누수를 막기 위해 scaler는 X_train에만 fit한다.</div>
+
+<h4>응용 4. 주택가격 예측과 MSE·RMSE 계산하기 (LinearRegression)</h4>
+<pre><button class="copy">복사</button><code># 정답 코드
+import numpy as np
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+
+# X: 주택 특성 데이터, y: 주택가격(MEDV)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=0
+)
+
+linear_model = LinearRegression()
+linear_model.fit(X_train, y_train)
+y_pred = linear_model.predict(X_test)
+
+mse = mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+r2 = r2_score(y_test, y_pred)
+cv_mean = cross_val_score(
+    linear_model, X_train, y_train, cv=5
+).mean()
+
+print('MSE:', mse)       # 작을수록 좋음
+print('RMSE:', rmse)     # 작을수록 좋음
+print('R2:', r2)         # 1에 가까울수록 좋음
+print('CV 평균:', cv_mean)</code></pre>
+<div class="call"><b>답안 설명:</b> 주택가격은 연속값이므로 회귀 문제이다. MSE와 RMSE는 예측 오차이므로 작을수록 좋고, R²는 1에 가까울수록 좋다.</div>
+
+<h4>응용 5. 과대적합된 선형회귀에 L1·L2 규제 적용하기</h4>
+<pre><button class="copy">복사</button><code># 정답 코드
+from sklearn.linear_model import Lasso, Ridge
+
+lasso_model = Lasso(alpha=10)   # L1: 일부 가중치를 0으로
+ridge_model = Ridge(alpha=100)  # L2: 모든 가중치를 작게
+
+lasso_model.fit(X_train, y_train)
+ridge_model.fit(X_train, y_train)
+
+print('Lasso 평가 점수:', lasso_model.score(X_test, y_test))
+print('Ridge 평가 점수:', ridge_model.score(X_test, y_test))</code></pre>
+<div class="call"><b>답안 설명:</b> Lasso는 중요하지 않은 특성의 가중치를 0으로 만들어 특성을 선택하고, Ridge는 모든 특성의 가중치를 골고루 줄인다. alpha가 지나치게 크면 과소적합될 수 있다.</div>
+
+<h4>응용 6. 최적의 트리 깊이를 교차 검증으로 찾기 (GridSearchCV)</h4>
+<pre><button class="copy">복사</button><code># 정답 코드
+from sklearn.model_selection import GridSearchCV
+from sklearn.tree import DecisionTreeClassifier
+
+params = {
+    'max_depth': [3, 5, 7, 10],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 5, 10]
+}
+
+grid = GridSearchCV(
+    DecisionTreeClassifier(), params, cv=5
+)
+grid.fit(X_train, y_train)
+
+print('최적 파라미터:', grid.best_params_)
+print('최고 교차검증 점수:', grid.best_score_)
+print('평가 점수:', grid.score(X_test, y_test))</code></pre>
+<div class="call"><b>답안 설명:</b> GridSearchCV는 지정한 하이퍼파라미터 조합을 5-fold 교차 검증으로 비교해 가장 성능이 좋은 조합을 찾는다.</div>
 </div></section>
 
 <section id="learning"><div class="sh" onclick="tog(this)"><h2>1. 지도학습 / 비지도학습 / 강화학습</h2><span class="badge">개념</span></div><div class="sb">
