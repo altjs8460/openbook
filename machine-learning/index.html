@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>머신러닝 시험 오픈북</title>
+<style>
+:root{--bg:#07111f;--p:#0e1b2e;--p2:#14243b;--t:#e7eef8;--m:#9fb0c7;--l:#263c58;--b:#38bdf8;--g:#4ade80;--y:#fbbf24;--r:#fb7185}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:radial-gradient(circle at 80% 0,#152c52 0,transparent 30%),var(--bg);color:var(--t);font:16px/1.65 Arial,"Noto Sans KR",sans-serif}header{position:sticky;top:0;z-index:9;background:#07111ff2;border-bottom:1px solid var(--l);backdrop-filter:blur(10px)}.head{max-width:1450px;margin:auto;padding:12px 18px;display:flex;gap:15px;align-items:center}.title{flex:1}.title h1{font-size:1.2rem;margin:0}.title small{color:var(--m)}.search{display:flex;gap:7px}.search input{width:min(430px,43vw);padding:10px;border:1px solid var(--l);border-radius:9px;background:#030914;color:white}.search button,.copy{border:0;border-radius:8px;background:var(--b);font-weight:bold;cursor:pointer;padding:9px 11px}.layout{max-width:1450px;margin:auto;padding:18px;display:grid;grid-template-columns:275px 1fr;gap:18px}nav{position:sticky;top:84px;height:calc(100vh - 104px);overflow:auto;background:var(--p);border:1px solid var(--l);border-radius:14px;padding:13px}nav b{display:block;color:var(--b);padding:5px 8px}nav a{display:block;color:#c7d6e9;text-decoration:none;padding:6px 8px;border-radius:7px;font-size:.9rem}nav a:hover{background:var(--p2)}.hero{background:linear-gradient(135deg,#0b4a6f,#29429a 55%,#63339a);border:1px solid #417bb4;border-radius:16px;padding:22px;margin-bottom:15px}.hero h2{margin:0}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.chip{background:#07111faa;border:1px solid #ffffff33;border-radius:99px;padding:4px 9px;font-size:.8rem}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:15px}.quick a{background:var(--p);border:1px solid var(--l);border-radius:11px;padding:10px;color:white;text-decoration:none;font-size:.85rem}.quick strong{display:block;color:var(--b)}section{background:var(--p);border:1px solid var(--l);border-radius:14px;margin-bottom:15px;overflow:hidden}.sh{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;background:linear-gradient(90deg,#111f34,var(--p))}.sh h2{font-size:1.1rem;margin:0;flex:1}.badge{font-size:.72rem;background:#0c4a6e;color:#bae6fd;padding:3px 8px;border-radius:99px}.sb{padding:3px 17px 18px}.collapsed .sb{display:none}.hidden{display:none}h3{color:#c4b5fd;margin:17px 0 6px}h4{color:#7dd3fc;margin:10px 0 4px}p,ul,ol{margin:7px 0}.call{padding:11px 13px;border-left:4px solid var(--b);background:#0b2841;border-radius:8px;margin:11px 0}.must{border-left-color:var(--y);background:#3b2908}.danger{border-left-color:var(--r);background:#3e111d}.formula{font-family:Consolas,monospace;color:#fde68a;background:#030914;border:1px solid var(--l);padding:10px 12px;border-radius:9px;margin:10px 0}table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9rem}th,td{border:1px solid var(--l);padding:9px;vertical-align:top}th{background:#172942;text-align:left}.key{color:#7dd3fc;font-weight:bold}.good{color:#86efac;font-weight:bold}.bad{color:#fda4af;font-weight:bold}pre{position:relative;background:#030914;border:1px solid #1c314c;border-radius:10px;padding:14px;overflow:auto;font-size:.85rem}.copy{position:absolute;right:7px;top:7px;padding:4px 8px;background:#334c6e;color:white}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:#0a1627;border:1px solid var(--l);border-radius:10px;padding:11px}details{border-bottom:1px solid var(--l);padding:9px}summary{cursor:pointer;font-weight:bold}footer{text-align:center;color:var(--m);padding:20px}.source{color:var(--m);font-size:.82rem}
+@media(max-width:950px){.layout{grid-template-columns:1fr}nav{position:relative;top:0;height:auto}.head{flex-direction:column;align-items:stretch}.search input{width:100%}.quick{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}@media(max-width:560px){.layout{padding:9px}.quick{grid-template-columns:1fr}.badge{display:none}}@media print{header,nav,.quick,.copy{display:none}.layout{display:block}.collapsed .sb{display:block}body,section,.card{background:white;color:#111}section{break-inside:avoid}.formula,pre{background:#eee;color:#111}}
+</style></head><body>
+<header><div class="head"><div class="title"><h1>🤖 머신러닝 시험 오픈북</h1><small>힌트 8개 완전 정리 · 검색 → 비교 → 코드 확인</small></div><div class="search"><input id="q" placeholder="예: 교차검증, 원핫, Ridge, 과대적합"><button onclick="findIt()">검색</button></div></div></header>
+<div class="layout"><nav><b>⚡ 시험 힌트</b><a href="#learning">1. 지도/비지도/강화</a><a href="#fit">2. 과대·과소·일반화</a><a href="#classify">3. 분류 모델</a><a href="#cv">4. 교차 검증</a><a href="#category">5. 범주형 처리</a><a href="#reg">6. 회귀 모델</a><a href="#metric">7. MSE / RMSE</a><a href="#process">8. 머신러닝 7과정</a><b>📌 실습 핵심</b><a href="#split">데이터 분리</a><a href="#scale">스케일링</a><a href="#code">전체 코드 흐름</a><a href="#trap">함정 암기표</a><a href="#quiz">셀프 체크</a></nav><main>
+<div class="hero"><h2>오늘 시험은 이 8개부터</h2><p><b>분류냐 회귀냐</b>를 먼저 판단하고, X/y 분리 → train/test 분리 → 모델 생성 → fit → predict/score 흐름을 기억하세요.</p><div class="chips"><span class="chip">분류 = 범주</span><span class="chip">회귀 = 연속값</span><span class="chip">MSE·RMSE ↓</span><span class="chip">R² ↑</span><span class="chip">일반화가 목표</span></div></div>
+<div class="quick"><a href="#classify"><strong>모델 비교</strong>KNN · DT · Logistic · SVM</a><a href="#cv"><strong>5-fold</strong>5조각으로 순환 검증</a><a href="#category"><strong>문자 데이터</strong>원-핫 인코딩</a><a href="#process"><strong>7과정</strong>문수전탐모학평</a></div>
+
+<section id="learning"><div class="sh" onclick="tog(this)"><h2>1. 지도학습 / 비지도학습 / 강화학습</h2><span class="badge">개념</span></div><div class="sb">
+<table><tr><th>종류</th><th>정답</th><th>핵심</th><th>예시</th></tr><tr><td class="key">지도학습</td><td>y 있음</td><td>X와 y의 관계 학습</td><td>분류, 회귀</td></tr><tr><td class="key">비지도학습</td><td>y 없음</td><td>내부 구조·패턴·그룹 발견</td><td>군집, 차원 축소</td></tr><tr><td class="key">강화학습</td><td>정답표 대신 보상</td><td>행동하며 누적 보상 최대화</td><td>게임, 로봇</td></tr></table>
+<div class="must call"><b>판별:</b> 정답 라벨이 있으면 지도, 비슷한 것끼리 묶으면 비지도, 행동 결과로 보상을 받으면 강화학습.</div>
+<div class="grid"><div class="card"><h4>분류</h4>정답이 종류/범주. BMI 등급, 뇌졸중 여부, 손글씨 0~9.</div><div class="card"><h4>회귀</h4>정답이 연속 숫자. 성적, 주택가격, 기온.</div></div></div></section>
+
+<section id="fit"><div class="sh" onclick="tog(this)"><h2>2. 과대적합 / 과소적합 / 일반화</h2><span class="badge">train vs test</span></div><div class="sb">
+<table><tr><th>상태</th><th>점수 모양</th><th>뜻·대응</th></tr><tr><td class="bad">과대적합</td><td>train 매우 높음, test 낮음</td><td>훈련을 외움. 모델 단순화, 규제, 데이터 추가, 트리 깊이 제한</td></tr><tr><td class="bad">과소적합</td><td>train/test 모두 낮음</td><td>학습 부족. 복잡도·유용한 특성 증가, 규제 완화</td></tr><tr><td class="good">일반화</td><td>train/test 모두 높고 차이 작음</td><td>처음 보는 데이터도 잘 예측. 우리가 지향할 상태</td></tr></table>
+<div class="formula">train ≫ test → 과대적합<br>train ≈ test, 둘 다 낮음 → 과소적합<br>train ≈ test, 둘 다 높음 → 일반화 양호</div>
+<pre><button class="copy">복사</button><code>dt = DecisionTreeClassifier(max_depth=5,
+                            min_samples_split=5,
+                            min_samples_leaf=10)
+dt.fit(X_train, y_train)
+print(dt.score(X_train, y_train), dt.score(X_test, y_test))</code></pre></div></section>
+
+<section id="classify"><div class="sh" onclick="tog(this)"><h2>3. 분류 모델 종류와 특징</h2><span class="badge">4종 비교</span></div><div class="sb">
+<table><tr><th>모델</th><th>원리·장점</th><th>주의 / 파라미터</th></tr><tr><td class="key">KNN</td><td>가까운 K개 이웃 다수결. 단순·직관적</td><td>거리 기반이라 스케일 중요. K 작으면 과대, 크면 과소 가능. <code>n_neighbors</code></td></tr><tr><td class="key">Decision Tree</td><td>질문을 반복해 분할. 해석 쉽고 스케일 영향 적음</td><td>깊으면 과대적합. <code>max_depth</code>, <code>min_samples_*</code></td></tr><tr><td class="key">Logistic Regression</td><td>선형식 → sigmoid → 0~1 확률. 빠르고 특성 많은 데이터에 유리</td><td><b>이름과 달리 분류 모델</b>. 선형 결정경계</td></tr><tr><td class="key">SVM / LinearSVC</td><td>클래스 사이 마진이 최대인 경계. 고차원에 강함</td><td>스케일링 중요. <code>C</code>로 규제 조절</td></tr></table>
+<div class="danger call"><b>시험 함정:</b> LogisticRegression은 회귀가 아니라 분류다. 서포트 벡터는 결정경계에 가장 가까운 데이터, 마진은 경계와 서포트 벡터 사이 거리.</div>
+<pre><button class="copy">복사</button><code>from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import LinearSVC</code></pre></div></section>
+
+<section id="cv"><div class="sh" onclick="tog(this)"><h2>4. 교차 검증 (Cross Validation)</h2><span class="badge">cv=5</span></div><div class="sb">
+<div class="must call"><b>한 문장:</b> 훈련 데이터를 여러 fold로 나누고 검증 fold를 번갈아 바꾸며 여러 번 평가해 일반화 성능을 안정적으로 확인하는 방법.</div>
+<ol><li>훈련 데이터를 5개 fold로 분할</li><li>4개로 학습, 1개로 검증</li><li>검증 fold를 바꿔 총 5번 반복</li><li>5개 점수의 평균 확인</li></ol>
+<div class="formula">[검증][학습][학습][학습][학습] → 검증 위치를 순환 → 5개 점수 평균</div>
+<pre><button class="copy">복사</button><code>from sklearn.model_selection import cross_val_score
+scores = cross_val_score(model, X_train, y_train, cv=5)
+print(scores, scores.mean())</code></pre>
+<p><code>cross_val_score</code> = 현재 모델 성능 검증. <code>GridSearchCV</code> = 교차 검증으로 최적 하이퍼파라미터 조합 탐색.</p>
+<div class="danger call"><b>주의:</b> 최종 test는 모델 선택에 반복 사용하지 않는다. 전처리는 train에만 fit하고 test에는 transform만 한다.</div></div></section>
+
+<section id="category"><div class="sh" onclick="tog(this)"><h2>5. 범주형 데이터 처리</h2><span class="badge">원-핫</span></div><div class="sb">
+<p>모델의 입력 X는 수치여야 하므로 성별·직업·지역 같은 문자를 숫자로 바꾼다.</p>
+<h3>수업 방법: 원-핫 인코딩</h3><p>범주 종류만큼 열을 만들고 해당 범주만 1, 나머지는 0.</p>
+<table><tr><th>Gender</th><th>Female</th><th>Male</th></tr><tr><td>Female</td><td>1</td><td>0</td></tr><tr><td>Male</td><td>0</td><td>1</td></tr></table>
+<pre><button class="copy">복사</button><code>X_oh = pd.get_dummies(X)
+X[['CHAS','RAD']] = X[['CHAS','RAD']].astype('int64')</code></pre>
+<div class="must call">Male=1, Female=2처럼 바꾸면 가짜 순서·거리 관계가 생긴다. 순서 없는 명목형은 원-핫이 안전하다. 문자 정답 y는 많은 분류기가 그대로 처리 가능하므로 입력 X와 구분.</div></div></section>
+
+<section id="reg"><div class="sh" onclick="tog(this)"><h2>6. 회귀 모델</h2><span class="badge">연속값</span></div><div class="sb">
+<div class="formula">ŷ = w₁x₁ + w₂x₂ + … + wₚxₚ + b<br>w = 가중치(coef_), b = 절편(intercept_)</div>
+<table><tr><th>모델</th><th>핵심</th><th>특징</th></tr><tr><td class="key">LinearRegression</td><td>MSE 최소의 w,b 탐색</td><td>빠르고 해석 쉬움. 자체 복잡도 조절이 없어 특성 확장 시 과대적합 가능</td></tr><tr><td class="key">SGDRegressor</td><td>경사하강법으로 w 반복 갱신</td><td>대용량. <code>max_iter</code>, <code>eta0</code>(학습률)</td></tr><tr><td class="key">Lasso (L1)</td><td>|w| 합에 벌점, 일부 w=0</td><td>과대적합 완화 + 자동 특성 선택</td></tr><tr><td class="key">Ridge (L2)</td><td>w² 합에 벌점, 모든 w 축소</td><td>특성을 유지하며 안정화</td></tr></table>
+<div class="must call"><b>alpha가 커지면</b> 규제가 강해져 모델이 단순해지고 과대적합이 줄 수 있으나, 너무 크면 과소적합·오차 증가.</div>
+<pre><button class="copy">복사</button><code>from sklearn.linear_model import LinearRegression, Lasso, Ridge
+linear = LinearRegression()
+lasso = Lasso(alpha=10)   # L1
+ridge = Ridge(alpha=100)  # L2</code></pre>
+<p><b>Lasso = Leave some out</b> (일부 계수 0), <b>Ridge = Reduce all</b> (전체 계수 축소).</p></div></section>
+
+<section id="metric"><div class="sh" onclick="tog(this)"><h2>7. 회귀 평가: MSE / RMSE</h2><span class="badge">작을수록 좋음</span></div><div class="sb">
+<table><tr><th>지표</th><th>뜻·특징</th><th>방향</th></tr><tr><td class="key">MSE</td><td>오차 제곱의 평균. 큰 오차에 큰 벌점, 단위가 제곱</td><td class="good">0에 가까울수록 좋음</td></tr><tr><td class="key">RMSE</td><td>MSE의 제곱근. 원래 y와 같은 단위</td><td class="good">0에 가까울수록 좋음</td></tr><tr><td>MAE</td><td>절대 오차 평균. 이상치 영향이 상대적으로 작음</td><td>작을수록</td></tr><tr><td>R²</td><td>회귀선의 설명력. 심하게 나쁘면 음수 가능</td><td class="good">1에 가까울수록</td></tr></table>
+<div class="formula">오차 = 예측값 - 실제값<br>MSE = 평균((예측값 - 실제값)²)<br>RMSE = √MSE</div>
+<pre><button class="copy">복사</button><code>import numpy as np
+from sklearn.metrics import mean_squared_error, r2_score
+mse = mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+r2 = r2_score(y_test, y_pred)</code></pre>
+<div class="danger call">분류 <code>.score()</code>는 보통 정확도, 회귀 <code>.score()</code>는 R² → 클수록 좋음. MSE/RMSE는 오차 → 작을수록 좋음.</div></div></section>
+
+<section id="process"><div class="sh" onclick="tog(this)"><h2>8. 머신러닝 7과정</h2><span class="badge">문수전탐모학평</span></div><div class="sb">
+<div class="must call"><b>암기:</b> 문-수-전-탐-모-학-평</div>
+<ol><li><b>문제 정의</b>: 지도/비지도, 분류/회귀, 목표 결정</li><li><b>데이터 수집</b>: 파일, DB, 크롤링, 공공데이터, 센서, 설문</li><li><b>전처리</b>: 결측·이상치, 인코딩, 스케일링, 특성공학</li><li><b>EDA</b>: 특성 의미, 통계, 분포·상관, 시각화</li><li><b>모델 선택·하이퍼파라미터 조정</b>: K, 깊이, alpha, C</li><li><b>모델 학습·예측</b>: <code>fit</code> → <code>predict</code></li><li><b>평가</b>: 정확도, MSE/RMSE/R², 교차 검증</li></ol></div></section>
+
+<section id="split"><div class="sh" onclick="tog(this)"><h2>데이터 분리 원칙</h2><span class="badge">X/y · train/test</span></div><div class="sb">
+<table><tr><th>X</th><td>입력 특성, 반드시 2차원 (행, 특성 수)</td></tr><tr><th>y</th><td>정답/예측 대상, 보통 1차원 (행,)</td></tr><tr><th>train</th><td>규칙을 학습하는 데이터</td></tr><tr><th>test</th><td>학습에 쓰지 않고 마지막 일반화 성능 평가</td></tr></table>
+<pre><button class="copy">복사</button><code>from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=7
+)</code></pre>
+<p>단순 슬라이싱은 정렬 데이터에서 편향될 수 있다. 분리 후 <code>shape</code>로 행 수와 차원을 확인.</p></div></section>
+
+<section id="scale"><div class="sh" onclick="tog(this)"><h2>스케일링</h2><span class="badge">KNN · SVM</span></div><div class="sb">
+<p>특성 범위가 크게 다르면 큰 숫자의 특성이 거리·경계 계산을 지배한다. 손글씨 SVM 실습은 MinMaxScaler로 0~1 범위를 사용했다.</p>
+<pre><button class="copy">복사</button><code>from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+scaler.fit(X_train)
+X_train_s = scaler.transform(X_train)
+X_test_s = scaler.transform(X_test)</code></pre>
+<div class="danger call">분리 전 전체 데이터에 scaler를 fit하면 test 정보가 섞이는 <b>데이터 누수</b>.</div></div></section>
+
+<section id="code"><div class="sh" onclick="tog(this)"><h2>실전 코드 전체 흐름</h2><span class="badge">복붙</span></div><div class="sb">
+<pre><button class="copy">복사</button><code>import pandas as pd
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.tree import DecisionTreeClassifier
+
+data = pd.read_csv('data.csv')
+X = pd.get_dummies(data.drop('target', axis=1))
+y = data['target']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=7
+)
+model = DecisionTreeClassifier(max_depth=5)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+print('train:', model.score(X_train, y_train))
+print('test :', model.score(X_test, y_test))
+print('CV   :', cross_val_score(model, X_train, y_train, cv=5).mean())</code></pre></div></section>
+
+<section id="trap"><div class="sh" onclick="tog(this)"><h2>30초 함정 암기표</h2><span class="badge">마지막 확인</span></div><div class="sb">
+<table><tr><th>분류/회귀</th><td>범주 = 분류, 연속 숫자 = 회귀</td></tr><tr><th>LogisticRegression</th><td>이름과 달리 분류</td></tr><tr><th>점수 방향</th><td>정확도·R² ↑ / MSE·RMSE ↓</td></tr><tr><th>과대/과소</th><td>train만 높음 = 과대 / 둘 다 낮음 = 과소</td></tr><tr><th>교차 검증</th><td>검증 fold 순환, 수업은 cv=5</td></tr><tr><th>범주형 X</th><td>원-핫: 한 칸 1, 나머지 0</td></tr><tr><th>L1/L2</th><td>Lasso 일부 0 / Ridge 전체 축소</td></tr><tr><th>전처리 fit</th><td>train만 fit, test는 transform</td></tr><tr><th>7과정</th><td>문수전탐모학평</td></tr></table></div></section>
+
+<section id="quiz"><div class="sh" onclick="tog(this)"><h2>셀프 체크 10문제</h2><span class="badge">클릭</span></div><div class="sb">
+<details><summary>1. 라벨 없이 고객을 비슷하게 묶는 학습?</summary><p>비지도학습의 군집화.</p></details>
+<details><summary>2. 훈련 99%, 평가 72%?</summary><p>과대적합 의심.</p></details>
+<details><summary>3. LogisticRegression은 회귀?</summary><p>아니요. 분류 모델.</p></details>
+<details><summary>4. 5-fold는 몇 번 검증?</summary><p>검증 fold를 바꿔 5번.</p></details>
+<details><summary>5. 문자열 Gender 처리법?</summary><p>원-핫 인코딩.</p></details>
+<details><summary>6. Lasso와 Ridge 차이?</summary><p>Lasso는 일부 w=0, Ridge는 모든 w 축소.</p></details>
+<details><summary>7. MSE=25이면 RMSE?</summary><p>5.</p></details>
+<details><summary>8. MSE는 클수록 좋다?</summary><p>아니요. 작을수록 좋음.</p></details>
+<details><summary>9. 7과정 순서?</summary><p>문제 정의 → 수집 → 전처리 → EDA → 모델 선택/튜닝 → 학습·예측 → 평가.</p></details>
+<details><summary>10. 전체 데이터에 scaler fit의 문제?</summary><p>test 정보가 섞이는 데이터 누수.</p></details></div></section>
+
+<section><div class="sh" onclick="tog(this)"><h2>자료 출처</h2><span class="badge">수업 기반</span></div><div class="sb source"><p>강의 PDF: Chap05 LinearRegression·Ridge·Lasso, Chap06 Logistic·SVM</p><p>실습: BMI KNN, 뇌졸중 DecisionTree, 성적 LinearRegression, 보스턴 주택 LinearRegression/Lasso/Ridge, 손글씨 Logistic/KNN/DecisionTree/LinearSVC</p><p>Notion 개인 학습 기록: 머신러닝(분류), 머신러닝(회귀), 머신러닝(선형분류)</p></div></section>
+<footer>미선의 머신러닝 시험 오픈북 · 단일 HTML · 모바일/검색/접기/복사/인쇄 지원</footer>
+</main></div>
+<script>
+function tog(e){e.parentElement.classList.toggle('collapsed')}
+function findIt(){const q=document.getElementById('q').value.trim().toLowerCase();let f=null;document.querySelectorAll('section').forEach(s=>{const ok=!q||s.innerText.toLowerCase().includes(q);s.classList.toggle('hidden',!ok);if(ok&&q){s.classList.remove('collapsed');if(!f)f=s}});if(f)f.scrollIntoView({behavior:'smooth'})}
+document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')findIt()});
+document.querySelectorAll('.copy').forEach(b=>b.onclick=async()=>{await navigator.clipboard.writeText(b.nextElementSibling.innerText);const x=b.innerText;b.innerText='복사됨!';setTimeout(()=>b.innerText=x,800)});
+</script></body></html>
+
