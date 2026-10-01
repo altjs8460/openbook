@@ -31,6 +31,26 @@ details{border:1px solid var(--line);border-radius:10px;margin:9px 0;background:
 @media(max-width:900px){.layout{grid-template-columns:1fr}nav{position:static;max-height:none;display:flex;gap:12px;white-space:nowrap}nav b{display:none}.quick{grid-template-columns:1fr}}
 @media(max-width:600px){body{font-size:17px}header{padding:21px 15px}.layout{padding:0 10px;margin:12px auto}.content{padding:14px}section h2{padding:13px 14px}pre{font-size:.78rem;padding:15px 10px}table{font-size:.86rem}th,td{padding:7px}}
 @media print{body{background:white;font-size:12pt}header{background:white;color:#111;border-bottom:2px solid #333}.sub{color:#222}.toolbar,nav,.copy{display:none!important}.layout{display:block;margin:0;padding:0;max-width:none}.hidden{display:block!important}section{break-inside:avoid;box-shadow:none}.detail{display:block!important}}
+
+/* 읽기 편한 대비와 학습 단계별 색상 */
+:root{--ink:#102238;--muted:#354960;--blue:#064f96;--pale:#e2efff;--line:#bdcbd9;--bg:#eef2f7;--amber:#fff0bf;--green:#dff3e6;--red:#ffe6e3}
+body{color:#102238}
+nav{border:2px solid #9eafc1;box-shadow:0 3px 12px #14223812}
+nav b{color:#102f50;font-size:1rem}
+nav a{color:#243e59}
+section{border:1px solid #aab9ca;box-shadow:0 2px 7px #1422380d}
+section h2{color:#102b49;font-weight:800}
+.concept h2{background:#d8eaff;border-left:9px solid #1764a0}
+.exam h2{background:#ffedbd;border-left:9px solid #a96b00}
+.practice h2{background:#d9f0e1;border-left:9px solid #23774b}
+.quick a{border-left:6px solid #1764a0}
+.quick a:nth-child(2){border-left-color:#a96b00}
+.quick a:nth-child(3){border-left-color:#23774b}
+.quick b{color:#123d68}
+.notice{color:#302300;font-weight:600;border:2px solid #bd850e}
+.call{color:#142b45}
+.tag.amber{color:#543b00}
+@media print{.concept h2,.exam h2,.practice h2{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 </style>
 </head>
 <body>
@@ -42,77 +62,51 @@ details{border:1px solid var(--line);border-radius:10px;margin:9px 0;background:
 </header>
 <div class="layout">
 <nav aria-label="목차">
-<div><b>5.DB</b><a href="#status">현재 파일 상태</a><a href="#install">모듈 설치</a><a href="#practice">예상 실습 순서</a><a href="#db">DB 연결 예시</a><a href="#crud">회원 처리 코드</a></div>
-<div><b>개념</b><a href="#node">Node.js·싱글 스레드</a><a href="#async">동기·비동기</a><a href="#http">HTTP·GET·POST</a><a href="#express">Express·라우터</a><a href="#nunjucks">Nunjucks</a><a href="#session">세션</a><a href="#answers">서술형 연습</a></div>
+<div><b>개념 정리</b><a href="#node">Node.js·싱글 스레드</a><a href="#async">동기·비동기</a><a href="#http">HTTP·GET·POST</a><a href="#express">Express·라우터</a><a href="#nunjucks">Nunjucks</a><a href="#session">쿠키·세션</a><a href="#db">MySQL·CRUD 개념</a></div>
+<div><b>시험 대비</b><a href="#answers">서술형 답안</a><a href="#quiz">객관식 확인</a></div>
+<div><b>실습 대비</b><a href="#status">현재 파일 상태</a><a href="#install">모듈 설치</a><a href="#practice">실습 순서</a><a href="#db-code">DB 연결 예시</a><a href="#crud">회원 처리 코드</a><a href="#trouble">문제 해결</a></div>
 </nav>
 <main>
-<div class="notice"><strong>5.DB 현재 단계</strong>받은 파일에는 mysql2 설치와 Express·Nunjucks·세션·mainRouter 기본 설정이 있어요. 하지만 MySQL 연결 코드와 SQL 실행은 아직 없고, 화면 구성도 미완성이에요. 아래 DB 연결·회원 CRUD는 시험 대비 예시라 수업에서 실제로 한 내용과 구분해 두었어요.</div>
-<div class="quick"><a href="#status"><b>지금 파일 상태</b><span>완료된 연결과 미완성 부분</span></a><a href="#practice"><b>예상 실습 빠른 이동</b><span>설치부터 회원 처리까지</span></a><a href="#answers"><b>서술형 답안</b><span>짧게 써먹을 수 있는 문장</span></a></div>
+<div class="notice"><strong>추천해서 보는 순서</strong>먼저 개념을 훑고, 서술형 답안과 객관식 확인 문제로 이해를 점검한 다음, 마지막의 실습 대비 코드와 체크리스트를 보세요.</div>
+<div class="quick"><a href="#node"><b>① 개념 정리</b><span>Node.js부터 DB 기초까지</span></a><a href="#answers"><b>② 서술형·객관식</b><span>답안 예시와 이해 확인 문제</span></a><a href="#practice"><b>③ 실습 대비</b><span>수업 파일 상태부터 코드 예시까지</span></a></div>
 
-<section id="status"><h2>1. 5.DB 폴더: 받은 파일 기준</h2><div class="content">
-<p>실습 문제가 5.DB 내용일 수 있다고 예상해 대비하되, 아래는 받은 ZIP에서 확인한 상태예요.</p>
-<table><tr><th>파일</th><th>현재 상태</th></tr>
-<tr><td><code>package.json</code></td><td>express, nunjucks, chokidar, express-session, session-file-store, mysql2</td></tr>
-<tr><td><code>app.js</code></td><td>폼 파서, Nunjucks, 세션 미들웨어 설정. mainRouter 연결</td></tr>
-<tr><td><code>routes/mainRouter.js</code></td><td>메인·회원가입·로그인·수정·탈퇴 화면을 보여주는 GET 라우트</td></tr>
-<tr><td><code>routes/userRouter.js</code></td><td>빈 파일. app.js에서 아직 연결하지 않음</td></tr>
-<tr><td><code>views</code></td><td>main/join은 기본 뼈대, login/update/delete는 비어 있음</td></tr>
-<tr><td>MySQL</td><td>mysql2만 설치. DB 연결, 쿼리, 회원 저장은 미진행</td></tr></table>
-<div class="call warn"><b>구분:</b> session-file-store는 세션 데이터를 파일에 저장해요. MySQL DB 연결이 아니에요.</div>
-<pre><button class="copy">복사</button><code>5.DB/
-├─ config/                    설정 파일을 둘 폴더
-├─ routes/
-│  ├─ mainRouter.js           화면 경로
-│  └─ userRouter.js           회원 처리 경로 (빈 파일)
-├─ views/
-│  ├─ main.html, join.html    기본 뼈대
-│  ├─ login.html              비어 있음
-│  ├─ update.html             비어 있음
-│  └─ delete.html             비어 있음
-├─ app.js                     앱 설정과 연결
-└─ package.json               설치 모듈 기록</code></pre>
-</div></section>
 
-<section id="install"><h2>2. 모듈 설치 명령과 역할</h2><div class="content">
-<p>각 명령은 해당 프로젝트의 <code>package.json</code>이 있는 폴더에서 실행해요.</p>
-<pre><button class="copy">복사</button><code># 접속 IP 확인 실습
-npm install request-ip
 
-# Express 서버 프로젝트
-npm install express
 
-# body-parser를 직접 require하는 코드
-npm install body-parser
 
-# Nunjucks 실습
-npm install express nunjucks chokidar
 
-# 5.DB 프로젝트에 기록된 패키지
-npm install express nunjucks chokidar express-session session-file-store mysql2
 
-# nodemon을 컴퓨터 전체에 설치
-npm i nodemon -g</code></pre>
-<table><tr><th>모듈</th><th>쓰는 목적</th></tr>
-<tr><td><code>express</code></td><td>서버, 라우트, 미들웨어 구성</td></tr>
-<tr><td><code>request-ip</code></td><td>요청에서 접속 IP 확인</td></tr>
-<tr><td><code>body-parser</code></td><td>폼 본문 읽기. Express의 express.urlencoded()를 쓰면 별도 설치 불필요</td></tr>
-<tr><td><code>nunjucks</code></td><td>데이터를 넣어 HTML 템플릿 생성</td></tr>
-<tr><td><code>chokidar</code></td><td>파일 변경 감지. Nunjucks watch 기능에 사용</td></tr>
-<tr><td><code>express-session</code></td><td>세션으로 로그인 상태 등 저장</td></tr>
-<tr><td><code>session-file-store</code></td><td>세션 데이터를 파일로 저장</td></tr>
-<tr><td><code>mysql2</code></td><td>Node.js와 MySQL 연결에 쓰는 드라이버</td></tr>
-<tr><td><code>nodemon -g</code></td><td>파일 변경 시 서버 재시작. -g는 global, 컴퓨터 전체 설치</td></tr></table>
-<ul><li><code>npm i</code>는 <code>npm install</code>의 짧은 명령이에요.</li><li>프로젝트에 설치하면 node_modules에 파일이 들어가고 package.json에 패키지가 기록돼요. package-lock.json에는 세부 버전이 기록돼요.</li><li>전역 nodemon은 프로젝트 package.json에 기록되지 않아요.</li></ul>
-</div></section>
 
-<section id="node"><h2>3. Node.js와 싱글 스레드</h2><div class="content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="node" class="concept"><h2>1. Node.js와 싱글 스레드</h2><div class="content">
 <p>Node.js는 브라우저 밖에서 JavaScript를 실행하는 환경이에요. 서버, 파일, 네트워크 프로그램을 만들 때 사용할 수 있어요.</p>
 <p><b>싱글 스레드</b>는 JavaScript를 실행하는 기본 흐름이 하나라는 뜻이에요. 파일·네트워크 결과를 기다리는 동안에는 다른 요청 처리를 진행하게 넘길 수 있어요.</p>
 <p><b>이벤트 루프</b>는 비동기 작업이 완료되었을 때 등록한 콜백을 실행하도록 작업 순서를 관리해요. 파일 I/O·네트워크 I/O는 운영체제나 보조 작업의 도움을 받을 수 있어요.</p>
 <div class="call"><b>답안 문장:</b> Node.js는 JavaScript 실행 흐름이 기본적으로 하나인 싱글 스레드 환경이다. 비동기 I/O와 이벤트 루프를 이용해 대기 중에도 다른 요청을 처리한다. 다만 오래 걸리는 CPU 계산은 메인 스레드를 차지해 전체 처리를 지연시킬 수 있다.</div>
 </div></section>
-
-<section id="async"><h2>4. 동기·비동기와 Blocking·Non-Blocking</h2><div class="content">
+<section id="async" class="concept"><h2>2. 동기·비동기와 Blocking·Non-Blocking</h2><div class="content">
 <table><tr><th>방식</th><th>뜻</th><th>장점</th><th>단점</th></tr>
 <tr><td>동기</td><td>앞 작업 결과를 기다린 뒤 다음 작업</td><td>순서가 명확하고 이해하기 쉬움</td><td>대기 시간 동안 뒤 작업이 늦어질 수 있음</td></tr>
 <tr><td>비동기</td><td>작업 결과를 기다리는 중에도 다른 작업</td><td>대기 시간을 다른 처리에 활용</td><td>실행 순서·오류 관리가 복잡</td></tr>
@@ -143,8 +137,7 @@ getData();</code></pre>
 <ul><li><code>async</code> 함수 안에서 <code>await</code>를 쓸 수 있어요.</li><li><code>await</code>는 해당 함수의 다음 줄이 결과를 기다리게 해요. 서버의 모든 코드가 멈추는 것은 아니에요.</li></ul>
 <div class="call">답안 요약: 동기는 앞 작업이 끝나야 다음 작업을 해 순서가 단순하다. 비동기는 기다리는 동안 다른 작업을 해 효율적일 수 있지만 결과와 오류를 관리해야 한다.</div>
 </div></section>
-
-<section id="http"><h2>5. HTTP 요청·응답, GET·POST</h2><div class="content">
+<section id="http" class="concept"><h2>3. HTTP 요청·응답, GET·POST</h2><div class="content">
 <p>클라이언트는 요청(Request)을 보내고 서버는 처리 결과를 응답(Response)해요.</p>
 <table><tr><th>방식</th><th>목적</th><th>Express에서 값 읽기</th></tr><tr><td>GET</td><td>조회</td><td><code>req.query</code></td></tr><tr><td>POST</td><td>폼 데이터 등 전송</td><td>파서 등록 후 <code>req.body</code></td></tr></table>
 <pre><button class="copy">복사</button><code>res.writeHead(200, {
@@ -156,8 +149,7 @@ res.end();</code></pre>
 <div class="call red"><b>보안:</b> POST는 주소에 값이 보이지 않을 뿐 자동 암호화가 아니에요. 실제 비밀번호는 HTTPS로 보내고 해시해서 저장해야 해요.</div>
 <div class="call">답안 문장: GET은 보통 조회에 사용하고 값이 URL의 쿼리로 전달되어 req.query에서 읽는다. POST는 요청 본문으로 값이 전달되어 body parser 등록 후 req.body에서 읽는다.</div>
 </div></section>
-
-<section id="express"><h2>6. Express·미들웨어·라우터</h2><div class="content">
+<section id="express" class="concept"><h2>4. Express·미들웨어·라우터</h2><div class="content">
 <pre><button class="copy">복사</button><code>const express = require('express');
 const app = express();
 
@@ -182,8 +174,7 @@ module.exports = router;</code></pre>
 <ul><li><code>express.Router()</code>는 라우트를 별도 파일에 모아요.</li><li><code>module.exports</code>로 내보낸 라우터를 app.js에서 <code>require()</code>로 불러와요.</li><li>앱의 mount 경로와 내부 경로가 이어져요. <code>app.use('/user', userRouter)</code> + <code>router.post('/join')</code> = <code>POST /user/join</code>.</li><li>미들웨어와 라우터는 등록한 순서가 중요해요. 폼 파서는 라우트보다 먼저 둬요.</li></ul>
 <div class="call good"><b>폴더 역할:</b> config는 설정, routes는 주소 처리, views는 화면 템플릿, app.js는 미들웨어·라우터·서버를 연결하는 중심 파일이에요.</div>
 </div></section>
-
-<section id="nunjucks"><h2>7. Nunjucks 템플릿</h2><div class="content">
+<section id="nunjucks" class="concept"><h2>5. Nunjucks 템플릿</h2><div class="content">
 <p><code>res.sendFile()</code>은 파일을 그대로 보내고, <code>res.render()</code>는 서버 데이터를 HTML에 넣어 완성된 페이지를 보내요.</p>
 <pre><button class="copy">복사</button><code>const nunjucks = require('nunjucks');
 app.set('view engine', 'html');
@@ -202,8 +193,7 @@ res.render('main', { name: '김미선' });</code></pre>
 {% endif %}</code></pre>
 <p>서버가 <code>res.render('loginResult', { know: id })</code>로 값을 넘기면 성공 문구를, 값을 넘기지 않으면 다시 로그인 문구를 보여줄 수 있어요.</p>
 </div></section>
-
-<section id="session"><h2>8. 쿠키·세션</h2><div class="content">
+<section id="session" class="concept"><h2>6. 쿠키·세션</h2><div class="content">
 <table><tr><th>쿠키</th><td>브라우저에 저장. 다음 요청에 세션 ID를 함께 보냄</td></tr><tr><th>세션</th><td>서버가 로그인 상태 등 사용자별 정보를 기억</td></tr><tr><th>session-file-store</th><td>세션 정보를 파일에 저장. MySQL과 별개</td></tr></table>
 <pre><button class="copy">복사</button><code>const session = require('express-session');
 const fileStore = require('session-file-store')(session);
@@ -219,20 +209,95 @@ app.use(session({
 <div class="call warn">받은 app.js는 <code>httpOnly</code>를 session 옵션 바깥에 적어 두었어요. 쿠키 옵션으로 적용하려면 위 코드처럼 <code>cookie</code> 안에 넣어요.</div>
 <div class="call">답안 문장: 쿠키는 브라우저에 저장되는 값이고, 세션은 서버가 사용자 상태를 기억하는 방식이다. express-session은 세션 데이터를 서버 저장소에 두고, 쿠키에는 보통 세션 ID를 저장한다.</div>
 </div></section>
-
-<section id="db"><h2>9. MySQL과 mysql2</h2><div class="content">
+<section id="db" class="concept"><h2>7. MySQL과 mysql2</h2><div class="content">
 <p>MySQL은 데이터를 테이블에 저장하는 관계형 데이터베이스예요. mysql2는 Node.js 코드에서 MySQL에 연결해 SQL을 실행하는 드라이버예요.</p>
 <table><tr><th>CRUD</th><th>SQL</th><th>회원 기능</th></tr><tr><td>Create</td><td>INSERT</td><td>회원가입</td></tr><tr><td>Read</td><td>SELECT</td><td>로그인·조회</td></tr><tr><td>Update</td><td>UPDATE</td><td>정보 수정</td></tr><tr><td>Delete</td><td>DELETE</td><td>회원 탈퇴</td></tr></table>
 <div class="call">mysql2 설치만으로 연결되는 것은 아니에요. MySQL 실행, DB/테이블 생성, 접속 설정, createPool 또는 createConnection, SQL 실행이 필요해요.</div>
 </div></section>
+<section id="answers" class="exam"><h2>8. 서술형 답안 연습</h2><div class="content">
+<details open><summary>Node.js란?</summary><div class="detail"><div class="answer">Node.js는 브라우저 밖에서 JavaScript를 실행하는 런타임 환경이다. 서버와 파일·네트워크 프로그램을 만들 수 있으며 비동기 I/O와 이벤트 루프로 대기 중에도 다른 요청을 처리한다.</div></div></details>
+<details><summary>싱글 스레드인데 여러 요청을 처리하는 이유?</summary><div class="detail"><div class="answer">JavaScript 실행 흐름은 기본적으로 하나지만, 파일·네트워크 응답은 비동기로 맡길 수 있다. 이벤트 루프가 완료된 작업의 콜백을 실행하므로 기다리는 동안 다른 요청을 처리할 수 있다.</div></div></details>
+<details><summary>동기와 비동기 차이는?</summary><div class="detail"><div class="answer">동기는 앞 작업이 끝난 뒤 다음 작업을 실행해 순서가 명확하다. 비동기는 결과를 기다리는 동안 다른 작업을 실행해 대기 시간을 활용할 수 있지만 결과 순서와 오류 처리가 복잡해진다.</div></div></details>
+<details><summary>GET과 POST 차이는?</summary><div class="detail"><div class="answer">GET은 보통 조회에 사용하고 입력값이 URL의 쿼리 문자열로 전달되어 req.query로 읽는다. POST는 요청 본문에 값이 담기며 본문 파서 등록 후 req.body로 읽는다. POST 자체가 통신을 암호화하지는 않는다.</div></div></details>
+<details><summary>미들웨어란?</summary><div class="detail"><div class="answer">미들웨어는 요청과 응답 사이에서 실행되는 함수다. 폼 파싱, 정적 파일 제공, 세션 확인 등에 사용하고 app.use()로 등록한다. 요청 본문 파서는 라우트보다 먼저 등록해야 한다.</div></div></details>
+<details><summary>세션과 쿠키 차이는?</summary><div class="detail"><div class="answer">쿠키는 브라우저에 저장되는 작은 값이고 세션은 서버가 사용자 상태를 기억하는 방법이다. 세션 ID는 쿠키로 전달되고, 세션 데이터는 서버 저장소에 둔다.</div></div></details>
+<details><summary>Nunjucks와 정적 HTML 차이는?</summary><div class="detail"><div class="answer">정적 HTML은 저장된 파일을 그대로 보낸다. Nunjucks는 서버에서 데이터를 템플릿에 넣어 사용자별 HTML을 만든 뒤 응답한다.</div></div></details>
+<details><summary>mysql2 설치만 하면 DB 연결이 되나?</summary><div class="detail"><div class="answer">아니다. mysql2는 연결용 드라이버다. 접속 정보로 연결 풀이나 연결을 만들고, SQL을 실행해야 실제 DB 작업이 된다.</div></div></details>
+<details><summary>SQL 물음표 바인딩을 쓰는 이유?</summary><div class="detail"><div class="answer">사용자 입력을 SQL 문자열에 직접 이어 붙이지 않고 별도 값으로 전달하기 위해서다. 값과 SQL을 분리해 입력값이 SQL 문법으로 해석되는 위험을 줄인다.</div></div></details>
+</div></section>
+<section id="quiz" class="exam"><h2>9. 객관식으로 개념 확인하기</h2><div class="content">
+<p>먼저 답을 생각한 뒤 항목을 눌러 정답과 이유를 확인해요.</p>
+<details><summary>1. Node.js에 대한 설명으로 알맞은 것은?</summary><div class="detail"><div class="answer"><b>정답: 브라우저 밖에서 JavaScript를 실행하는 런타임 환경</b><br>Node.js는 JavaScript 실행 환경이며, 서버나 파일·네트워크 프로그램을 만들 수 있어요.</div></div></details>
+<details><summary>2. 싱글 스레드인 Node.js가 I/O 대기 중 다른 요청을 처리할 수 있는 이유는?</summary><div class="detail"><div class="answer"><b>정답: 비동기 I/O와 이벤트 루프를 사용하기 때문</b><br>대기 작업의 결과를 기다리는 동안 실행 흐름을 다른 작업에 넘기고, 완료된 작업은 이벤트 루프가 이어서 처리해요.</div></div></details>
+<details><summary>3. 동기와 비동기의 차이를 가장 잘 설명한 것은?</summary><div class="detail"><div class="answer"><b>정답: 결과를 이어서 처리하는 방식과 시점의 차이</b><br>동기는 앞 작업 결과를 받은 뒤 다음 작업을 하고, 비동기는 기다리는 동안 다른 작업을 진행할 수 있어요.</div></div></details>
+<details><summary>4. GET 요청의 쿼리 값은 Express에서 어디로 읽을까?</summary><div class="detail"><div class="answer"><b>정답: req.query</b><br>예를 들어 <code>/search?word=node</code>의 word 값은 <code>req.query.word</code>로 읽어요.</div></div></details>
+<details><summary>5. POST 폼 값을 req.body에서 읽기 전에 필요한 것은?</summary><div class="detail"><div class="answer"><b>정답: express.urlencoded() 같은 본문 파서 미들웨어 등록</b><br>폼의 <code>name</code> 값도 확인하고, 파서는 라우트보다 먼저 등록해야 해요.</div></div></details>
+<details><summary>6. app.use('/user', userRouter)와 router.post('/join')이 연결되면 주소는?</summary><div class="detail"><div class="answer"><b>정답: POST /user/join</b><br>앱에 연결한 기본 경로 뒤에 라우터 내부 경로를 붙여요.</div></div></details>
+<details><summary>7. res.sendFile()과 res.render()의 차이는?</summary><div class="detail"><div class="answer"><b>정답: 파일 그대로 보내기와 데이터를 템플릿에 넣어 보내기의 차이</b><br><code>sendFile()</code>은 정적 파일을 보내고, <code>render()</code>는 서버 데이터를 HTML 템플릿에 넣어 결과 페이지를 만들어요.</div></div></details>
+<details><summary>8. 쿠키와 세션의 설명으로 알맞은 것은?</summary><div class="detail"><div class="answer"><b>정답: 쿠키는 브라우저에, 세션 데이터는 보통 서버 저장소에 둔다</b><br>브라우저는 쿠키로 세션 ID를 보내고, 서버는 그 ID에 해당하는 사용자 상태를 확인해요.</div></div></details>
+<details><summary>9. mysql2 설치 후 바로 가능한 것은?</summary><div class="detail"><div class="answer"><b>정답: 아직 DB 연결은 되지 않는다</b><br>MySQL 실행, 접속 정보, 연결 풀 또는 연결 생성, SQL 실행이 필요해요.</div></div></details>
+<details><summary>10. SQL의 ? 바인딩을 사용하는 주된 이유는?</summary><div class="detail"><div class="answer"><b>정답: SQL 문장과 사용자 입력값을 분리해 안전하게 전달하기 위해</b><br>값을 SQL 문자열에 직접 이어 붙이는 방식보다 SQL 삽입 공격 위험을 줄일 수 있어요.</div></div></details>
+</div></section>
+<section id="status" class="practice"><h2>10. 5.DB 폴더: 받은 파일 기준</h2><div class="content">
+<p>실습 문제가 5.DB 내용일 수 있다고 예상해 대비하되, 아래는 받은 ZIP에서 확인한 상태예요.</p>
+<table><tr><th>파일</th><th>현재 상태</th></tr>
+<tr><td><code>package.json</code></td><td>express, nunjucks, chokidar, express-session, session-file-store, mysql2</td></tr>
+<tr><td><code>app.js</code></td><td>폼 파서, Nunjucks, 세션 미들웨어 설정. mainRouter 연결</td></tr>
+<tr><td><code>routes/mainRouter.js</code></td><td>메인·회원가입·로그인·수정·탈퇴 화면을 보여주는 GET 라우트</td></tr>
+<tr><td><code>routes/userRouter.js</code></td><td>빈 파일. app.js에서 아직 연결하지 않음</td></tr>
+<tr><td><code>views</code></td><td>main/join은 기본 뼈대, login/update/delete는 비어 있음</td></tr>
+<tr><td>MySQL</td><td>mysql2만 설치. DB 연결, 쿼리, 회원 저장은 미진행</td></tr></table>
+<div class="call warn"><b>구분:</b> session-file-store는 세션 데이터를 파일에 저장해요. MySQL DB 연결이 아니에요.</div>
+<pre><button class="copy">복사</button><code>5.DB/
+├─ config/                    설정 파일을 둘 폴더
+├─ routes/
+│  ├─ mainRouter.js           화면 경로
+│  └─ userRouter.js           회원 처리 경로 (빈 파일)
+├─ views/
+│  ├─ main.html, join.html    기본 뼈대
+│  ├─ login.html              비어 있음
+│  ├─ update.html             비어 있음
+│  └─ delete.html             비어 있음
+├─ app.js                     앱 설정과 연결
+└─ package.json               설치 모듈 기록</code></pre>
+</div></section>
+<section id="install" class="practice"><h2>11. 모듈 설치 명령과 역할</h2><div class="content">
+<p>각 명령은 해당 프로젝트의 <code>package.json</code>이 있는 폴더에서 실행해요.</p>
+<pre><button class="copy">복사</button><code># 접속 IP 확인 실습
+npm install request-ip
 
-<section id="practice"><h2>10. 5.DB 예상 실습: 진행 순서</h2><div class="content">
+# Express 서버 프로젝트
+npm install express
+
+# body-parser를 직접 require하는 코드
+npm install body-parser
+
+# Nunjucks 실습
+npm install express nunjucks chokidar
+
+# 5.DB 프로젝트에 기록된 패키지
+npm install express nunjucks chokidar express-session session-file-store mysql2
+
+# nodemon을 컴퓨터 전체에 설치
+npm i nodemon -g</code></pre>
+<table><tr><th>모듈</th><th>쓰는 목적</th></tr>
+<tr><td><code>express</code></td><td>서버, 라우트, 미들웨어 구성</td></tr>
+<tr><td><code>request-ip</code></td><td>요청에서 접속 IP 확인</td></tr>
+<tr><td><code>body-parser</code></td><td>폼 본문 읽기. Express의 express.urlencoded()를 쓰면 별도 설치 불필요</td></tr>
+<tr><td><code>nunjucks</code></td><td>데이터를 넣어 HTML 템플릿 생성</td></tr>
+<tr><td><code>chokidar</code></td><td>파일 변경 감지. Nunjucks watch 기능에 사용</td></tr>
+<tr><td><code>express-session</code></td><td>세션으로 로그인 상태 등 저장</td></tr>
+<tr><td><code>session-file-store</code></td><td>세션 데이터를 파일로 저장</td></tr>
+<tr><td><code>mysql2</code></td><td>Node.js와 MySQL 연결에 쓰는 드라이버</td></tr>
+<tr><td><code>nodemon -g</code></td><td>파일 변경 시 서버 재시작. -g는 global, 컴퓨터 전체 설치</td></tr></table>
+<ul><li><code>npm i</code>는 <code>npm install</code>의 짧은 명령이에요.</li><li>프로젝트에 설치하면 node_modules에 파일이 들어가고 package.json에 패키지가 기록돼요. package-lock.json에는 세부 버전이 기록돼요.</li><li>전역 nodemon은 프로젝트 package.json에 기록되지 않아요.</li></ul>
+</div></section>
+<section id="practice" class="practice"><h2>12. 5.DB 예상 실습: 진행 순서</h2><div class="content">
 <p><span class="tag amber">시험 대비 예시</span> 실제 시험문제는 아직 확인되지 않았어요. 받은 폴더의 회원 메뉴를 바탕으로 예상 흐름을 정리했어요.</p>
 <ol><li>수업에서 정한 DB명·테이블명·컬럼명을 먼저 확인한다.</li><li>MySQL에서 DB와 회원 테이블을 준비한다.</li><li><code>config/db.js</code>에서 연결 풀을 만든다.</li><li><code>app.js</code>에서 폼 파서 → Nunjucks → 세션 → 라우터를 연결한다.</li><li><code>userRouter.js</code>에서 req.body를 읽고 쿼리를 실행한다.</li><li>조회 결과를 화면에 전달하거나 로그인 정보를 세션에 저장한다.</li><li>성공·실패 화면을 각각 확인한다.</li></ol>
 <div class="call warn"><b>중요:</b> 아래 예시는 공부용이에요. 시험에서는 선생님이 준 테이블 이름, 컬럼명, 라우트 주소를 그대로 따라야 해요.</div>
 </div></section>
-
-<section id="db-code"><h2>11. DB 연결 설정 예시</h2><div class="content">
+<section id="db-code" class="practice"><h2>13. DB 연결 설정 예시</h2><div class="content">
 <p>예시 위치: <code>config/db.js</code>. DB 이름·계정·비밀번호는 실제 환경 값으로 바꿔요.</p>
 <pre><button class="copy">복사</button><code>const mysql = require('mysql2/promise');
 
@@ -249,8 +314,7 @@ module.exports = pool;</code></pre>
 <ul><li><code>mysql2/promise</code>는 async/await로 DB 작업을 하게 해요.</li><li><code>createPool()</code>은 여러 요청이 연결을 재사용하도록 연결 풀을 만들어요.</li><li><code>host/user/password/database</code>는 MySQL 접속 정보를 지정해요.</li><li><code>waitForConnections</code>와 <code>connectionLimit</code>은 연결 풀의 대기와 최대 연결 수를 정해요.</li><li><code>module.exports</code>로 pool을 내보내 라우터에서 불러와요.</li></ul>
 <div class="call red">DB 비밀번호를 공개 GitHub에 올리면 안 돼요. 위 값은 예시 자리 표시자예요.</div>
 </div></section>
-
-<section id="crud"><h2>12. 회원 처리 코드 패턴</h2><div class="content">
+<section id="crud" class="practice"><h2>14. 회원 처리 코드 패턴</h2><div class="content">
 <p>공통 준비: app.js에서 userRouter를 불러와 <code>app.use('/user', userRouter)</code>로 연결하고, userRouter.js에서는 <code>express.Router()</code>와 DB pool을 가져와요. 그러면 <code>router.post('/join')</code>의 최종 주소는 <code>POST /user/join</code>이에요.</p>
 <details open><summary>회원가입: INSERT</summary><div class="detail"><pre><button class="copy">복사</button><code>router.post('/join', async (req, res, next) => {
   try {
@@ -321,20 +385,7 @@ router.get('/update', checkLogin, (req, res) => {
   }
 });</code></pre><ul><li>현재 로그인한 사람을 세션에서 확인해 DB에서 삭제해요.</li><li>DB 삭제 후 destroy()로 로그인 세션을 끝내요.</li><li>실제 서비스는 삭제 전 확인 절차와 관련 자료 처리도 필요해요.</li></ul></div></details>
 </div></section>
-
-<section id="answers"><h2>13. 서술형 답안 연습</h2><div class="content">
-<details open><summary>Node.js란?</summary><div class="detail"><div class="answer">Node.js는 브라우저 밖에서 JavaScript를 실행하는 런타임 환경이다. 서버와 파일·네트워크 프로그램을 만들 수 있으며 비동기 I/O와 이벤트 루프로 대기 중에도 다른 요청을 처리한다.</div></div></details>
-<details><summary>싱글 스레드인데 여러 요청을 처리하는 이유?</summary><div class="detail"><div class="answer">JavaScript 실행 흐름은 기본적으로 하나지만, 파일·네트워크 응답은 비동기로 맡길 수 있다. 이벤트 루프가 완료된 작업의 콜백을 실행하므로 기다리는 동안 다른 요청을 처리할 수 있다.</div></div></details>
-<details><summary>동기와 비동기 차이는?</summary><div class="detail"><div class="answer">동기는 앞 작업이 끝난 뒤 다음 작업을 실행해 순서가 명확하다. 비동기는 결과를 기다리는 동안 다른 작업을 실행해 대기 시간을 활용할 수 있지만 결과 순서와 오류 처리가 복잡해진다.</div></div></details>
-<details><summary>GET과 POST 차이는?</summary><div class="detail"><div class="answer">GET은 보통 조회에 사용하고 입력값이 URL의 쿼리 문자열로 전달되어 req.query로 읽는다. POST는 요청 본문에 값이 담기며 본문 파서 등록 후 req.body로 읽는다. POST 자체가 통신을 암호화하지는 않는다.</div></div></details>
-<details><summary>미들웨어란?</summary><div class="detail"><div class="answer">미들웨어는 요청과 응답 사이에서 실행되는 함수다. 폼 파싱, 정적 파일 제공, 세션 확인 등에 사용하고 app.use()로 등록한다. 요청 본문 파서는 라우트보다 먼저 등록해야 한다.</div></div></details>
-<details><summary>세션과 쿠키 차이는?</summary><div class="detail"><div class="answer">쿠키는 브라우저에 저장되는 작은 값이고 세션은 서버가 사용자 상태를 기억하는 방법이다. 세션 ID는 쿠키로 전달되고, 세션 데이터는 서버 저장소에 둔다.</div></div></details>
-<details><summary>Nunjucks와 정적 HTML 차이는?</summary><div class="detail"><div class="answer">정적 HTML은 저장된 파일을 그대로 보낸다. Nunjucks는 서버에서 데이터를 템플릿에 넣어 사용자별 HTML을 만든 뒤 응답한다.</div></div></details>
-<details><summary>mysql2 설치만 하면 DB 연결이 되나?</summary><div class="detail"><div class="answer">아니다. mysql2는 연결용 드라이버다. 접속 정보로 연결 풀이나 연결을 만들고, SQL을 실행해야 실제 DB 작업이 된다.</div></div></details>
-<details><summary>SQL 물음표 바인딩을 쓰는 이유?</summary><div class="detail"><div class="answer">사용자 입력을 SQL 문자열에 직접 이어 붙이지 않고 별도 값으로 전달하기 위해서다. 값과 SQL을 분리해 입력값이 SQL 문법으로 해석되는 위험을 줄인다.</div></div></details>
-</div></section>
-
-<section id="trouble"><h2>14. 빠른 문제 해결</h2><div class="content">
+<section id="trouble" class="practice"><h2>15. 빠른 문제 해결</h2><div class="content">
 <table><tr><th>증상</th><th>확인</th></tr>
 <tr><td>req.body가 비어 있음</td><td>폼의 name, express.urlencoded 등록 여부, 미들웨어 순서 확인</td></tr>
 <tr><td>파일 못 찾음</td><td>__dirname 기준 경로, views/public 폴더 위치 확인</td></tr>
@@ -345,7 +396,7 @@ router.get('/update', checkLogin, (req, res) => {
 <tr><td>서버가 터미널을 점유</td><td>서버 실행 중이면 요청 로그만 확인. 종료는 Ctrl+C</td></tr></table>
 <p><b>실습 체크:</b> 폼 action·method·name → 파서 → 라우트 URL → DB 테이블·컬럼 → SQL 물음표/값 순서 → 성공·실패 응답.</p>
 </div></section>
-<section id="notion"><h2>15. 전체 교재</h2><div class="content"><p>길게 읽을 개념과 앞서 배운 수업 예시는 <a href="https://app.notion.com/p/3e950dc8432181558c51ef5222ee0e97" target="_blank" rel="noopener">📘 Notion Node.js 교재</a>에서 볼 수 있어요.</p><div class="call good">내일 오전 수업 파일을 받으면 설치 모듈과 5.DB 코드, 실습 예시를 실제 진도에 맞춰 보완하면 돼요.</div></div></section>
+<section id="notion" class="practice"><h2>16. 전체 교재</h2><div class="content"><p>길게 읽을 개념과 앞서 배운 수업 예시는 <a href="https://app.notion.com/p/3e950dc8432181558c51ef5222ee0e97" target="_blank" rel="noopener">📘 Notion Node.js 교재</a>에서 볼 수 있어요.</p><div class="call good">추가 수업 자료가 생기면 실제 진도와 시험 범위에 맞춰 이 교재와 함께 보완해요.</div></div></section>
 <footer>Node.js 시험 오픈북 · 검색 · 코드 복사 · 모바일 보기 · 인쇄 지원</footer>
 </main>
 </div>
