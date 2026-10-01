@@ -24,7 +24,7 @@ p{margin:8px 0 13px}ul,ol{padding-left:1.4em}li{margin:5px 0}
 .call{padding:11px 14px;margin:12px 0;border-left:5px solid var(--blue);background:var(--pale);border-radius:7px}.call.warn{border-color:#c78b0c;background:var(--amber)}.call.good{border-color:#218350;background:var(--green)}.call.red{border-color:#b53630;background:var(--red)}
 table{width:100%;border-collapse:collapse;margin:12px 0 16px;font-size:.94rem}th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}th{background:#edf3f9}
 pre{position:relative;white-space:pre;overflow:auto;background:#142238;color:#f4f7fb;border-radius:10px;padding:16px;font: .86rem/1.65 Consolas,"Courier New",monospace}
-p code,li code,td code,.call code{background:#fff1f0;color:#b42318;border:0;border-radius:3px;padding:0 3px;font-weight:800;word-break:break-word}
+p code,li code,td code,.call code,.exam-snapshot code{background:#fff1f0;color:#b42318;border:0;border-radius:3px;padding:0 3px;font-weight:800;word-break:break-word}
 .copy{position:absolute;top:7px;right:7px;background:#314865;color:#fff;border:1px solid #6681a0;font-size:.78rem;padding:3px 8px}
 details{border:1px solid var(--line);border-radius:10px;margin:9px 0;background:#fff}summary{padding:9px 12px;font-weight:bold;cursor:pointer;color:#24496e}details[open]>summary{background:#f5f8fc;border-bottom:1px solid var(--line)}.detail{padding:0 13px 12px}.answer{background:#f5f8fc;border:1px solid var(--line);border-radius:9px;padding:12px;margin-top:11px}
 .hidden{display:none!important}footer{padding:12px 4px 30px;color:var(--muted);font-size:.9rem}
@@ -52,6 +52,19 @@ section h2{color:#102b49;font-weight:800}
 .call{color:#142b45}
 .tag.amber{color:#543b00}
 @media print{.concept h2,.exam h2,.practice h2{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+
+/* 빠른 참조와 가독성 보완 */
+.color-guide{display:flex;gap:9px;flex-wrap:wrap;margin:-3px 0 16px;color:#253c54;font-weight:700;font-size:.9rem}
+.color-guide span{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;background:#fff;border:1px solid #c8d2de;border-radius:999px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}.concept-dot{background:#1764a0}.exam-dot{background:#a96b00}.practice-dot{background:#23774b}
+nav>div+div{border-top:1px solid #d8e0e8;margin-top:10px;padding-top:6px}
+.exam-snapshot{margin:3px 0 18px;padding:13px 15px;background:#fff8e6;border:1px solid #e6c96d;border-left:5px solid #a96b00;border-radius:10px}
+.exam-snapshot>strong{display:block;color:#654100;margin-bottom:9px;font-size:1.03rem}
+.snapshot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.snapshot-grid>div{background:#fff;border:1px solid #eadba8;border-radius:8px;padding:8px 10px}
+.snapshot-grid b{display:block;color:#654100}.snapshot-grid span{display:block;color:#24384d;font-size:.93rem}
+.where-map{font-size:.91rem}.where-map th{background:#e4edf7;color:#183b61}.where-map td:first-child{white-space:nowrap;font-weight:700}
+@media(max-width:700px){.snapshot-grid{grid-template-columns:1fr}.where-map td:first-child{white-space:normal}}
 </style>
 </head>
 <!-- Inline code terms are emphasized by text color only. -->
@@ -232,7 +245,7 @@ app.use(session({
 <table><tr><th>CRUD</th><th>SQL</th><th>회원 기능</th></tr><tr><td>Create</td><td>INSERT</td><td>회원가입</td></tr><tr><td>Read</td><td>SELECT</td><td>로그인·조회</td></tr><tr><td>Update</td><td>UPDATE</td><td>정보 수정</td></tr><tr><td>Delete</td><td>DELETE</td><td>회원 탈퇴</td></tr></table>
 <div class="call">mysql2 설치만으로 연결되는 것은 아니에요. MySQL 실행, DB/테이블 생성, 접속 설정, createPool 또는 createConnection, SQL 실행이 필요해요.</div>
 </div></section>
-<section id="answers" class="exam"><h2>8. 서술형 답안 연습</h2><div class="content">
+<section id="answers" class="exam"><h2>8. 서술형 답안 연습</h2><div class="content"><div class="exam-snapshot"><strong>시험 직전 30초 요약</strong><div class="snapshot-grid"><div><b>Node.js</b><span>싱글 스레드 + 비동기 I/O + 이벤트 루프</span></div><div><b>요청 값</b><span>GET → <code>req.query</code> · POST → 파서 뒤 <code>req.body</code></span></div><div><b>Express</b><span>미들웨어를 먼저 등록하고, 그다음 라우터 연결</span></div><div><b>로그인 기억</b><span>세션은 서버 저장소 · 쿠키는 세션 ID 전달</span></div></div></div>
 <details open><summary>Node.js란?</summary><div class="detail"><div class="answer">Node.js는 브라우저 밖에서 JavaScript를 실행하는 런타임 환경이다. 서버와 파일·네트워크 프로그램을 만들 수 있으며 비동기 I/O와 이벤트 루프로 대기 중에도 다른 요청을 처리한다.</div></div></details>
 <details><summary>싱글 스레드인데 여러 요청을 처리하는 이유?</summary><div class="detail"><div class="answer">JavaScript 실행 흐름은 기본적으로 하나지만, 파일·네트워크 응답은 비동기로 맡길 수 있다. 이벤트 루프가 완료된 작업의 콜백을 실행하므로 기다리는 동안 다른 요청을 처리할 수 있다.</div></div></details>
 <details><summary>동기와 비동기 차이는?</summary><div class="detail"><div class="answer">동기는 앞 작업이 끝난 뒤 다음 작업을 실행해 순서가 명확하다. 비동기는 결과를 기다리는 동안 다른 작업을 실행해 대기 시간을 활용할 수 있지만 결과 순서와 오류 처리가 복잡해진다.</div></div></details>
@@ -266,6 +279,7 @@ app.use(session({
 <tr><td><code>routes/userRouter.js</code></td><td>빈 파일. app.js에서 아직 연결하지 않음</td></tr>
 <tr><td><code>views</code></td><td>main/join은 기본 뼈대, login/update/delete는 비어 있음</td></tr>
 <tr><td>MySQL</td><td>mysql2만 설치. DB 연결, 쿼리, 회원 저장은 미진행</td></tr></table>
+<h3>파일 위치 빠르게 찾기</h3><p>아래는 각 파일에 보통 어떤 코드를 두는지 보여주는 위치 안내예요. 현재 수업 파일에 아직 없는 코드는 실습 예시에서만 다뤄요.</p><table class="where-map"><tr><th>파일·폴더</th><th>여기에 두는 코드</th><th>현재 5.DB 상태</th></tr><tr><td><code>app.js</code></td><td>미들웨어, 라우터 연결, 서버 실행</td><td>기본 설정과 mainRouter 연결 확인</td></tr><tr><td><code>routes/mainRouter.js</code></td><td>페이지를 보여주는 GET 경로</td><td>화면 이동 경로 있음</td></tr><tr><td><code>routes/userRouter.js</code></td><td>회원가입·로그인 등 폼 처리와 DB 요청</td><td>파일은 있지만 아직 비어 있고 연결 전</td></tr><tr><td><code>config/db.js</code></td><td>MySQL 연결 정보와 연결 풀</td><td>수업 파일에는 아직 DB 연결 코드 없음</td></tr><tr><td><code>views/*.html</code></td><td>Nunjucks 화면 템플릿</td><td>일부 화면만 기본 뼈대</td></tr></table>
 <div class="call warn"><b>구분:</b> session-file-store는 세션 데이터를 파일에 저장해요. MySQL DB 연결이 아니에요.</div>
 <pre><button class="copy">복사</button><code>5.DB/
 ├─ config/                    설정 파일을 둘 폴더
