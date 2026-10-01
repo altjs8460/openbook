@@ -40,9 +40,10 @@ nav b{color:#102f50;font-size:1rem}
 nav a{color:#243e59}
 section{border:1px solid #aab9ca;box-shadow:0 2px 7px #1422380d}
 section h2{color:#102b49;font-weight:800}
-.concept h2{background:#d8eaff;border-left:9px solid #1764a0}
-.exam h2{background:#ffedbd;border-left:9px solid #a96b00}
-.practice h2{background:#d9f0e1;border-left:9px solid #23774b}
+.concept h2{background:#d8eaff;border-left:9px solid #1764a0;color:#123c63}
+.exam h2{background:#ffedbd;border-left:9px solid #a96b00;color:#654100}
+.practice h2{background:#d9f0e1;border-left:9px solid #23774b;color:#145832}
+.reference h2{background:#e7eaf0;border-left:9px solid #586779;color:#304153}
 .quick a{border-left:6px solid #1764a0}
 .quick a:nth-child(2){border-left-color:#a96b00}
 .quick a:nth-child(3){border-left-color:#23774b}
@@ -69,6 +70,22 @@ section h2{color:#102b49;font-weight:800}
 <main>
 <div class="notice"><strong>추천해서 보는 순서</strong>먼저 개념을 훑고, 서술형 답안과 객관식 확인 문제로 이해를 점검한 다음, 마지막의 실습 대비 코드와 체크리스트를 보세요.</div>
 <div class="quick"><a href="#node"><b>① 개념 정리</b><span>Node.js부터 DB 기초까지</span></a><a href="#answers"><b>② 서술형·객관식</b><span>답안 예시와 이해 확인 문제</span></a><a href="#practice"><b>③ 실습 대비</b><span>수업 파일 상태부터 코드 예시까지</span></a></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -238,7 +255,8 @@ app.use(session({
 <details><summary>9. mysql2 설치 후 바로 가능한 것은?</summary><div class="detail"><div class="answer"><b>정답: 아직 DB 연결은 되지 않는다</b><br>MySQL 실행, 접속 정보, 연결 풀 또는 연결 생성, SQL 실행이 필요해요.</div></div></details>
 <details><summary>10. SQL의 ? 바인딩을 사용하는 주된 이유는?</summary><div class="detail"><div class="answer"><b>정답: SQL 문장과 사용자 입력값을 분리해 안전하게 전달하기 위해</b><br>값을 SQL 문자열에 직접 이어 붙이는 방식보다 SQL 삽입 공격 위험을 줄일 수 있어요.</div></div></details>
 </div></section>
-<section id="status" class="practice"><h2>10. 5.DB 폴더: 받은 파일 기준</h2><div class="content">
+<section id="notion" class="reference"><h2>10. 전체 교재</h2><div class="content"><p>길게 읽을 개념과 앞서 배운 수업 예시는 <a href="https://app.notion.com/p/3e950dc8432181558c51ef5222ee0e97" target="_blank" rel="noopener">📘 Notion Node.js 교재</a>에서 볼 수 있어요.</p><div class="call good">추가 수업 자료가 생기면 실제 진도와 시험 범위에 맞춰 이 교재와 함께 보완해요.</div></div></section>
+<section id="status" class="practice"><h2>11. 5.DB 폴더: 받은 파일 기준</h2><div class="content">
 <p>실습 문제가 5.DB 내용일 수 있다고 예상해 대비하되, 아래는 받은 ZIP에서 확인한 상태예요.</p>
 <table><tr><th>파일</th><th>현재 상태</th></tr>
 <tr><td><code>package.json</code></td><td>express, nunjucks, chokidar, express-session, session-file-store, mysql2</td></tr>
@@ -261,7 +279,7 @@ app.use(session({
 ├─ app.js                     앱 설정과 연결
 └─ package.json               설치 모듈 기록</code></pre>
 </div></section>
-<section id="install" class="practice"><h2>11. 모듈 설치 명령과 역할</h2><div class="content">
+<section id="install" class="practice"><h2>12. 모듈 설치 명령과 역할</h2><div class="content">
 <p>각 명령은 해당 프로젝트의 <code>package.json</code>이 있는 폴더에서 실행해요.</p>
 <pre><button class="copy">복사</button><code># 접속 IP 확인 실습
 npm install request-ip
@@ -292,12 +310,12 @@ npm i nodemon -g</code></pre>
 <tr><td><code>nodemon -g</code></td><td>파일 변경 시 서버 재시작. -g는 global, 컴퓨터 전체 설치</td></tr></table>
 <ul><li><code>npm i</code>는 <code>npm install</code>의 짧은 명령이에요.</li><li>프로젝트에 설치하면 node_modules에 파일이 들어가고 package.json에 패키지가 기록돼요. package-lock.json에는 세부 버전이 기록돼요.</li><li>전역 nodemon은 프로젝트 package.json에 기록되지 않아요.</li></ul>
 </div></section>
-<section id="practice" class="practice"><h2>12. 5.DB 예상 실습: 진행 순서</h2><div class="content">
+<section id="practice" class="practice"><h2>13. 5.DB 예상 실습: 진행 순서</h2><div class="content">
 <p><span class="tag amber">시험 대비 예시</span> 실제 시험문제는 아직 확인되지 않았어요. 받은 폴더의 회원 메뉴를 바탕으로 예상 흐름을 정리했어요.</p>
 <ol><li>수업에서 정한 DB명·테이블명·컬럼명을 먼저 확인한다.</li><li>MySQL에서 DB와 회원 테이블을 준비한다.</li><li><code>config/db.js</code>에서 연결 풀을 만든다.</li><li><code>app.js</code>에서 폼 파서 → Nunjucks → 세션 → 라우터를 연결한다.</li><li><code>userRouter.js</code>에서 req.body를 읽고 쿼리를 실행한다.</li><li>조회 결과를 화면에 전달하거나 로그인 정보를 세션에 저장한다.</li><li>성공·실패 화면을 각각 확인한다.</li></ol>
 <div class="call warn"><b>중요:</b> 아래 예시는 공부용이에요. 시험에서는 선생님이 준 테이블 이름, 컬럼명, 라우트 주소를 그대로 따라야 해요.</div>
 </div></section>
-<section id="db-code" class="practice"><h2>13. DB 연결 설정 예시</h2><div class="content">
+<section id="db-code" class="practice"><h2>14. DB 연결 설정 예시</h2><div class="content">
 <p>예시 위치: <code>config/db.js</code>. DB 이름·계정·비밀번호는 실제 환경 값으로 바꿔요.</p>
 <pre><button class="copy">복사</button><code>const mysql = require('mysql2/promise');
 
@@ -314,7 +332,7 @@ module.exports = pool;</code></pre>
 <ul><li><code>mysql2/promise</code>는 async/await로 DB 작업을 하게 해요.</li><li><code>createPool()</code>은 여러 요청이 연결을 재사용하도록 연결 풀을 만들어요.</li><li><code>host/user/password/database</code>는 MySQL 접속 정보를 지정해요.</li><li><code>waitForConnections</code>와 <code>connectionLimit</code>은 연결 풀의 대기와 최대 연결 수를 정해요.</li><li><code>module.exports</code>로 pool을 내보내 라우터에서 불러와요.</li></ul>
 <div class="call red">DB 비밀번호를 공개 GitHub에 올리면 안 돼요. 위 값은 예시 자리 표시자예요.</div>
 </div></section>
-<section id="crud" class="practice"><h2>14. 회원 처리 코드 패턴</h2><div class="content">
+<section id="crud" class="practice"><h2>15. 회원 처리 코드 패턴</h2><div class="content">
 <p>공통 준비: app.js에서 userRouter를 불러와 <code>app.use('/user', userRouter)</code>로 연결하고, userRouter.js에서는 <code>express.Router()</code>와 DB pool을 가져와요. 그러면 <code>router.post('/join')</code>의 최종 주소는 <code>POST /user/join</code>이에요.</p>
 <details open><summary>회원가입: INSERT</summary><div class="detail"><pre><button class="copy">복사</button><code>router.post('/join', async (req, res, next) => {
   try {
@@ -385,7 +403,7 @@ router.get('/update', checkLogin, (req, res) => {
   }
 });</code></pre><ul><li>현재 로그인한 사람을 세션에서 확인해 DB에서 삭제해요.</li><li>DB 삭제 후 destroy()로 로그인 세션을 끝내요.</li><li>실제 서비스는 삭제 전 확인 절차와 관련 자료 처리도 필요해요.</li></ul></div></details>
 </div></section>
-<section id="trouble" class="practice"><h2>15. 빠른 문제 해결</h2><div class="content">
+<section id="trouble" class="practice"><h2>16. 빠른 문제 해결</h2><div class="content">
 <table><tr><th>증상</th><th>확인</th></tr>
 <tr><td>req.body가 비어 있음</td><td>폼의 name, express.urlencoded 등록 여부, 미들웨어 순서 확인</td></tr>
 <tr><td>파일 못 찾음</td><td>__dirname 기준 경로, views/public 폴더 위치 확인</td></tr>
@@ -396,7 +414,6 @@ router.get('/update', checkLogin, (req, res) => {
 <tr><td>서버가 터미널을 점유</td><td>서버 실행 중이면 요청 로그만 확인. 종료는 Ctrl+C</td></tr></table>
 <p><b>실습 체크:</b> 폼 action·method·name → 파서 → 라우트 URL → DB 테이블·컬럼 → SQL 물음표/값 순서 → 성공·실패 응답.</p>
 </div></section>
-<section id="notion" class="practice"><h2>16. 전체 교재</h2><div class="content"><p>길게 읽을 개념과 앞서 배운 수업 예시는 <a href="https://app.notion.com/p/3e950dc8432181558c51ef5222ee0e97" target="_blank" rel="noopener">📘 Notion Node.js 교재</a>에서 볼 수 있어요.</p><div class="call good">추가 수업 자료가 생기면 실제 진도와 시험 범위에 맞춰 이 교재와 함께 보완해요.</div></div></section>
 <footer>Node.js 시험 오픈북 · 검색 · 코드 복사 · 모바일 보기 · 인쇄 지원</footer>
 </main>
 </div>
