@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f7fb"><title>React</title>
+<style>
+:root{--ink:#1c2740;--muted:#71809b;--line:#e7eaf1;--paper:#fff;--bg:#f6f7fb;--blue:#5367e8;--pale:#edf0ff;--shadow:0 14px 40px #24345d0b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 Inter,"Pretendard","Apple SD Gothic Neo",sans-serif}button,input{font:inherit}button{cursor:pointer}.top{height:68px;position:sticky;top:0;z-index:5;background:#f6f7fbef;backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 max(20px,calc((100vw - 1420px)/2));gap:22px}.brand{font-size:22px;font-weight:900;letter-spacing:-.06em;min-width:150px}.brand i{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--blue);color:#fff;font-size:16px;font-style:normal;margin-right:8px}.search{position:relative;max-width:650px;flex:1}.search input{width:100%;height:41px;border:1px solid var(--line);border-radius:13px;padding:0 15px 0 40px;background:#fff;outline:0}.search input:focus{border-color:#aeb8ff;box-shadow:0 0 0 4px #5367e814}.search span{position:absolute;left:13px;top:5px;color:#8d9ab3;font-size:21px}.topnote{margin-left:auto;color:#8994aa;font-size:12px}.layout{max-width:1480px;margin:auto;display:grid;grid-template-columns:225px minmax(0,900px) 170px;gap:27px;padding:25px 27px 65px}.side{position:sticky;top:88px;height:calc(100vh - 100px);overflow:auto}.label{font-size:10px;letter-spacing:.12em;color:#9ca6b9;font-weight:800;margin:15px 10px 7px}.navbtn{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;color:#65738d;text-align:left;padding:9px 11px;border-radius:10px;font-size:13px;font-weight:650}.navbtn:hover{background:#fff}.navbtn.active{background:var(--pale);color:#4458d8}.navbtn small{margin-left:auto;opacity:.6}.sidecard{background:#fff;border:1px solid var(--line);padding:14px;border-radius:14px;margin:20px 2px;box-shadow:var(--shadow);font-size:11px;color:var(--muted)}.sidecard b{display:block;color:var(--ink);font-size:12px}.hero{border:1px solid #e5e8f2;border-radius:22px;background:linear-gradient(125deg,#fff,#eff1ff);padding:29px 32px;margin-bottom:18px;box-shadow:var(--shadow)}.eyebrow{font-size:10px;color:#5265df;font-weight:850;letter-spacing:.12em}.hero h1{font-size:38px;line-height:1.15;letter-spacing:-.06em;margin:7px 0}.hero p{color:#64728c;margin:0;max-width:620px}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}.chip{font-size:10px;border-radius:20px;padding:4px 10px;background:#fff;border:1px solid #e6e9f3;color:#62708a}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}.stat,.card{background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.stat{padding:11px 15px}.stat b{font-size:17px;display:block}.stat span{font-size:10px;color:var(--muted)}.panel{display:none;animation:fade .2s}.panel.active{display:block}@keyframes fade{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:none}}.head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:24px 2px 13px}.head h2{font-size:24px;line-height:1.25;letter-spacing:-.04em;margin:0}.head p{font-size:12px;color:var(--muted);margin:4px 0 0}.badge{font-size:10px;padding:4px 9px;border-radius:16px;background:var(--pale);color:#4f61d3;font-weight:800}.card{padding:18px 20px;margin:11px 0}.card h3{font-size:16px;margin:0 0 7px;letter-spacing:-.02em}.card h4{margin:3px 0 7px}.card p{margin:7px 0;color:#53617b}.card ul,.card ol{padding-left:20px;margin:7px 0;color:#53617b}.card li{padding:2px 0}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.call{border-radius:11px;padding:11px 13px;margin:11px 0;font-size:12px;background:#f0f2ff;color:#4759c8}.call.green{background:#edf8f3;color:#3d7861}.call.amber{background:#fff7e8;color:#86651c}.call.red{background:#fff0f0;color:#9b5151}.code{background:#172033;border-radius:12px;margin:11px 0;overflow:hidden}.codehead{display:flex;justify-content:space-between;padding:7px 12px;background:#202b41;color:#aebbd3;font-size:10px}.copy{border:1px solid #48556d;background:#2a3650;color:#e6ebf5;border-radius:7px;padding:2px 8px;font-size:10px}.code pre{overflow:auto;padding:12px 15px;margin:0;color:#e2e8f4;font:12px/1.7 ui-monospace,Consolas,monospace;tab-size:2}.inline{font:12px ui-monospace,Consolas,monospace;background:#f0f2f7;padding:2px 5px;border-radius:5px;color:#4b59a9}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px;margin:11px 0}table{border-collapse:collapse;width:100%;font-size:12px;min-width:480px}th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f8f9fc;color:#596783;font-size:11px}tr:last-child td{border:0}.steps{counter-reset:s}.step{position:relative;padding:0 0 13px 34px;color:#55637d}.step:before{counter-increment:s;content:counter(s);position:absolute;left:0;width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:var(--pale);color:#4d60dc;font-size:11px;font-weight:800}.quiz{border:1px solid var(--line);border-radius:12px;padding:14px;margin:10px 0;background:#fff}.qtype{color:#5367e8;font-size:10px;font-weight:850}.choice{display:block;color:#586681;font-size:12px;padding:2px 0}.answer{display:none;margin-top:9px;background:#eef8f3;border-radius:9px;padding:10px;color:#3f755e;font-size:12px}.answer.show{display:block}.answerbtn{border:0;background:transparent;color:#4f62d7;font-size:11px;font-weight:750;padding:5px 0}.searchresults{display:none}.searchresults.show{display:block}.result{display:flex;justify-content:space-between;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:white;margin:8px 0;text-align:left;width:100%}.result small{color:#8994a8}.empty{display:none;background:#fff;border:1px solid var(--line);border-radius:14px;padding:25px;text-align:center;color:#74809a}.empty.show{display:block}.right{position:sticky;top:98px;height:fit-content;padding-top:10px}.right h4{font-size:10px;color:#99a3b4;text-transform:uppercase;letter-spacing:.1em;margin:0 0 8px}.right a{display:block;padding:5px 0 5px 10px;border-left:1px solid #dfe3ed;color:#8994a9;font-size:10px}.right a:hover{color:#4d60dc;border-color:var(--blue)}.rightnote{font-size:10px;color:#8490a6;background:#fff;border:1px solid var(--line);padding:12px;border-radius:12px;margin-top:18px}.foot{text-align:center;color:#9aa4b5;font-size:10px;padding:20px 4px}.mobile{display:none}
+@media(max-width:1100px){.layout{grid-template-columns:205px minmax(0,1fr);gap:19px}.right{display:none}}
+@media(max-width:720px){.top{height:60px;padding:0 13px;gap:9px}.brand{min-width:auto;font-size:19px}.topnote{display:none}.mobile{display:block;border:0;background:#fff;border-radius:9px;width:34px;height:34px}.layout{display:block;padding:14px}.side{display:none;position:fixed;z-index:9;top:60px;left:0;bottom:0;width:260px;height:auto;background:#f7f8fc;padding:16px;box-shadow:12px 0 35px #16234422}.side.open{display:block}.hero{padding:24px 20px}.hero h1{font-size:32px}.two{grid-template-columns:1fr}.card{padding:16px}.head h2{font-size:21px}.stats{gap:6px}.stat{padding:9px}.stat b{font-size:14px}}
+</style></head>
+<body><header class="top"><button class="mobile" id="mobile" aria-label="����">?</button><a href="#" class="brand" onclick="go('home');return false"><i>R</i>React</a><div class="search"><span>?</span><input id="search" type="search" placeholder="���䡤�Լ����ڵ� �˻�  (��: useEffect, map, props)"></div><div class="topnote">�ʿ��� ������ �ٷ� ã�ƺ�����</div></header>
+<div class="layout"><aside class="side" id="side"><div class="label">���� ����</div><button class="navbtn active" data-id="home">? <span>�Ѵ��� ����</span></button><button class="navbtn" data-id="exam">? <span>���� ���� ���</span></button><div class="label">����� ����</div><button class="navbtn" data-id="jsx">? <span>React �� JSX</span><small>01</small></button><button class="navbtn" data-id="components">? <span>������Ʈ �� Props</span><small>02</small></button><button class="navbtn" data-id="state">? <span>State �� �̺�Ʈ</span><small>03</small></button><button class="navbtn" data-id="lists">? <span>�迭 �� ���</span><small>04</small></button><button class="navbtn" data-id="share">? <span>������ ����</span><small>05</small></button><button class="navbtn" data-id="effects">? <span>Effect �� API �� Ref</span><small>06</small></button><button class="navbtn" data-id="router">? <span>������ �̵�</span><small>07</small></button><div class="label">���� Ǯ��</div><button class="navbtn" data-id="practice">? <span>�ǽ� ���� Ǯ��</span></button><button class="navbtn" data-id="quiz">? <span>������ Ȯ�� ����</span></button><div class="sidecard"><b>���� �ڵ� ����</b>React Work�� React01~07 ������ ���� PPT �� �ڷḦ �Բ� �ݿ��߾��.</div></aside>
+<main>
+<section class="hero" id="hero"><div class="eyebrow">���� �� �ڵ� �� �ǽ�</div><h1>React</h1><p>���� ������ �����忡�� �ٷ� ã�� �� �� �ְ� �����߾��. ������ Ȯ���ϰ� �ڵ� ������ ������ �� Ǯ�� ������ �������ϼ���.</p><div class="chips"><span class="chip">JSX�� ������Ʈ</span><span class="chip">Props�� State</span><span class="chip">map �� filter</span><span class="chip">Context �� Zustand</span><span class="chip">useEffect �� Router</span></div></section>
+<div class="stats" id="stats"><div class="stat"><b>7��</b><span>���� ���� ����</span></div><div class="stat"><b>9��</b><span>�ٽ� ����</span></div><div class="stat"><b>3����</b><span>���� ���� ���</span></div></div><div id="results" class="searchresults"></div><div id="empty" class="empty">�˻� ����� �����. �ٸ� �ܾ�� �˻��� ������.</div>
+
+<section class="panel active" id="home"><div class="head"><div><h2>������ �����?</h2><p>���� ������ ���� �ʿ��� ������� �������.</p></div><span class="badge">START HERE</span></div><div class="two"><article class="card"><h3>������ �� ���� Ȯ��</h3><p>JSX ��Ģ, Props�� State ����, Hook ������, map ��ȯ��ó�� ���� ���� ������ Ȯ���ؿ�.</p><button class="answerbtn" onclick="go('exam')">���� ���� ��� ���� ��</button></article><article class="card"><h3>������ �� �ڵ� ����</h3><p>�Է� �� ó�� �� ȭ�� �ݿ� ������ �Լ��� ������ �����ϰ� State�� ȭ���� �ٽ� �׸��� ������ �����ؿ�.</p><button class="answerbtn" onclick="go('state')">���¿� �̺�Ʈ ���� ��</button></article><article class="card"><h3>�ǽ��� �� ��� �����</h3><p>Ŭ��, �Է�, ���, ���� ����, API ��� ǥ�� ������ Ǯ�� ������ ���󰡿�.</p><button class="answerbtn" onclick="go('practice')">�ǽ� Ǯ�� ���� ��</button></article><article class="card"><h3>�ڷ� ����</h3><p>React01~07 �ڵ�� JSX��������Ʈ��Props ���� PPT�� ������ �Բ� �ٷ��.</p><button class="answerbtn" onclick="go('jsx')">���� ���ʴ�� ���� ��</button></article></div><div class="call"><b>ã�� ��</b> �˻�â�� ���������Ҵ�, setState, key, fetch ���� Ű���带 �Է��ϼ���. �ڵ� ���� ��ư�� ����� �� �־��.</div><div class="head"><div><h2>������ �ڵ�� �ٲٴ� ����</h2><p>� �ǽ����� ������ �� �ִ� ���� �帧</p></div></div><div class="card steps"><div class="step"><b>ȭ�鿡 ������ ��������</b> ���ؿ�. ���� ��������, �迭����, ����ڰ� �ٲٴ� ������ �����մϴ�.</div><div class="step"><b>���ϴ� �����ʹ� State��</b> ������. useState(�ʱⰪ)�� setter�� �غ��մϴ�.</div><div class="step"><b>������ �Լ���</b> �и��ؿ�. �̺�Ʈ���� ���� �а� set �Լ��� State�� �ٲߴϴ�.</div><div class="step"><b>JSX ȭ���� ������.</b> ������ ����/&&, ����� map, �׸񸶴� key�� �ݴϴ�.</div><div class="step"><b>������ �帧�� Ȯ���ؿ�.</b> �θ���ڽ��� props, ���� �ڼ� ������ Context/Zustand�� �����մϴ�.</div></div></section>
+
+<section class="panel" id="exam"><div class="head"><div><h2>���� ���� ���</h2><p>������ ���� ���а� ������ Ű����</p></div><span class="badge">QUICK REVIEW</span></div><div class="tablewrap"><table><thead><tr><th>����</th><th>�ٽ� �� ����</th><th>�������� Ȯ��</th></tr></thead><tbody><tr><td>React</td><td>UI�� ������Ʈ�� ����� JavaScript ���̺귯��</td><td>���̺귯���� �����ӿ�ũ ����</td></tr><tr><td>JSX</td><td>JavaScript �ȿ��� UI�� HTMLó�� �ۼ�</td><td>�� �θ�, �߰�ȣ, className, ��Ÿ�� ��ü</td></tr><tr><td>Component</td><td>UI�� ���� �����ϴ� �Լ�/Ŭ���� ����</td><td>�Լ��� �̸��� �빮�ڷ� ����</td></tr><tr><td>Props</td><td>�θ� �ڽĿ��� �����ϴ� �б�� ������</td><td>���ڿ��� ����ǥ, ���������ڴ� �߰�ȣ</td></tr><tr><td>State</td><td>������Ʈ�� �����ϸ� ȭ�鿡 �ݿ��Ǵ� ��</td><td>���� ���� ��� setter</td></tr><tr><td>Event</td><td>onClick={�Լ�}�� �ڵ鷯 ����</td><td>�Լ� �̸��� ����, ��ȣ ���� ����</td></tr><tr><td>map / filter</td><td>map�� ��ȯ, filter�� ���ǿ� �´� �׸� ����</td><td>��� ��ҿ��� key</td></tr><tr><td>useEffect</td><td>���� �� �ܺ� �۾� ����</td><td>������ �迭�� ���� ����</td></tr><tr><td>useRef</td><td>������ ����Ű�� �ʴ� ��������DOM ����</td><td>DOM�� .current</td></tr><tr><td>Context / Zustand</td><td>������Ʈ���� ���� �����͸� ����</td><td>Provider/useContext, store hook</td></tr><tr><td>Router</td><td>URL ��ο� ���� ������ ������Ʈ�� ǥ��</td><td>BrowserRouter, Routes, Route, useParams</td></tr></tbody></table></div><div class="head"><div><h2>�򰥸��� ���� ¦</h2><p>���̸� �� �������� ������ ������.</p></div></div><div class="two"><article class="card"><h3>Props �� State</h3><p>Props�� �θ� �ǳ� ��. State�� ������Ʈ�� �����ϴ� ���ϴ� ��.</p></article><article class="card"><h3>map �� filter</h3><p>map�� �� �׸��� �ٲ� �� �迭 ����. filter�� ������ ����� �׸� ����.</p></article><article class="card"><h3>Effect �� �̺�Ʈ</h3><p>Effect�� ���� �� �������� �ٲ� ��. �ڵ鷯�� Ŭ�����Է� ���� ����� ���� ��.</p></article><article class="card"><h3>Context �� Zustand</h3><p>Context�� Provider�� ���ΰ� useContext�� ����. Zustand�� store hook���� ���¸� ������.</p></article></div><div class="call amber"><b>������ ��� Ʋ</b> ���� �ڵ�� ___ ����/�Լ��� ����� ___ �̺�Ʈ�� �߻��ϸ� ___�� �����Ѵ�. setter�� ���¸� �����ϸ� React�� �ٽ� �������Ͽ� ___�� ȭ�鿡 �����ش�.��</div></section>
+
+<section class="panel" id="jsx"><div class="head"><div><h2>React�� JSX</h2><p>React01 �� ù ���� PPT: ����� JSX</p></div><span class="badge">01 �� BASICS</span></div><article class="card"><h3>React�� �����ΰ���?</h3><p>����� �������̽��� ����� ���� JavaScript ���̺귯������. ȭ���� ���� ������Ʈ�� ������ �����Ͱ� �ٲ�� �ʿ��� ȭ���� �ٽ� �׷���.</p><div class="call"><b>���̺귯���� �����ӿ�ũ</b> ���̺귯���� �ʿ��� ����� ��� ���� ������ ������, �����ӿ�ũ�� ��ü ������ ���� �帧�� �� ���� ���� �� Ʋ�̿���.</div></article><article class="card"><h3>JSX�� �⺻ ��Ģ</h3><ul><li>JS ���̳� ǥ������ { } �ȿ� �ۼ��ؿ�.</li><li>���� ��Ҹ� ��ȯ�� �� �ϳ��� �θ�� ���ο�. �� Fragment &lt;&gt; &lt;/&gt;�� ���� DOM ��Ҹ� �߰����� �ʾƿ�.</li><li>JSX �ȿ����� if�� ��� ���� �����ڳ� ���� &amp;&amp; ��Ҹ� ���.</li><li>HTML�� class ��� className. �±״� �ҹ���, ������Ʈ�� �빮�ڷ� �����ؿ�.</li><li>imgó�� �ݴ� �±װ� ���� ��ҵ� &lt;img /&gt;ó�� �ݾƿ�.</li></ul><div class="code"><div class="codehead"><span>JSX���� ������ ���� ���</span><button class="copy">�ڵ� ����</button></div><pre><code>function App() {
+  const name = '�̼�';
+  const age = 20;
+  return (
+    &lt;&gt;
+      &lt;h1&gt;�ȳ��ϼ���, {name}&lt;/h1&gt;
+      &lt;p&gt;{age &gt;= 19 ? '����' : '�̼�����'}&lt;/p&gt;
+    &lt;/&gt;
+  );
+}</code></pre></div></article><div class="two"><article class="card"><h3>�ζ��� ��Ÿ��</h3><p>��Ÿ���� ��ü�� �ѱ�� CSS �Ӽ� �̸��� camelCase�� ���.</p><div class="code"><div class="codehead"><span>��Ÿ�� ��ü</span><button class="copy">�ڵ� ����</button></div><pre><code>const boxStyle = {
+  backgroundColor: 'pink',
+  fontSize: '24px',
+};
+&lt;h1 style={boxStyle}&gt;�ݰ�����&lt;/h1&gt;
+&lt;p style={{ color: 'navy' }}&gt;�ȳ�&lt;/p&gt;</code></pre></div></article><article class="card"><h3>���Ǻ� ���</h3><div class="code"><div class="codehead"><span>���� �����ڿ� &&</span><button class="copy">�ڵ� ����</button></div><pre><code>{isLogin ? &lt;p&gt;ȯ���մϴ�&lt;/p&gt; : &lt;p&gt;�α����� �ּ���&lt;/p&gt;}
+{hasNotice &amp;&amp; &lt;span&gt;�� �˸�&lt;/span&gt;}</code></pre></div><p>������ �� �� �ϳ��� ������, &&�� ������ ���� �� ������ UI�� �������.</p></article></div><article class="card"><h3>Vite ������Ʈ ���� �帧</h3><p>���� ������ main.jsx�� index.html ���� root�� React ���� �����ϰ� App�� �������մϴ�.</p><div class="code"><div class="codehead"><span>����� ������</span><button class="copy">�ڵ� ����</button></div><pre><code>npm install
+npm run dev
+
+import { createRoot } from 'react-dom/client';
+import App from './App.jsx';
+createRoot(document.getElementById('root')).render(&lt;App /&gt;);</code></pre></div></article></section>
+
+<section class="panel" id="components"><div class="head"><div><h2>������Ʈ�� Props</h2><p>React02 �� �ݺ� UI�� ������ �� �����ϱ�</p></div><span class="badge">02 �� COMPONENTS</span></div><article class="card"><h3>������Ʈ �����</h3><p>ȭ���� �� �κ��� ���� ������ ������ ���� ���� ������Ʈ����. �Լ��� ������Ʈ�� �빮�ڷ� �����ϰ� JSX�� ��ȯ�մϴ�.</p><div class="code"><div class="codehead"><span>�ڽ� ������Ʈ ���ǿ� ���</span><button class="copy">�ڵ� ����</button></div><pre><code>function Member({ team, name }) {
+  return &lt;section&gt;&lt;p&gt;{team}&lt;/p&gt;&lt;p&gt;{name}&lt;/p&gt;&lt;/section&gt;;
+}
+export default Member;
+
+import Member from './Member.jsx';
+&lt;Member team="�������" name="�̼�" /&gt;</code></pre></div></article><div class="two"><article class="card"><h3>Props��?</h3><p>�θ� ������Ʈ�� �ڽĿ��� �����ϴ� �����Ϳ���. �ڽ��� �Լ� ���ڷ� ��ü ������ props�� �޾ƿ�.</p><ul><li>���ڿ�: name="�̼�"</li><li>����/�Ҹ���/����: age={32}, isOpen={true}</li><li>�ڽ��� props�� ���� �������� �ʾƿ�.</li></ul></article><article class="card"><h3>���� ���� �Ҵ�</h3><p>props ��ü���� �ʿ��� �Ӽ��� �ٷ� ���� ���. �Ӽ����� �������� ���ƾ� �մϴ�.</p><div class="code"><div class="codehead"><span>���� �ǹ�</span><button class="copy">�ڵ� ����</button></div><pre><code>const Member = (props) =&gt; &lt;p&gt;{props.name}&lt;/p&gt;;
+// ���� ����
+const Member = ({ name }) =&gt; &lt;p&gt;{name}&lt;/p&gt;;</code></pre></div></article></div><article class="card"><h3>���ǿ� ���� ���� ǥ��</h3><div class="code"><div class="codehead"><span>��ǰ ������Ʈ</span><button class="copy">�ڵ� ����</button></div><pre><code>function Goods({ goods, money }) {
+  return (
+    &lt;div style={{ backgroundColor: money &gt; 10000 ? 'salmon' : 'white' }}&gt;
+      &lt;p&gt;��ǰ: {goods}&lt;/p&gt;&lt;p&gt;����: {money}��&lt;/p&gt;
+      {money &gt; 10000 &amp;&amp; &lt;p&gt;������ ���ƿ�&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}</code></pre></div><p>�θ�� goods�� money�� �����ϰ�, �ڽ��� �� ������ ����� ��Ÿ���� �����ؿ�.</p><div class="call amber"><b>�ڷ��� ����</b> money="4500"�� ���ڿ��Դϴ�. ���� ����� �Ϸ��� money={4500}ó�� ���ڷ� �����ϰų� Number�� ��ȯ�ϼ���.</div></article></section>
+
+<section class="panel" id="state"><div class="head"><div><h2>State�� �̺�Ʈ</h2><p>React03 �� �Է¡�Ŭ���� �����ϴ� ȭ�� �����</p></div><span class="badge">03 �� INTERACTION</span></div><article class="card"><h3>State�� ȭ���� ����ϴ� ��</h3><p>�Ϲ� ������ �ٲٸ� React�� ȭ���� �ٽ� �׸� ������ ���� ���ؿ�. ȭ�鿡 �ݿ��ؾ� �ϴ� ���� State�� �����ϰ� setter�� �����մϴ�.</p><div class="code"><div class="codehead"><span>���� ī����</span><button class="copy">�ڵ� ����</button></div><pre><code>import { useState } from 'react';
+function Counter() {
+  const [num, setNum] = useState(0);
+  return (
+    &lt;&gt;&lt;p&gt;{num}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setNum(num - 1)}&gt;-1&lt;/button&gt;
+      &lt;button onClick={() =&gt; setNum(num + 1)}&gt;+1&lt;/button&gt;
+    &lt;/&gt;
+  );
+}</code></pre></div><p>useState�� ���� ���¿� ���� �Լ��� �����ؿ�. setter ȣ���� ���� ������ ��û�ϰ� ȭ�� �緻������ ����ŵ�ϴ�.</p></article><div class="two"><article class="card"><h3>�̺�Ʈ ����</h3><ul><li>React �̺�Ʈ�� camelCase: onClick, onChange.</li><li>Ŭ�� �� �����Ϸ��� �Լ� ����: onClick={handleClick}.</li><li>onClick={handleClick()}�� ���� �� ��� �����ؿ�.</li><li>���ڸ� �ѱ� ���� onClick={() =&gt; remove(id)}.</li></ul></article><article class="card"><h3>�̺�Ʈ ��ü�� �� �б�</h3><p>��ư ���ڴ� e.target.innerText, �Է°��� e.target.value����.</p><div class="code"><div class="codehead"><span>�Է°� ���ð�</span><button class="copy">�ڵ� ����</button></div><pre><code>const handleClick = (e) =&gt; {
+  const selected = Number(e.target.innerText);
+  setMyNum(selected);
+};
+const handleChange = (e) =&gt; setText(e.target.value);
+&lt;input onChange={handleChange} /&gt;</code></pre></div></article></div><article class="card"><h3>�Է����� ���</h3><div class="code"><div class="codehead"><span>�Է°� ���� �� ��ư���� ���</span><button class="copy">�ڵ� ����</button></div><pre><code>function Echo() {
+  const [input, setInput] = useState('');
+  const [result, setResult] = useState('');
+  return (
+    &lt;&gt;
+      &lt;input value={input} onChange={e =&gt; setInput(e.target.value)} /&gt;
+      &lt;button onClick={() =&gt; setResult(input)}&gt;�Է�&lt;/button&gt;
+      &lt;p&gt;{result}&lt;/p&gt;
+    &lt;/&gt;
+  );
+}</code></pre></div><p>value�� onChange�� �Բ� ���� State�� �Է°��� �����ϴ� ���� ������Ʈ�� �˴ϴ�.</p><div class="call red"><b>���� �ڵ忡�� �߰��� ��Ÿ</b> e.target.innetText�� ��Ÿ����. innerText�� �½��ϴ�. setter ���� ���� ���࿡�� State�� ������ ���� ������ ���� ���� �� �־��.</div></article></section>
+
+<section class="panel" id="lists"><div class="head"><div><h2>�迭�� ��� ������</h2><p>React01 �� �ݺ��� / React04 �� map, filter, ������ ���</p></div><span class="badge">04 �� LISTS</span></div><article class="card"><h3>map���� �迭�� UI�� �ٲٱ�</h3><p>map�� �� �迭 �׸� �Լ��� ������ �� �迭�� ��ȯ�ؿ�. �� JSX �׸� �������� key�� �ָ� React�� �߰������������� ������ ������ �� �־��.</p><div class="code"><div class="codehead"><span>���� �迭 �� ����Ʈ</span><button class="copy">�ڵ� ����</button></div><pre><code>const names = ['������', 'BTS', '�����'];
+return &lt;ul&gt;
+  {names.map(name =&gt; &lt;li key={name}&gt;{name}&lt;/li&gt;)}
+&lt;/ul&gt;;</code></pre></div><p>�ݹ��� (���, �ε���, ���� �迭)�� ���� �� �־��. ���� ��ҿ� �ʿ��� ��� �ε����� ����մϴ�.</p></article><div class="two"><article class="card"><h3>��ü �迭 ���</h3><div class="code"><div class="codehead"><span>�Ӽ� ǥ��</span><button class="copy">�ڵ� ����</button></div><pre><code>const people = [
+  { id: 10, name: '������', age: 30 },
+  { id: 11, name: '�����', age: 32 },
+];
+{people.map(person =&gt; (
+  &lt;p key={person.id}&gt;{person.name} �� {person.age}&lt;/p&gt;
+))}</code></pre></div></article><article class="card"><h3>filter�� ���ǿ� �´� ����</h3><div class="code"><div class="codehead"><span>���� �� ��� ����</span><button class="copy">�ڵ� ����</button></div><pre><code>const fruits = ['apple', 'orange', 'banana'];
+{fruits.filter(x =&gt; x.length &gt; 5)
+  .map(x =&gt; &lt;p key={x}&gt;{x}&lt;/p&gt;)}</code></pre></div><p>���� ������ ����� �ε������� �������� ���� id�� key�� ���� ���� �����ؿ�.</p></article></div><div class="call green"><b>ǥ�� ������</b> map �ݹ鿡�� &lt;tr key={item.id}&gt;�� ��ȯ�ϰ� �Ӽ��� &lt;td&gt;�� ǥ���ؿ�. �迭�� ������ �ݺ�����, JSX�� ��� �������� ���մϴ�.</div></section>
+
+<section class="panel" id="share"><div class="head"><div><h2>������Ʈ �� ������ ����</h2><p>React05 �� ���� ����ø���, Context, Zustand</p></div><span class="badge">05 �� SHARED STATE</span></div><article class="card"><h3>�ڽ� �Է��� �θ� ������: ���� ����ø���</h3><p>�����ʹ� ���� �θ𿡼� �ڽ����� ��������. �ڽĿ��� �ٲ� ���� �θ� ����ؾ� �Ѵٸ� ���¸� ���� �θ� �ΰ� ���� �Լ��� props�� �����մϴ�.</p><div class="code"><div class="codehead"><span>���� �ݹ� ����</span><button class="copy">�ڵ� ����</button></div><pre><code>function Parent() {
+  const [text, setText] = useState('');
+  return (
+    &lt;&gt;
+      &lt;Child value={text} onChange={e =&gt; setText(e.target.value)} /&gt;
+      &lt;p&gt;�ڽ� �Է�: {text}&lt;/p&gt;
+    &lt;/&gt;
+  );
+}
+function Child({ value, onChange }) {
+  return &lt;input value={value} onChange={onChange} /&gt;;
+}</code></pre></div><p>������ Ex01_Main ����ó�� ���� �θ���ڽ�, �ݹ� ���� ����� �ڽġ�θ�� ���޵˴ϴ�.</p></article><div class="two"><article class="card"><h3>Context API</h3><ol><li>createContext�� Context ����</li><li>Provider���� State ����, value�� ����</li><li>�� ������Ʈ�� Provider�� ���α�</li><li>�ڼտ��� useContext�� �� ���</li></ol><div class="code"><div class="codehead"><span>�⺻ ���</span><button class="copy">�ڵ� ����</button></div><pre><code>const ColorContext = createContext(null);
+function ColorProvider({ children }) {
+  const [color, setColor] = useState('red');
+  return (
+    &lt;ColorContext.Provider value={{ color, setColor }}&gt;
+      {children}
+    &lt;/ColorContext.Provider&gt;
+  );
+}
+const { color, setColor } = useContext(ColorContext);</code></pre></div></article><article class="card"><h3>Zustand</h3><p>�������� �ٷ� ���� store ����̿���. ���� ���� �׼��� store�� �����ϰ� �ʿ��� ������Ʈ���� hook���� �����ɴϴ�.</p><div class="code"><div class="codehead"><span>store�� �б�</span><button class="copy">�ڵ� ����</button></div><pre><code>const useColorStore = create(set =&gt; ({
+  color: 'red',
+  changeColor: value =&gt; set({ color: value }),
+}));
+const color = useColorStore(state =&gt; state.color);</code></pre></div></article></div><div class="call amber"><b>�ڷ��� ����</b> �Ҹ����� ����ǥ ���� true/false����. useState('true')�� ���ڿ��̹Ƿ� useState(true)�� �ʱ�ȭ�ؾ� �մϴ�.</div></section>
+
+<section class="panel" id="effects"><div class="head"><div><h2>Effect �� API �� Ref</h2><p>React06 �� �����ֱ�, �񵿱� ��û, DOM ����</p></div><span class="badge">06 �� SIDE EFFECTS</span></div><article class="card"><h3>useEffect�� ������ �迭</h3><p>������ ��ü�� �ƴ� �ܺ� �۾��� �����ϴ� Hook�̿���. API ��û, Ÿ�̸�, ������ �̺�Ʈ ���� � ���ϴ�.</p><div class="tablewrap"><table><thead><tr><th>����</th><th>���� ����</th><th>����</th></tr></thead><tbody><tr><td>useEffect(fn)</td><td>�� ���� ��</td><td>�������� �ʿ��� �ܺ� ����ȭ</td></tr><tr><td>useEffect(fn, [])</td><td>����Ʈ ��</td><td>���� ������ ��û</td></tr><tr><td>useEffect(fn, [num])</td><td>ó���� num ���� ��</td><td>num�� ����ȭ</td></tr></tbody></table></div><div class="call">Effect�� cleanup �Լ��� ��ȯ�ϸ� �ٽ� ����Ǳ� ���̳� ������Ʈ�� ���ŵ� �� ���� �۾��� �� �� �־��. ���� StrictMode������ �ʱ� Effect�� �߰��� ����Ǵ� ��ó�� ���� �� �ֽ��ϴ�.</div></article><article class="card"><h3>Ŭ���� �����ֱ�� �Լ��� ����</h3><div class="tablewrap"><table><thead><tr><th>Ŭ���� �޼���</th><th>��</th><th>�Լ������� ���� ���� ���</th></tr></thead><tbody><tr><td>constructor</td><td>�ʱ� ����</td><td>�Լ� ������ useState �ʱⰪ</td></tr><tr><td>render</td><td>UI ��ȯ</td><td>������Ʈ�� return</td></tr><tr><td>componentDidMount</td><td>ó�� ȭ�鿡 ���� ��</td><td>useEffect(fn, [])</td></tr><tr><td>componentDidUpdate</td><td>�� ���� ��</td><td>useEffect(fn, [��])</td></tr><tr><td>componentWillUnmount</td><td>���� ���� ����</td><td>Effect�� cleanup</td></tr></tbody></table></div></article><div class="two"><article class="card"><h3>fetch + async/await</h3><p>ó�� ȭ���� ���� �� ��û�ϰ�, ������ JSON���� �ٲپ� State�� ������ �� ����� �׷���.</p><div class="code"><div class="codehead"><span>API ���</span><button class="copy">�ڵ� ����</button></div><pre><code>const [items, setItems] = useState([]);
+useEffect(() =&gt; {
+  async function load() {
+    const response = await fetch('/api/items');
+    const data = await response.json();
+    setItems(data.items);
+  }
+  load();
+}, []);
+return items.map(x =&gt; &lt;p key={x.id}&gt;{x.name}&lt;/p&gt;);</code></pre></div><p>fetch�� response.json ��� �񵿱� �۾��̶� await�� ��ٸ��ϴ�.</p></article><article class="card"><h3>useRef�� DOM ����</h3><p>������ ����Ű�� �ʴ� �������� �����ϰų� input�� ��Ŀ�� �ֱ�ó�� DOM ������ �ʿ��� �� ����ؿ�.</p><div class="code"><div class="codehead"><span>�Է� ���� ��Ŀ��</span><button class="copy">�ڵ� ����</button></div><pre><code>const inputRef = useRef(null);
+function handleClick() {
+  inputRef.current.value = '';
+  inputRef.current.focus();
+}
+&lt;input ref={inputRef} /&gt;</code></pre></div><p>ref.current�� �ٲ㵵 �緻������ �Ͼ�� �ʾƿ�.</p></article></div><article class="card"><h3>���� ����: ���� ��</h3><p>����� ���ð� ��ǻ�� ������ �� State�� �����ؿ�. ����� �ѿ��� �ٷ� ����� �� �ֽ��ϴ�.</p><div class="code"><div class="codehead"><span>1~3 ���� ��</span><button class="copy">�ڵ� ����</button></div><pre><code>const [mine, setMine] = useState(null);
+const [computer, setComputer] = useState(null);
+const result = mine === null ? '���� ���� ��'
+  : mine === computer ? '����!' : 'Ʋ�Ƚ��ϴ�!';
+function play(e) {
+  const selected = Number(e.currentTarget.textContent);
+  const random = Math.floor(Math.random() * 3) + 1;
+  setMine(selected);
+  setComputer(random);
+}</code></pre></div><p>Math.random�� 0 �̻� 1 �̸��̹Ƿ� floor(random * 3) + 1�� 1, 2, 3�� �����ؿ�.</p><div class="call red"><b>���� ���� ���� ����</b> setter�� �ҷ��� ���� ���� �帧�� mine�� ��� �ٲ��� �ʾƿ�. �� �Է°��� ���� ������ �ΰ� ���ϰų�, �Ļ� ����� ���� �� ����ϼ���.</div></article></section>
+
+<section class="panel" id="router"><div class="head"><div><h2>������ �̵� �� React Router</h2><p>React07 �� URL�� �´� ������ ǥ��</p></div><span class="badge">07 �� ROUTING</span></div><article class="card"><h3>����� ����</h3><p>�� ��ü�� BrowserRouter�� ���ΰ� Routes �ȿ� URL ��ο� ȭ�� ������Ʈ�� �����մϴ�.</p><div class="code"><div class="codehead"><span>main.jsx / App.jsx</span><button class="copy">�ڵ� ����</button></div><pre><code>// main.jsx
+&lt;BrowserRouter&gt;&lt;App /&gt;&lt;/BrowserRouter&gt;
+
+// App.jsx
+&lt;Routes&gt;
+  &lt;Route path="/" element={&lt;Main /&gt;} /&gt;
+  &lt;Route path="/about/:num" element={&lt;About /&gt;} /&gt;
+&lt;/Routes&gt;</code></pre></div></article><div class="two"><article class="card"><h3>Link�� �̵�</h3><p>������ ��ü�� �ٽ� �ҷ����� �ʰ� ��θ� �ٲٴ� ��ũ����.</p><div class="code"><div class="codehead"><span>������ �̵�</span><button class="copy">�ڵ� ����</button></div><pre><code>&lt;Link to="/about/3"&gt;�Ұ� ������&lt;/Link&gt;</code></pre></div></article><article class="card"><h3>useNavigate�� �̵�</h3><p>��ư�̳� ���ǿ� ���� �ڵ忡�� �̵��� �� ����ؿ�.</p><div class="code"><div class="codehead"><span>�Լ� ȣ��� �̵�</span><button class="copy">�ڵ� ����</button></div><pre><code>const navigate = useNavigate();
+const handleClick = () =&gt; navigate('/about/3');</code></pre></div></article></div><article class="card"><h3>URL �Ķ���� �б�</h3><p>����� :num �ڸ��� ���� ���� useParams�� ��ü�� �����ݴϴ�.</p><div class="code"><div class="codehead"><span>About.jsx</span><button class="copy">�ڵ� ����</button></div><pre><code>const { num } = useParams();
+return &lt;p&gt;About {num}&lt;/p&gt;;</code></pre></div><div class="call amber">������ /about/:num ��ο� ���� �̵��� ���� /about/3ó�� �Ķ���͸� �����ϼ���. /about�� �̵��ϸ� �� Route�� ��ġ���� �ʾƿ�.</div></article></section>
+
+<section class="panel" id="practice"><div class="head"><div><h2>�ǽ� ���� Ǯ��</h2><p>�䱸������ �ڵ� ������ �Űܺ��� ����</p></div><span class="badge">PRACTICE</span></div><article class="card"><h3>1. �Է� ������ ��ư Ŭ�� �� ���</h3><p>�Է� State �� onChange�� ���� �� Ŭ�� �� ��� State�� ���� �� JSX���� ǥ��.</p><div class="code"><div class="codehead"><span>Ǯ��</span><button class="copy">�ڵ� ����</button></div><pre><code>function TextEcho() {
+  const [text, setText] = useState('');
+  const [result, setResult] = useState('');
+  return (
+    &lt;&gt;
+      &lt;input value={text} onChange={e =&gt; setText(e.target.value)} /&gt;
+      &lt;button onClick={() =&gt; setResult(text)}&gt;���&lt;/button&gt;
+      &lt;p&gt;{result}&lt;/p&gt;
+    &lt;/&gt;
+  );
+}</code></pre></div></article><article class="card"><h3>2. 1���� 100���� ¦�� ���</h3><p>¦���� 2�� ���� �������� 0�� ������. �迭�� ���� �� map���� ����ϸ� JSX�� �����մϴ�.</p><div class="code"><div class="codehead"><span>Ǯ��</span><button class="copy">�ڵ� ����</button></div><pre><code>const evens = [];
+for (let n = 1; n &lt;= 100; n++) {
+  if (n % 2 === 0) evens.push(n);
+}
+return evens.map(n =&gt; &lt;p key={n}&gt;{n}&lt;/p&gt;);</code></pre></div></article><article class="card"><h3>3. ��ư ���ڿ� ���� ���� ��</h3><p>���ð��� ������ ���� �����ϰ�, �� ������ ����� ����ؿ�.</p><div class="code"><div class="codehead"><span>Ǯ��</span><button class="copy">�ڵ� ����</button></div><pre><code>const [mine, setMine] = useState(null);
+const [computer, setComputer] = useState(null);
+const result = mine === null ? '���� ��'
+  : mine === computer ? '�����Դϴ�!' : 'Ʋ�Ƚ��ϴ�!';
+function play(e) {
+  setMine(Number(e.currentTarget.textContent));
+  setComputer(Math.floor(Math.random() * 3) + 1);
+}
+{[1, 2, 3].map(n =&gt; &lt;button key={n} onClick={play}&gt;{n}&lt;/button&gt;)}</code></pre></div></article><article class="card"><h3>4. ��ǰ �迭�� ī��� ǥ��</h3><p>map�� ��ü�� ī��� �ٲٰ�, ���Ǻ� ������� ��� ��ǰ�� �ȳ��� �������.</p><div class="code"><div class="codehead"><span>Ǯ��</span><button class="copy">�ڵ� ����</button></div><pre><code>const goods = [
+  { id: 1, name: '����', price: 5000 },
+  { id: 2, name: 'ġŲ', price: 20000 },
+];
+return goods.map(item =&gt; (
+  &lt;article key={item.id}&gt;
+    &lt;h2&gt;{item.name}&lt;/h2&gt;&lt;p&gt;{item.price}��&lt;/p&gt;
+    {item.price &gt; 10000 &amp;&amp; &lt;p&gt;������ ���ƿ�&lt;/p&gt;}
+  &lt;/article&gt;
+));</code></pre></div></article><article class="card"><h3>5. API ����� ǥ�� ���</h3><div class="steps"><div class="step">�� �迭 State�� �����. �����Ͱ� ��� map�� ȣ���� �� �ִ�.</div><div class="step">useEffect�� �� ������ �迭 �ȿ��� �񵿱� �Լ��� �����Ѵ�.</div><div class="step">fetch �� response.json() �� �ʿ��� �迭�� setter�� �����Ѵ�.</div><div class="step">State �迭�� map���� �ٲٰ� �� tr�� key�� �ش�.</div></div><div class="call amber">���� API �ּҡ�Ű��CORS�� ����ȯ�濡 ���� �޶�����. ������ ��û �� JSON ��ȯ �� State ���� �� ��� ��� �帧�� �ٽ��Դϴ�.</div></article><div class="head"><div><h2>���� �� üũ</h2><p>�ϳ��� Ȯ���ϼ���.</p></div></div><div class="card"><label><input type="checkbox"> ���ϴ� ȭ�� ���� State�� �����ߴ�.</label><br><label><input type="checkbox"> setter�� State�� �����ߴ�.</label><br><label><input type="checkbox"> �̺�Ʈ �ڵ鷯�� ��ȣ�� ������ �ʾҴ�.</label><br><label><input type="checkbox"> JSX ǥ���Ŀ� �߰�ȣ�� ���.</label><br><label><input type="checkbox"> ��� �� �׸� key�� ���.</label><br><label><input type="checkbox"> ���ڿ������ڡ��Ҹ��� �ڷ����� Ȯ���ߴ�.</label><br><label><input type="checkbox"> State ���� ���� ���� ���� ���� �ʴ��� Ȯ���ߴ�.</label></div></section>
+
+<section class="panel" id="quiz"><div class="head"><div><h2>������ Ȯ�� ����</h2><p>���� Ǯ��� ���� ���� Ȯ���� ������.</p></div><span class="badge">CHECK YOURSELF</span></div><div class="quiz"><div class="qtype">������</div><h4>JSX���� ���� name�� ����ϴ� ������?</h4><label class="choice">�� &lt;p&gt;name&lt;/p&gt;</label><label class="choice">�� &lt;p&gt;{name}&lt;/p&gt;</label><label class="choice">�� &lt;p&gt;$&#123;name&#125;&lt;/p&gt;</label><button class="answerbtn">����� �ؼ� ����</button><div class="answer">���� ��. JSX�� JavaScript ǥ������ �߰�ȣ �ȿ� ���ϴ�. &#36;{...}�� ���ø� ���ڿ� �����̿���.</div></div><div class="quiz"><div class="qtype">������</div><h4>useState(0)�� ��ȯ�ϴ� ���� ������?</h4><label class="choice">�� setter, ���� ��</label><label class="choice">�� ���� ��, setter</label><label class="choice">�� �ʱⰪ, props</label><button class="answerbtn">����� �ؼ� ����</button><div class="answer">���� ��. const [count, setCount] = useState(0)ó�� ���� ���¿� ���� �Լ��� �޽��ϴ�.</div></div><div class="quiz"><div class="qtype">������</div><h4>Props�� State�� ���̸� �����ϼ���.</h4><button class="answerbtn">���� ��� ����</button><div class="answer">Props�� �θ� �ڽĿ��� �����ϴ� �����ͷ� �ڽ��� ���� �ٲ��� �ʽ��ϴ�. State�� ������Ʈ�� �����ϴ� ���� ������ �������̸� setter�� �����ϸ� ȭ���� �ٽ� �������˴ϴ�.</div></div><div class="quiz"><div class="qtype">�ڵ� �б�</div><h4>items.filter(x =&gt; x.price &gt; 1000).map(x =&gt; &lt;p key={x.id}&gt;{x.name}&lt;/p&gt;)�� ������ �ϳ���?</h4><button class="answerbtn">���� ��� ����</button><div class="answer">������ 1,000���� ū ��ü�� filter�� ������, map���� ���� JSX�� ����� �����ݴϴ�. �� �׸��� id�� key�� ���ϴ�.</div></div><div class="quiz"><div class="qtype">���� ã��</div><h4>&lt;button onClick={save()}&gt;����&lt;/button&gt;�� ������?</h4><button class="answerbtn">����� �ؼ� ����</button><div class="answer">������ �� save�� ��� ����˴ϴ�. Ŭ�� �� �����Ϸ��� onClick={save}. ���ڸ� �ѱ� ���� onClick={() =&gt; save(id)}�� ���ϴ�.</div></div><div class="quiz"><div class="qtype">�ǽ���</div><h4>��ư�� ������ ���ڰ� 1�� �ö󰡴� ������Ʈ�� �ۼ��ϼ���.</h4><button class="answerbtn">��� Ǯ�� ����</button><div class="answer"><pre><code>function Counter() {
+  const [count, setCount] = useState(0);
+  return &lt;&gt;&lt;p&gt;{count}&lt;/p&gt;
+    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;+1&lt;/button&gt;&lt;/&gt;;
+}</code></pre>setter�� ���� �ٲٰ� React�� ȭ���� �ٽ� �׷� �� ���ڸ� �����ݴϴ�.</div></div></section><div class="foot">React ���� �ڷ� ��� ���� �� �˻��ϰ� ������ ���迡 Ȱ���ϼ���</div></main>
+<aside class="right"><h4>���� �̵�</h4><a href="#" onclick="go('home');return false">ó������</a><a href="#" onclick="go('exam');return false">���� ���</a><a href="#" onclick="go('practice');return false">�ǽ� Ǯ��</a><div class="rightnote">���� �ڵ� �ٽ��� ���� ������ �ٷ� �� �� �ִ� �������� �����߾��.</div></aside></div>
+<script>
+const buttons=[...document.querySelectorAll('.navbtn')];
+function go(id){document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));buttons.forEach(b=>b.classList.toggle('active',b.dataset.id===id));document.getElementById('hero').style.display=id==='home'?'block':'none';document.getElementById('stats').style.display=id==='home'?'grid':'none';document.getElementById('results').classList.remove('show');document.getElementById('empty').classList.remove('show');document.getElementById('search').value='';document.getElementById('side').classList.remove('open');window.scrollTo({top:0,behavior:'smooth'})}
+buttons.forEach(b=>b.addEventListener('click',()=>go(b.dataset.id)));
+document.querySelectorAll('.answerbtn').forEach(b=>b.addEventListener('click',()=>{const a=b.nextElementSibling;if(a&&a.classList.contains('answer')){a.classList.toggle('show');b.textContent=a.classList.contains('show')?'��� ����':'����� �ؼ� ����'}}));
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(b.closest('.code').querySelector('code').innerText);b.textContent='���� �Ϸ�';setTimeout(()=>b.textContent='�ڵ� ����',1200)}catch{b.textContent='������ �� ����';setTimeout(()=>b.textContent='�ڵ� ����',1200)}}));
+const input=document.getElementById('search'),results=document.getElementById('results'),empty=document.getElementById('empty');
+const sections=[...document.querySelectorAll('.panel')].map(p=>({id:p.id,title:p.querySelector('h2')?.innerText||'�Ѵ��� ����',text:p.innerText}));
+input.addEventListener('input',()=>{const q=input.value.trim().toLowerCase();if(!q){results.classList.remove('show');empty.classList.remove('show');return}document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById('hero').style.display='none';document.getElementById('stats').style.display='none';buttons.forEach(b=>b.classList.remove('active'));const hits=sections.filter(s=>(s.title+' '+s.text).toLowerCase().includes(q));results.innerHTML=hits.map(h=>'<button class="result" data-go="'+h.id+'"><b>'+h.title+'</b><small>���� ��</small></button>').join('');results.classList.toggle('show',hits.length>0);empty.classList.toggle('show',!hits.length);results.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)))});
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();input.focus()}if(e.key==='Escape'){input.value='';results.classList.remove('show');empty.classList.remove('show')}});
+document.getElementById('mobile').addEventListener('click',()=>document.getElementById('side').classList.toggle('open'));
+</script></body></html>
